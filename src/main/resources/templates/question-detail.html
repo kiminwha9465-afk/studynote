@@ -7,7 +7,8 @@
 <main class="mx-auto max-w-3xl px-4 py-8">
     <div class="mb-3 flex items-center gap-2">
         <span class="rounded bg-indigo-50 px-2 py-0.5 text-xs font-semibold text-indigo-600" th:text="${question.subject.label}"></span>
-        <span class="text-xs text-slate-400" th:text="${question.examYear} + '년 ' + ${question.examRound} + '회'"></span>
+        <span th:if="${question.examYear != null}" class="text-xs text-slate-400" th:text="${question.examYear} + '년 ' + ${question.examRound} + '회'"></span>
+        <span th:if="${question.theme != null}" class="text-xs text-slate-400" th:text="${question.theme}"></span>
     </div>
 
     <h1 class="mb-6 text-lg font-semibold text-slate-800" th:text="${question.content}"></h1>
@@ -42,7 +43,7 @@
          th:classappend="${result.correct()} ? 'border-green-300 bg-green-50' : 'border-red-300 bg-red-50'">
         <p class="font-semibold" th:classappend="${result.correct()} ? 'text-green-700' : 'text-red-700'"
            th:text="${result.correct()} ? '정답입니다!' : '오답입니다.'"></p>
-        <p class="mt-1 text-sm text-slate-600">정답: <span class="font-medium" th:text="${question.answerNo}"></span>번</p>
+        <p class="mt-1 text-sm text-slate-600">정답: <span class="font-medium" th:text="${question.multiAnswer != null ? question.multiAnswer : question.answerNo}"></span>번</p>
         <p class="mt-2 text-sm text-slate-600" th:text="${question.explanation}"></p>
     </div>
 

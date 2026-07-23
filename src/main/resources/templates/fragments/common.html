@@ -13,6 +13,9 @@
         <a th:href="@{/questions}"
            th:classappend="${active == 'questions'} ? 'text-indigo-600' : 'text-slate-500 hover:text-slate-800'"
            class="text-sm font-semibold">문제풀이</a>
+        <a th:href="@{/exam}"
+           th:classappend="${active == 'exam'} ? 'text-indigo-600' : 'text-slate-500 hover:text-slate-800'"
+           class="text-sm font-semibold">모의고사</a>
         <a th:href="@{/wrong-notes}"
            th:classappend="${active == 'wrong-notes'} ? 'text-indigo-600' : 'text-slate-500 hover:text-slate-800'"
            class="text-sm font-semibold">오답노트</a>

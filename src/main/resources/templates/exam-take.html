@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/common :: head('모의고사 응시')}"></head>
+<body class="min-h-screen bg-slate-50">
+<div th:replace="~{fragments/common :: nav('exam')}"></div>
+
+<main class="mx-auto max-w-3xl px-4 py-8">
+    <h1 class="mb-1 text-xl font-bold text-slate-800" th:text="${title}"></h1>
+    <p class="mb-6 text-sm text-slate-500">모든 문제에 답을 고른 뒤 제출하세요.</p>
+
+    <form method="post" th:action="@{/exam/submit}" class="flex flex-col gap-4">
+        <div class="rounded-lg border bg-white p-4 shadow-sm" th:each="q, iter : ${questions}">
+            <div class="mb-2 flex items-center gap-2">
+                <span class="text-xs font-semibold text-slate-400" th:text="${iter.count} + '.'"></span>
+                <span class="rounded bg-indigo-50 px-2 py-0.5 text-xs font-semibold text-indigo-600" th:text="${q.subject.label}"></span>
+                <span th:if="${q.examYear != null}" class="text-xs text-slate-400" th:text="${q.examYear} + '년 ' + ${q.examRound} + '회'"></span>
+                <span th:if="${q.theme != null}" class="text-xs text-slate-400" th:text="${q.theme}"></span>
+            </div>
+            <p class="mb-3 font-medium text-slate-800" th:text="${q.content}"></p>
+
+            <label th:each="i : ${#numbers.sequence(1, 4)}"
+                   class="mb-1 flex items-center gap-3 rounded-md border px-3 py-2 text-sm text-slate-700 hover:border-indigo-300 hover:bg-indigo-50/40">
+                <input type="radio" th:name="${'answer_' + q.id}" th:value="${i}" required
+                       class="h-4 w-4 accent-indigo-600">
+                <span th:text="${i} + '. ' + ${
+                    i == 1 ? q.choice1 :
+                    i == 2 ? q.choice2 :
+                    i == 3 ? q.choice3 :
+                    q.choice4}"></span>
+            </label>
+        </div>
+
+        <button type="submit"
+                class="sticky bottom-4 self-center rounded-md bg-indigo-600 px-8 py-2.5 text-sm font-semibold text-white shadow-lg hover:bg-indigo-700">
+            제출하기
+        </button>
+    </form>
+</main>
+</body>
+</html>

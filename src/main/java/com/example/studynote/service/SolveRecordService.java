@@ -21,7 +21,7 @@ public class SolveRecordService {
     @Transactional
     public SolveResult submitAnswer(Long questionId, int selectedAnswer) {
         Question question = questionService.getQuestion(questionId);
-        boolean correct = question.getAnswerNo() != null && question.getAnswerNo() == selectedAnswer;
+        boolean correct = question.isCorrectAnswer(selectedAnswer);
         solveRecordRepository.save(new SolveRecord(question, selectedAnswer, correct));
         return new SolveResult(question, selectedAnswer, correct);
     }

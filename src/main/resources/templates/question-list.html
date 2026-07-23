@@ -27,7 +27,8 @@
            class="block rounded-lg border bg-white p-4 shadow-sm transition hover:shadow-md hover:border-indigo-300">
             <div class="mb-2 flex items-center gap-2">
                 <span class="rounded bg-indigo-50 px-2 py-0.5 text-xs font-semibold text-indigo-600" th:text="${q.subject.label}"></span>
-                <span class="text-xs text-slate-400" th:text="${q.examYear} + '년 ' + ${q.examRound} + '회'"></span>
+                <span th:if="${q.examYear != null}" class="text-xs text-slate-400" th:text="${q.examYear} + '년 ' + ${q.examRound} + '회'"></span>
+                <span th:if="${q.theme != null}" class="text-xs text-slate-400" th:text="${q.theme}"></span>
             </div>
             <p class="font-medium text-slate-800" th:text="${q.content}"></p>
         </a>

@@ -38,3 +38,5 @@ out/
 
 ### App ###
 /data/
+# 저작권 보호 자료(개인 용도 한정, 재배포 금지)에서 추출한 기출문제 데이터 - 퍼블릭 레포에 올리지 않음
+/src/main/resources/data/questions.json
