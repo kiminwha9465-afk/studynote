@@ -1,48 +1,55 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>정보처리기사 문제풀이</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-</head>
-<body>
-<nav>
-    <a th:href="@{/questions}">문제풀이</a>
-    <a th:href="@{/wrong-notes}">오답노트</a>
-</nav>
+<head th:replace="~{fragments/common :: head('정보처리기사 문제풀이')}"></head>
+<body class="min-h-screen bg-slate-50">
+<div th:replace="~{fragments/common :: nav('questions')}"></div>
 
-<p>
-    <span class="badge" th:text="${question.subject.label}"></span>
-    <span th:text="${question.examYear} + '년 ' + ${question.examRound} + '회'"></span>
-</p>
+<main class="mx-auto max-w-3xl px-4 py-8">
+    <div class="mb-3 flex items-center gap-2">
+        <span class="rounded bg-indigo-50 px-2 py-0.5 text-xs font-semibold text-indigo-600" th:text="${question.subject.label}"></span>
+        <span class="text-xs text-slate-400" th:text="${question.examYear} + '년 ' + ${question.examRound} + '회'"></span>
+    </div>
 
-<h1 th:text="${question.content}"></h1>
+    <h1 class="mb-6 text-lg font-semibold text-slate-800" th:text="${question.content}"></h1>
 
-<form class="answer-form" method="post" th:action="@{/questions/{id}/answer(id=${question.id})}">
-    <label th:each="i : ${#numbers.sequence(1, 4)}">
-        <input type="radio" name="selectedAnswer" th:value="${i}"
-               th:checked="${result != null and result.selectedAnswer() == i}"
-               th:disabled="${result != null}" required>
-        <span th:text="${i} + '. ' + ${
-            i == 1 ? question.choice1 :
-            i == 2 ? question.choice2 :
-            i == 3 ? question.choice3 :
-            question.choice4}"></span>
-    </label>
-    <button type="submit" th:if="${result == null}">제출</button>
-</form>
+    <form method="post" th:action="@{/questions/{id}/answer(id=${question.id})}" class="flex flex-col gap-2">
+        <label th:each="i : ${#numbers.sequence(1, 4)}"
+               class="flex items-center gap-3 rounded-lg border bg-white px-4 py-3 transition"
+               th:classappend="${
+                   result == null ? 'cursor-pointer hover:border-indigo-300 hover:bg-indigo-50/40' :
+                   (i == question.answerNo) ? 'border-green-400 bg-green-50' :
+                   (i == result.selectedAnswer()) ? 'border-red-300 bg-red-50' : 'opacity-60'
+               }">
+            <input type="radio" name="selectedAnswer" th:value="${i}"
+                   th:checked="${result != null and result.selectedAnswer() == i}"
+                   th:disabled="${result != null}" required
+                   class="h-4 w-4 accent-indigo-600">
+            <span class="text-slate-700" th:text="${i} + '. ' + ${
+                i == 1 ? question.choice1 :
+                i == 2 ? question.choice2 :
+                i == 3 ? question.choice3 :
+                question.choice4}"></span>
+        </label>
 
-<div th:if="${result != null}"
-     class="result" th:classappend="${result.correct()} ? 'correct' : 'wrong'">
-    <p th:text="${result.correct()} ? '정답입니다!' : '오답입니다.'"></p>
-    <p>정답: <span th:text="${question.answerNo}"></span>번</p>
-    <p th:text="${question.explanation}"></p>
-</div>
+        <button type="submit" th:if="${result == null}"
+                class="mt-2 self-start rounded-md bg-indigo-600 px-5 py-2 text-sm font-semibold text-white hover:bg-indigo-700">
+            제출
+        </button>
+    </form>
 
-<p th:if="${result != null}">
-    <a th:href="@{/questions/{id}(id=${question.id})}">다시 풀기</a>
-    &nbsp;|&nbsp;
-    <a th:href="@{/questions(subject=${question.subject})}">목록으로</a>
-</p>
+    <div th:if="${result != null}"
+         class="mt-5 rounded-lg border p-4"
+         th:classappend="${result.correct()} ? 'border-green-300 bg-green-50' : 'border-red-300 bg-red-50'">
+        <p class="font-semibold" th:classappend="${result.correct()} ? 'text-green-700' : 'text-red-700'"
+           th:text="${result.correct()} ? '정답입니다!' : '오답입니다.'"></p>
+        <p class="mt-1 text-sm text-slate-600">정답: <span class="font-medium" th:text="${question.answerNo}"></span>번</p>
+        <p class="mt-2 text-sm text-slate-600" th:text="${question.explanation}"></p>
+    </div>
+
+    <div th:if="${result != null}" class="mt-4 flex gap-4 text-sm">
+        <a th:href="@{/questions/{id}(id=${question.id})}" class="font-medium text-indigo-600 hover:underline">다시 풀기</a>
+        <a th:href="@{/questions(subject=${question.subject})}" class="font-medium text-slate-500 hover:underline">목록으로</a>
+    </div>
+</main>
 </body>
 </html>

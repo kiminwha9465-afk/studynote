@@ -1,37 +1,37 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>정보처리기사 문제풀이</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-</head>
-<body>
-<nav>
-    <a th:href="@{/questions}">문제풀이</a>
-    <a th:href="@{/wrong-notes}">오답노트</a>
-</nav>
+<head th:replace="~{fragments/common :: head('정보처리기사 문제풀이')}"></head>
+<body class="min-h-screen bg-slate-50">
+<div th:replace="~{fragments/common :: nav('questions')}"></div>
 
-<h1>문제 목록</h1>
+<main class="mx-auto max-w-3xl px-4 py-8">
+    <h1 class="mb-4 text-xl font-bold text-slate-800">문제 목록</h1>
 
-<div class="filter">
-    <a th:href="@{/questions}"
-       th:classappend="${selectedSubject == null} ? 'active'">전체</a>
-    <a th:each="s : ${subjects}"
-       th:href="@{/questions(subject=${s})}"
-       th:text="${s.label}"
-       th:classappend="${selectedSubject == s} ? 'active'"></a>
-</div>
+    <div class="mb-6 flex flex-wrap gap-2">
+        <a th:href="@{/questions}"
+           th:classappend="${selectedSubject == null} ? 'bg-indigo-600 text-white' : 'bg-white text-slate-600 border hover:bg-slate-100'"
+           class="rounded-full px-3 py-1 text-sm font-medium">전체</a>
+        <a th:each="s : ${subjects}"
+           th:href="@{/questions(subject=${s})}"
+           th:text="${s.label}"
+           th:classappend="${selectedSubject == s} ? 'bg-indigo-600 text-white' : 'bg-white text-slate-600 border hover:bg-slate-100'"
+           class="rounded-full px-3 py-1 text-sm font-medium"></a>
+    </div>
 
-<div th:if="${#lists.isEmpty(questions)}">
-    <p>등록된 문제가 없습니다.</p>
-</div>
+    <div th:if="${#lists.isEmpty(questions)}" class="rounded-lg border border-dashed p-8 text-center text-slate-400">
+        등록된 문제가 없습니다.
+    </div>
 
-<div class="question-item" th:each="q : ${questions}">
-    <a th:href="@{/questions/{id}(id=${q.id})}">
-        <span class="badge" th:text="${q.subject.label}"></span>
-        <span th:text="${q.examYear} + '년 ' + ${q.examRound} + '회'"></span>
-        <div th:text="${q.content}"></div>
-    </a>
-</div>
+    <div class="flex flex-col gap-3">
+        <a th:each="q : ${questions}" th:href="@{/questions/{id}(id=${q.id})}"
+           class="block rounded-lg border bg-white p-4 shadow-sm transition hover:shadow-md hover:border-indigo-300">
+            <div class="mb-2 flex items-center gap-2">
+                <span class="rounded bg-indigo-50 px-2 py-0.5 text-xs font-semibold text-indigo-600" th:text="${q.subject.label}"></span>
+                <span class="text-xs text-slate-400" th:text="${q.examYear} + '년 ' + ${q.examRound} + '회'"></span>
+            </div>
+            <p class="font-medium text-slate-800" th:text="${q.content}"></p>
+        </a>
+    </div>
+</main>
 </body>
 </html>
