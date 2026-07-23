@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>오답노트</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<nav>
+    <a th:href="@{/questions}">문제풀이</a>
+    <a th:href="@{/wrong-notes}">오답노트</a>
+</nav>
+
+<h1>오답노트</h1>
+
+<div th:if="${#lists.isEmpty(wrongRecords)}">
+    <p>아직 틀린 문제가 없습니다. (또는 모두 다시 맞혔습니다!)</p>
+</div>
+
+<div class="question-item" th:each="r : ${wrongRecords}">
+    <span class="badge" th:text="${r.question.subject.label}"></span>
+    <a th:href="@{/questions/{id}(id=${r.question.id})}" th:text="${r.question.content}"></a>
+
+    <p>
+        내가 고른 답: <span th:text="${r.selectedAnswer}"></span>번
+        / 정답: <span th:text="${r.question.answerNo}"></span>번
+    </p>
+    <p th:text="${r.question.explanation}"></p>
+
+    <form class="memo-box" method="post" th:action="@{/wrong-notes/{id}/memo(id=${r.id})}">
+        <textarea name="memo" placeholder="오답 메모를 남겨보세요" th:text="${r.memo}"></textarea>
+        <button type="submit">메모 저장</button>
+    </form>
+</div>
+</body>
+</html>

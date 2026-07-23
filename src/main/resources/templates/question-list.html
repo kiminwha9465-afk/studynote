@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>정보처리기사 문제풀이</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<nav>
+    <a th:href="@{/questions}">문제풀이</a>
+    <a th:href="@{/wrong-notes}">오답노트</a>
+</nav>
+
+<h1>문제 목록</h1>
+
+<div class="filter">
+    <a th:href="@{/questions}"
+       th:classappend="${selectedSubject == null} ? 'active'">전체</a>
+    <a th:each="s : ${subjects}"
+       th:href="@{/questions(subject=${s})}"
+       th:text="${s.label}"
+       th:classappend="${selectedSubject == s} ? 'active'"></a>
+</div>
+
+<div th:if="${#lists.isEmpty(questions)}">
+    <p>등록된 문제가 없습니다.</p>
+</div>
+
+<div class="question-item" th:each="q : ${questions}">
+    <a th:href="@{/questions/{id}(id=${q.id})}">
+        <span class="badge" th:text="${q.subject.label}"></span>
+        <span th:text="${q.examYear} + '년 ' + ${q.examRound} + '회'"></span>
+        <div th:text="${q.content}"></div>
+    </a>
+</div>
+</body>
+</html>

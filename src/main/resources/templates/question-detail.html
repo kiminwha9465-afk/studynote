@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>정보처리기사 문제풀이</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<nav>
+    <a th:href="@{/questions}">문제풀이</a>
+    <a th:href="@{/wrong-notes}">오답노트</a>
+</nav>
+
+<p>
+    <span class="badge" th:text="${question.subject.label}"></span>
+    <span th:text="${question.examYear} + '년 ' + ${question.examRound} + '회'"></span>
+</p>
+
+<h1 th:text="${question.content}"></h1>
+
+<form class="answer-form" method="post" th:action="@{/questions/{id}/answer(id=${question.id})}">
+    <label th:each="i : ${#numbers.sequence(1, 4)}">
+        <input type="radio" name="selectedAnswer" th:value="${i}"
+               th:checked="${result != null and result.selectedAnswer() == i}"
+               th:disabled="${result != null}" required>
+        <span th:text="${i} + '. ' + ${
+            i == 1 ? question.choice1 :
+            i == 2 ? question.choice2 :
+            i == 3 ? question.choice3 :
+            question.choice4}"></span>
+    </label>
+    <button type="submit" th:if="${result == null}">제출</button>
+</form>
+
+<div th:if="${result != null}"
+     class="result" th:classappend="${result.correct()} ? 'correct' : 'wrong'">
+    <p th:text="${result.correct()} ? '정답입니다!' : '오답입니다.'"></p>
+    <p>정답: <span th:text="${question.answerNo}"></span>번</p>
+    <p th:text="${question.explanation}"></p>
+</div>
+
+<p th:if="${result != null}">
+    <a th:href="@{/questions/{id}(id=${question.id})}">다시 풀기</a>
+    &nbsp;|&nbsp;
+    <a th:href="@{/questions(subject=${question.subject})}">목록으로</a>
+</p>
+</body>
+</html>
