@@ -1,6 +1,7 @@
 package com.example.studynote.web;
 
 import com.example.studynote.domain.Question;
+import com.example.studynote.domain.Subject;
 import com.example.studynote.service.ExamService;
 import com.example.studynote.service.ExamSitting;
 import com.example.studynote.service.QuestionService;
@@ -40,13 +41,21 @@ public class ExamController {
     @GetMapping
     public String home(Model model) {
         model.addAttribute("sittings", examService.listExamSittings());
+        model.addAttribute("subjects", Subject.values());
         return "exam-home";
     }
 
     @PostMapping("/mock/start")
-    public String startMock(@RequestParam(defaultValue = "20") int questionsPerSubject, HttpSession session) {
-        List<Question> questions = examService.buildMockExam(questionsPerSubject);
-        startAttempt(session, questions, "모의고사 (과목별 %d문항, 총 %d문항)".formatted(questionsPerSubject, questions.size()));
+    public String startMock(
+            @RequestParam(defaultValue = "20") int questionsPerSubject,
+            @RequestParam(required = false) String subject,
+            HttpSession session) {
+        Subject subjectEnum = (subject == null || subject.isBlank()) ? null : Subject.valueOf(subject);
+        List<Question> questions = examService.buildMockExam(subjectEnum, questionsPerSubject);
+        String title = (subjectEnum != null)
+                ? "모의고사 - %s (%d문항)".formatted(subjectEnum.getLabel(), questions.size())
+                : "모의고사 (과목별 %d문항, 총 %d문항)".formatted(questionsPerSubject, questions.size());
+        startAttempt(session, questions, title);
         return "redirect:/exam/take";
     }
 

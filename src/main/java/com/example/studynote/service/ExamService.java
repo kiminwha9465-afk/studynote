@@ -24,11 +24,14 @@ public class ExamService {
                 .toList();
     }
 
-    /** 과목마다 questionsPerSubject개를 무작위로 뽑아 과목 순서대로 이어붙인다. */
-    public List<Question> buildMockExam(int questionsPerSubject) {
+    /** 과목마다 questionsPerSubject개를 무작위로 뽑아 과목 순서대로 이어붙인다. subject가 null이면 전체 과목. */
+    public List<Question> buildMockExam(Subject subject, int questionsPerSubject) {
+        List<Subject> targets = (subject != null)
+                ? List.of(subject)
+                : List.of(Subject.values());
         List<Question> result = new ArrayList<>();
-        for (Subject subject : Subject.values()) {
-            List<Question> pool = new ArrayList<>(questionRepository.findBySubjectOrderByIdAsc(subject));
+        for (Subject s : targets) {
+            List<Question> pool = new ArrayList<>(questionRepository.findBySubjectOrderByIdAsc(s));
             Collections.shuffle(pool);
             int take = Math.min(questionsPerSubject, pool.size());
             result.addAll(pool.subList(0, take));
