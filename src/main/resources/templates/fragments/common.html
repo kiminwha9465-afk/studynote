@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(title)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${title}">정보처리기사 문제풀이</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+<header th:fragment="nav(active)" class="border-b bg-white">
+    <nav class="mx-auto flex max-w-3xl items-center gap-6 px-4 py-4">
+        <span class="text-lg font-bold text-indigo-600">정처기 스터디</span>
+        <a th:href="@{/questions}"
+           th:classappend="${active == 'questions'} ? 'text-indigo-600' : 'text-slate-500 hover:text-slate-800'"
+           class="text-sm font-semibold">문제풀이</a>
+        <a th:href="@{/exam}"
+           th:classappend="${active == 'exam'} ? 'text-indigo-600' : 'text-slate-500 hover:text-slate-800'"
+           class="text-sm font-semibold">모의고사</a>
+        <a th:href="@{/wrong-notes}"
+           th:classappend="${active == 'wrong-notes'} ? 'text-indigo-600' : 'text-slate-500 hover:text-slate-800'"
+           class="text-sm font-semibold">오답노트</a>
+    </nav>
+</header>
+</body>
+</html>
