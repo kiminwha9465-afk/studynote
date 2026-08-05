@@ -2,6 +2,8 @@ package com.example.studynote.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -35,15 +37,23 @@ public class SolveRecord {
 
     private boolean correct;
 
+    @Enumerated(EnumType.STRING)
+    private SolveMode mode;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "exam_session_id")
+    private ExamSession examSession;
+
     @Column(columnDefinition = "TEXT")
     private String memo;
 
     private LocalDateTime solvedAt;
 
-    public SolveRecord(Question question, Integer selectedAnswer, boolean correct) {
+    public SolveRecord(Question question, Integer selectedAnswer, boolean correct, SolveMode mode) {
         this.question = question;
         this.selectedAnswer = selectedAnswer;
         this.correct = correct;
+        this.mode = mode;
     }
 
     @PrePersist

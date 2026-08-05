@@ -26,7 +26,7 @@
                       th:text="${r.correct()} ? '정답' : '오답'"></span>
             </div>
             <a th:href="@{/questions/{id}(id=${r.question().id})}"
-               class="font-medium text-slate-800 hover:text-indigo-600" th:text="${r.question().content}"></a>
+               class="font-medium text-slate-800 hover:text-indigo-600" th:utext="${r.question().content}"></a>
             <p th:if="${!r.correct()}" class="mt-1 text-sm text-slate-600">
                 내가 고른 답: <span class="font-semibold text-red-600" th:text="${r.selectedAnswer()}"></span>번
                 / 정답: <span class="font-semibold text-green-600" th:text="${r.question().answerNo}"></span>번

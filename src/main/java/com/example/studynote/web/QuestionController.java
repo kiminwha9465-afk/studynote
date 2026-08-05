@@ -1,6 +1,7 @@
 package com.example.studynote.web;
 
 import com.example.studynote.domain.Question;
+import com.example.studynote.domain.SolveMode;
 import com.example.studynote.domain.Subject;
 import com.example.studynote.service.QuestionService;
 import com.example.studynote.service.SolveRecordService;
@@ -47,7 +48,7 @@ public class QuestionController {
 
     @PostMapping("/{id}/answer")
     public String answer(@PathVariable Long id, @RequestParam int selectedAnswer, Model model) {
-        SolveResult result = solveRecordService.submitAnswer(id, selectedAnswer);
+        SolveResult result = solveRecordService.submitAnswer(id, selectedAnswer, SolveMode.PRACTICE);
         model.addAttribute("question", result.question());
         model.addAttribute("result", result);
         return "question-detail";

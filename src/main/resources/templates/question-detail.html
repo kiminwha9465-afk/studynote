@@ -11,7 +11,7 @@
         <span th:if="${question.theme != null}" class="text-xs text-slate-400" th:text="${question.theme}"></span>
     </div>
 
-    <h1 class="mb-6 text-lg font-semibold text-slate-800" th:text="${question.content}"></h1>
+    <h1 class="mb-6 text-lg font-semibold text-slate-800" th:utext="${question.content}"></h1>
 
     <form method="post" th:action="@{/questions/{id}/answer(id=${question.id})}" class="flex flex-col gap-2">
         <label th:each="i : ${#numbers.sequence(1, 4)}"
@@ -25,7 +25,7 @@
                    th:checked="${result != null and result.selectedAnswer() == i}"
                    th:disabled="${result != null}" required
                    class="h-4 w-4 accent-indigo-600">
-            <span class="text-slate-700" th:text="${i} + '. ' + ${
+            <span class="text-slate-700" th:utext="${i} + '. ' + ${
                 i == 1 ? question.choice1 :
                 i == 2 ? question.choice2 :
                 i == 3 ? question.choice3 :
@@ -44,7 +44,7 @@
         <p class="font-semibold" th:classappend="${result.correct()} ? 'text-green-700' : 'text-red-700'"
            th:text="${result.correct()} ? '정답입니다!' : '오답입니다.'"></p>
         <p class="mt-1 text-sm text-slate-600">정답: <span class="font-medium" th:text="${question.multiAnswer != null ? question.multiAnswer : question.answerNo}"></span>번</p>
-        <p class="mt-2 text-sm text-slate-600" th:text="${question.explanation}"></p>
+        <p class="mt-2 text-sm text-slate-600" th:utext="${question.explanation}"></p>
     </div>
 
     <div th:if="${result != null}" class="mt-4 flex gap-4 text-sm">
