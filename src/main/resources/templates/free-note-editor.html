@@ -57,12 +57,25 @@ tinymce.init({
     base_url: 'https://cdn.jsdelivr.net/npm/tinymce@6.8.3',
     suffix: '.min',
     height: 520,
-    plugins: 'table image link lists code',
+    plugins: 'table image link lists codesample',
     toolbar: [
-        'undo redo | blocks | bold italic underline strikethrough | forecolor backcolor',
-        'alignleft aligncenter alignright | numlist bullist | table | image link | code'
+        'undo redo | blocks blockquote | bold italic underline strikethrough | forecolor backcolor',
+        'alignleft aligncenter alignright | numlist bullist | table | image link | codesample'
     ],
     toolbar_mode: 'wrap',
+    block_formats: '본문=p; 제목 1=h1; 제목 2=h2; 제목 3=h3; 인용문=blockquote; 코드=pre',
+    codesample_languages: [
+        {text: 'Python', value: 'python'},
+        {text: 'JavaScript', value: 'javascript'},
+        {text: 'Java', value: 'java'},
+        {text: 'C', value: 'c'},
+        {text: 'C++', value: 'cpp'},
+        {text: 'SQL', value: 'sql'},
+        {text: 'HTML', value: 'markup'},
+        {text: 'CSS', value: 'css'},
+        {text: 'Bash', value: 'bash'},
+        {text: '기타', value: 'none'}
+    ],
     table_toolbar: 'tableprops tabledelete | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol',
     images_upload_handler: function(blobInfo) {
         return new Promise(function(resolve, reject) {
@@ -74,7 +87,10 @@ tinymce.init({
                 .catch(function() { reject('이미지 업로드 실패'); });
         });
     },
-    content_style: 'body { font-family: -apple-system, sans-serif; font-size: 15px; line-height: 1.7; }'
+    content_style: [
+        'body { font-family: -apple-system, sans-serif; font-size: 15px; line-height: 1.7; }',
+        'blockquote { border-left: 4px solid #e2e8f0; margin: 0.5em 0; padding: 0.5em 1em; color: #64748b; }'
+    ].join('')
 });
 
 // 폼 제출 전 TinyMCE 내용을 textarea에 동기화

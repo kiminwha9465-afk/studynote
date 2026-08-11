@@ -16,9 +16,10 @@
         .note-content strong, .note-content b { font-weight: 700; }
         .note-content em, .note-content i { font-style: italic; }
         .note-content a { color: #4f46e5; text-decoration: underline; }
-        .note-content blockquote { border-left: 4px solid #e2e8f0; padding-left: 1em; color: #64748b; margin: 0.75em 0; }
-        .note-content pre { background: #1e293b; color: #e2e8f0; padding: 1em; border-radius: 6px; overflow-x: auto; font-size: 0.875em; }
-        .note-content code { background: #f1f5f9; padding: 0.15em 0.4em; border-radius: 3px; font-size: 0.875em; }
+        .note-content blockquote { border-left: 4px solid #e2e8f0; padding: 0.5em 1em; color: #64748b; margin: 0.75em 0; }
+        .note-content pre[class*="language-"] { border-radius: 6px; font-size: 0.875em; margin: 0.75em 0; }
+        .note-content pre:not([class]) { background: #1e293b; color: #e2e8f0; padding: 1em; border-radius: 6px; overflow-x: auto; font-size: 0.875em; }
+        .note-content code:not([class]) { background: #f1f5f9; padding: 0.15em 0.4em; border-radius: 3px; font-size: 0.875em; }
         .note-content img { max-width: 100%; height: auto; border-radius: 4px; margin: 0.5em 0; }
         .note-content table { border-collapse: collapse; width: 100%; margin: 0.75em 0; }
         .note-content table td, .note-content table th { border: 1px solid #cbd5e1; padding: 8px 12px; vertical-align: top; }
@@ -51,5 +52,9 @@
     </div>
 
 </main>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
 </body>
 </html>
