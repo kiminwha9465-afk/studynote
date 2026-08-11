@@ -38,6 +38,13 @@
         </div>
     </div>
 
+    <!-- 풀이기록 없음 (뒤로가기로 나간 세션) -->
+    <div th:if="${detail.totalCount() == 0}"
+         class="rounded-lg border border-dashed p-10 text-center text-slate-400">
+        <p class="mb-1 font-medium">풀이 기록이 없습니다.</p>
+        <p class="text-xs">시험을 완료하지 않고 나간 경우입니다.</p>
+    </div>
+
     <!-- ===== 오답 섹션 ===== -->
     <div th:if="${!#lists.isEmpty(wrongDetails)}">
         <h2 class="mb-3 flex items-center gap-2 text-base font-bold text-slate-700">

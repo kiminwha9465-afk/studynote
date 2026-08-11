@@ -64,7 +64,7 @@ public class SolveRecordService {
                 .toList();
     }
 
-    /** 세션 목록 (최신순) */
+    /** 세션 목록 (최신순). 풀이기록이 없는 세션(뒤로가기로 나간 경우)은 제외. */
     public List<SessionSummary> findSessionSummaries(SolveMode mode) {
         List<ExamSession> sessions = examSessionRepository.findByModeOrderByCreatedAtDesc(mode);
         return sessions.stream().map(s -> {
@@ -72,7 +72,7 @@ public class SolveRecordService {
             int total = records.size();
             int correct = (int) records.stream().filter(SolveRecord::isCorrect).count();
             return new SessionSummary(s, total, correct);
-        }).toList();
+        }).filter(s -> s.totalCount() > 0).toList();
     }
 
     /** 세션 상세: 오답(나중에 맞혔는지 여부 포함) + 정답 */
