@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>노트 편집</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.snow.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/quill-better-table@1.2.10/src/assets/quill-better-table.css">
+    <style>
+        #editor { min-height: 480px; font-size: 0.95rem; }
+        .ql-better-table td, .ql-better-table th { border: 1px solid #cbd5e1; padding: 6px 10px; }
+    </style>
+</head>
+<body class="min-h-screen bg-slate-50">
+<div th:replace="~{fragments/common :: nav('free-notes')}"></div>
+
+<main class="mx-auto max-w-3xl px-4 py-8">
+
+    <a th:href="${note != null ? '/free-notes/' + note.id : '/free-notes'}"
+       class="mb-4 inline-flex items-center gap-1 text-sm text-slate-500 hover:text-slate-700">
+        ← 목록으로
+    </a>
+
+    <form id="noteForm"
+          th:action="${note != null ? '/free-notes/' + note.id : '/free-notes'}"
+          method="post">
+
+        <input type="text" name="title" placeholder="제목을 입력하세요"
+               th:value="${note?.title}"
+               class="mb-4 w-full rounded-lg border border-slate-200 px-4 py-3 text-lg font-semibold text-slate-800 focus:border-indigo-400 focus:outline-none">
+
+        <!-- 표 삽입 버튼 (툴바 밖에 별도 배치) -->
+        <div class="mb-2 flex items-center gap-2">
+            <button type="button" id="insertTable"
+                    class="rounded border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 hover:bg-slate-50">
+                ＋ 표 삽입 (3×3)
+            </button>
+        </div>
+
+        <div id="editor" class="rounded-lg border bg-white"></div>
+        <!-- 기존 내용 전달용 (편집 시) -->
+        <textarea id="initialContent" style="display:none" th:text="${note?.content}"></textarea>
+        <input type="hidden" name="content" id="hiddenContent">
+
+        <div class="mt-4 flex items-center gap-3">
+            <button type="submit"
+                    class="rounded-md bg-indigo-600 px-5 py-2 text-sm font-semibold text-white hover:bg-indigo-700">
+                저장
+            </button>
+            <a th:href="${note != null ? '/free-notes/' + note.id : '/free-notes'}"
+               class="rounded-md border border-slate-300 px-5 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-50">
+                취소
+            </a>
+            <form th:if="${note != null}"
+                  th:action="@{/free-notes/{id}/delete(id=${note.id})}"
+                  method="post" class="ml-auto">
+                <button type="submit"
+                        onclick="return confirm('정말 삭제하시겠어요?')"
+                        class="rounded-md bg-red-50 px-5 py-2 text-sm font-semibold text-red-600 hover:bg-red-100">
+                    삭제
+                </button>
+            </form>
+        </div>
+    </form>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/quill-better-table@1.2.10/dist/quill-better-table.js"></script>
+<script>
+    var QuillBetterTable = window.quillBetterTable;
+    Quill.register({'modules/better-table': QuillBetterTable}, true);
+
+    var quill = new Quill('#editor', {
+        theme: 'snow',
+        modules: {
+            table: false,
+            'better-table': {},
+            keyboard: {bindings: QuillBetterTable.keyboardBindings},
+            toolbar: [
+                ['bold', 'italic', 'underline', 'strike'],
+                [{'header': [1, 2, 3, false]}],
+                [{'list': 'ordered'}, {'list': 'bullet'}],
+                ['blockquote', 'code-block'],
+                ['link', 'image'],
+                [{'color': []}, {'background': []}],
+                ['clean']
+            ]
+        }
+    });
+
+    // 편집 시 기존 내용 복원
+    var initial = document.getElementById('initialContent').value;
+    if (initial) {
+        quill.clipboard.dangerouslyPasteHTML(initial);
+    }
+
+    // 이미지 업로드
+    quill.getModule('toolbar').addHandler('image', function () {
+        var input = document.createElement('input');
+        input.type = 'file';
+        input.accept = 'image/*';
+        input.click();
+        input.onchange = function () {
+            var file = input.files[0];
+            if (!file) return;
+            var fd = new FormData();
+            fd.append('file', file);
+            fetch('/free-notes/upload-image', {method: 'POST', body: fd})
+                .then(function (r) { return r.json(); })
+                .then(function (data) {
+                    var range = quill.getSelection(true);
+                    quill.insertEmbed(range.index, 'image', data.url);
+                });
+        };
+    });
+
+    // 표 삽입
+    document.getElementById('insertTable').addEventListener('click', function () {
+        quill.getModule('better-table').insertTable(3, 3);
+    });
+
+    // 저장 시 Quill HTML을 hidden input으로 전달
+    document.getElementById('noteForm').addEventListener('submit', function () {
+        document.getElementById('hiddenContent').value = quill.root.innerHTML;
+    });
+</script>
+</body>
+</html>

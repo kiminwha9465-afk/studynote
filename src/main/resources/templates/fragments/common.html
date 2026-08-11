@@ -19,6 +19,9 @@
         <a th:href="@{/wrong-notes}"
            th:classappend="${active == 'wrong-notes'} ? 'text-indigo-600' : 'text-slate-500 hover:text-slate-800'"
            class="text-sm font-semibold">오답노트</a>
+        <a th:href="@{/free-notes}"
+           th:classappend="${active == 'free-notes'} ? 'text-indigo-600' : 'text-slate-500 hover:text-slate-800'"
+           class="text-sm font-semibold">자유노트</a>
     </nav>
 </header>
 </body>
