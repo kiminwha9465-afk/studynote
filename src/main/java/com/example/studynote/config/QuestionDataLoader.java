@@ -2,37 +2,32 @@ package com.example.studynote.config;
 
 import com.example.studynote.domain.Question;
 import com.example.studynote.domain.Subject;
-import com.example.studynote.repository.ExamSessionRepository;
 import com.example.studynote.repository.QuestionRepository;
-import com.example.studynote.repository.SolveRecordRepository;
 import tools.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * 앱 시작 시 questions.json의 문제 수와 DB 문제 수를 비교한다.
- * 수가 다르면 기존 데이터를 전체 초기화하고 JSON을 재적재한다.
+ * 앱 시작 시 questions.json을 DB에 동기화한다.
+ * content를 자연키로 삼아 기존 문제는 ID를 유지한 채 필드만 갱신하고,
+ * 새 문제만 insert한다. 풀이기록(FK)을 보존하기 위해 삭제는 하지 않는다.
  */
 @Component
 public class QuestionDataLoader implements CommandLineRunner {
 
     private final QuestionRepository questionRepository;
-    private final SolveRecordRepository solveRecordRepository;
-    private final ExamSessionRepository examSessionRepository;
     private final ObjectMapper objectMapper;
 
     public QuestionDataLoader(QuestionRepository questionRepository,
-                               SolveRecordRepository solveRecordRepository,
-                               ExamSessionRepository examSessionRepository,
                                ObjectMapper objectMapper) {
         this.questionRepository = questionRepository;
-        this.solveRecordRepository = solveRecordRepository;
-        this.examSessionRepository = examSessionRepository;
         this.objectMapper = objectMapper;
     }
 
@@ -43,18 +38,31 @@ public class QuestionDataLoader implements CommandLineRunner {
             List<QuestionRecord> records = objectMapper.readValue(in, objectMapper.getTypeFactory()
                     .constructCollectionType(List.class, QuestionRecord.class));
 
-            if (questionRepository.count() == records.size()) {
-                return;
+            Map<String, Question> byContent = questionRepository.findAll().stream()
+                    .collect(Collectors.toMap(
+                            q -> q.getContent().trim(),
+                            q -> q,
+                            (a, b) -> a));
+
+            for (QuestionRecord r : records) {
+                String key = r.content() == null ? "" : r.content().trim();
+                Question existing = byContent.get(key);
+                if (existing != null) {
+                    existing.setSubject(r.subject() == null ? null : Subject.valueOf(r.subject()));
+                    existing.setExamYear(r.examYear());
+                    existing.setExamRound(r.examRound());
+                    existing.setChoice1(r.choice1());
+                    existing.setChoice2(r.choice2());
+                    existing.setChoice3(r.choice3());
+                    existing.setChoice4(r.choice4());
+                    existing.setAnswerNo(r.answerNo());
+                    existing.setExplanation(r.explanation());
+                    existing.setMultiAnswer(r.multiAnswer());
+                    existing.setTheme(r.theme());
+                } else {
+                    questionRepository.save(toEntity(r));
+                }
             }
-
-            solveRecordRepository.deleteAllInBatch();
-            examSessionRepository.deleteAllInBatch();
-            questionRepository.deleteAllInBatch();
-
-            List<Question> questions = records.stream()
-                    .map(QuestionDataLoader::toEntity)
-                    .toList();
-            questionRepository.saveAll(questions);
         }
     }
 
