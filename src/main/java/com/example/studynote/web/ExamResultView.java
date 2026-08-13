@@ -31,6 +31,11 @@ public record ExamResultView(String title, List<SolveResult> results) {
         return Math.round(100f * correctCount() / totalCount());
     }
 
+    public boolean passed() {
+        if (scorePercent() < 60) return false;
+        return subjectStats().stream().noneMatch(s -> s.scorePercent() < 40);
+    }
+
     public List<SubjectStat> subjectStats() {
         Map<Subject, List<SolveResult>> bySubject = results.stream()
                 .collect(Collectors.groupingBy(r -> r.question().getSubject()));

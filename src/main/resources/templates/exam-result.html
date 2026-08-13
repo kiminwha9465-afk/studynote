@@ -8,12 +8,20 @@
     <h1 class="mb-1 text-xl font-bold text-slate-800 dark:text-zinc-100" th:text="${result.title}"></h1>
 
     <div class="mb-6 rounded-lg border bg-white p-5 shadow-sm dark:bg-zinc-800 dark:border-zinc-700">
-        <p class="text-3xl font-bold text-indigo-600">
-            <span th:text="${result.scorePercent()}"></span><span class="text-lg">점</span>
-        </p>
-        <p class="mt-1 text-sm text-slate-500 dark:text-zinc-400">
-            <span th:text="${result.correctCount()}"></span> / <span th:text="${result.totalCount()}"></span> 문제 정답
-        </p>
+        <div class="flex items-start justify-between gap-4">
+            <div>
+                <p class="text-3xl font-bold text-indigo-600">
+                    <span th:text="${result.scorePercent()}"></span><span class="text-lg">점</span>
+                </p>
+                <p class="mt-1 text-sm text-slate-500 dark:text-zinc-400">
+                    <span th:text="${result.correctCount()}"></span> / <span th:text="${result.totalCount()}"></span> 문제 정답
+                </p>
+            </div>
+            <span th:if="${result.passed()}"
+                  class="shrink-0 rounded-full bg-green-100 px-3 py-1 text-sm font-bold text-green-700 dark:bg-green-900/40 dark:text-green-400">합격</span>
+            <span th:unless="${result.passed()}"
+                  class="shrink-0 rounded-full bg-red-100 px-3 py-1 text-sm font-bold text-red-600 dark:bg-red-900/40 dark:text-red-400">불합격</span>
+        </div>
     </div>
 
     <!-- 과목별 점수 -->
@@ -26,6 +34,8 @@
                th:text="${s.scorePercent()} + '점'"></p>
             <p class="text-xs text-slate-400 dark:text-zinc-500"
                th:text="${s.correct()} + '/' + ${s.total()} + ' 정답'"></p>
+            <span th:if="${s.scorePercent() < 40}"
+                  class="mt-1 inline-block rounded-full bg-red-100 px-2 py-0.5 text-xs font-semibold text-red-600 dark:bg-red-900/40 dark:text-red-400">과락</span>
         </div>
     </div>
 
