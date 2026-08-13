@@ -1,5 +1,6 @@
 package com.example.studynote.web;
 
+import com.example.studynote.domain.ExamSession;
 import com.example.studynote.domain.Question;
 import com.example.studynote.domain.SolveMode;
 import com.example.studynote.domain.Subject;
