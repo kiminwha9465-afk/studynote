@@ -38,6 +38,19 @@
         </div>
     </div>
 
+    <!-- 과목별 점수 -->
+    <div class="mb-6 grid grid-cols-2 gap-2 sm:grid-cols-5" th:if="${not #lists.isEmpty(detail.subjectStats())}">
+        <div th:each="s : ${detail.subjectStats()}"
+             class="rounded-lg border bg-white p-3 shadow-sm text-center dark:bg-zinc-800 dark:border-zinc-700">
+            <p class="mb-1 truncate text-xs text-slate-500 dark:text-zinc-400" th:text="${s.subject().label}"></p>
+            <p class="text-xl font-bold"
+               th:classappend="${s.scorePercent() >= 40} ? 'text-indigo-600 dark:text-indigo-400' : 'text-red-500 dark:text-red-400'"
+               th:text="${s.scorePercent()} + '점'"></p>
+            <p class="text-xs text-slate-400 dark:text-zinc-500"
+               th:text="${s.correct()} + '/' + ${s.total()} + ' 정답'"></p>
+        </div>
+    </div>
+
     <!-- 풀이기록 없음 -->
     <div th:if="${detail.totalCount() == 0}"
          class="rounded-lg border border-dashed p-10 text-center text-slate-400 dark:border-zinc-600 dark:text-zinc-500">
