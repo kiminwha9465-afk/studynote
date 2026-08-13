@@ -4,25 +4,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title th:text="${title}">정보처리기사 문제풀이</title>
+    <script>
+        (function() {
+            var t = localStorage.getItem('theme');
+            if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            }
+        })();
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = { darkMode: 'class' }</script>
 </head>
 <body>
-<header th:fragment="nav(active)" class="border-b bg-white">
+<header th:fragment="nav(active)" class="border-b bg-white dark:bg-slate-800 dark:border-slate-700">
     <nav class="mx-auto flex max-w-3xl items-center gap-6 px-4 py-4">
         <a th:href="@{/}" class="text-lg font-bold text-indigo-600">정처기 스터디</a>
         <a th:href="@{/questions}"
-           th:classappend="${active == 'questions'} ? 'text-indigo-600' : 'text-slate-500 hover:text-slate-800'"
+           th:classappend="${active == 'questions'} ? 'text-indigo-600' : 'text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200'"
            class="text-sm font-semibold">문제풀이</a>
         <a th:href="@{/exam}"
-           th:classappend="${active == 'exam'} ? 'text-indigo-600' : 'text-slate-500 hover:text-slate-800'"
+           th:classappend="${active == 'exam'} ? 'text-indigo-600' : 'text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200'"
            class="text-sm font-semibold">모의고사</a>
         <a th:href="@{/wrong-notes}"
-           th:classappend="${active == 'wrong-notes'} ? 'text-indigo-600' : 'text-slate-500 hover:text-slate-800'"
+           th:classappend="${active == 'wrong-notes'} ? 'text-indigo-600' : 'text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200'"
            class="text-sm font-semibold">오답노트</a>
         <a th:href="@{/free-notes}"
-           th:classappend="${active == 'free-notes'} ? 'text-indigo-600' : 'text-slate-500 hover:text-slate-800'"
+           th:classappend="${active == 'free-notes'} ? 'text-indigo-600' : 'text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200'"
            class="text-sm font-semibold">자유노트</a>
+        <button id="theme-toggle" onclick="toggleTheme()"
+                class="ml-auto rounded-full p-1.5 text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-700"
+                title="다크모드 전환">
+            <svg id="icon-moon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+            <svg id="icon-sun" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="5"/>
+                <line x1="12" y1="1" x2="12" y2="3"/>
+                <line x1="12" y1="21" x2="12" y2="23"/>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                <line x1="1" y1="12" x2="3" y2="12"/>
+                <line x1="21" y1="12" x2="23" y2="12"/>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
+        </button>
     </nav>
+    <script>
+        function toggleTheme() {
+            var html = document.documentElement;
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+            updateThemeIcons();
+        }
+        function updateThemeIcons() {
+            var isDark = document.documentElement.classList.contains('dark');
+            document.getElementById('icon-moon').classList.toggle('hidden', isDark);
+            document.getElementById('icon-sun').classList.toggle('hidden', !isDark);
+        }
+        updateThemeIcons();
+    </script>
 </header>
 </body>
 </html>

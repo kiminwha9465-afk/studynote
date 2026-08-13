@@ -1,25 +1,28 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/common :: head('모의고사')}"></head>
-<body class="min-h-screen bg-slate-50">
+<body class="min-h-screen bg-slate-50 dark:bg-slate-900">
 <div th:replace="~{fragments/common :: nav('exam')}"></div>
 
 <main class="mx-auto max-w-3xl px-4 py-8">
-    <h1 class="mb-6 text-xl font-bold text-slate-800">모의고사</h1>
+    <h1 class="mb-6 text-xl font-bold text-slate-800 dark:text-slate-100">모의고사</h1>
 
-    <section class="mb-8 rounded-lg border bg-white p-5 shadow-sm">
-        <h2 class="mb-1 text-lg font-semibold text-slate-800">모의고사 모드</h2>
-        <p class="mb-4 text-sm text-slate-500">과목별로 문제를 무작위로 뽑아 실제 시험처럼 풀어봅니다.</p>
+    <section class="mb-8 rounded-lg border bg-white p-5 shadow-sm dark:bg-slate-800 dark:border-slate-700">
+        <h2 class="mb-1 text-lg font-semibold text-slate-800 dark:text-slate-100">모의고사 모드</h2>
+        <p class="mb-4 text-sm text-slate-500 dark:text-slate-400">과목별로 문제를 무작위로 뽑아 실제 시험처럼 풀어봅니다.</p>
         <form method="post" th:action="@{/exam/mock/start}">
             <!-- 과목 선택 -->
             <div class="mb-4">
-                <p class="mb-2 text-sm text-slate-600">과목 선택</p>
+                <p class="mb-2 text-sm text-slate-600 dark:text-slate-300">과목 선택</p>
                 <div class="flex flex-wrap gap-2">
                     <label class="cursor-pointer">
                         <input type="radio" name="subject" value="" class="peer sr-only" checked>
                         <span class="rounded-full border px-3 py-1.5 text-sm font-medium text-slate-600
                                      peer-checked:border-indigo-500 peer-checked:bg-indigo-50 peer-checked:text-indigo-700
-                                     hover:border-indigo-300 hover:bg-indigo-50">
+                                     hover:border-indigo-300 hover:bg-indigo-50
+                                     dark:border-slate-600 dark:text-slate-300
+                                     dark:peer-checked:bg-indigo-900/40 dark:peer-checked:border-indigo-500 dark:peer-checked:text-indigo-300
+                                     dark:hover:border-indigo-500 dark:hover:bg-indigo-900/20">
                             전체 (5과목)
                         </span>
                     </label>
@@ -27,7 +30,10 @@
                         <input type="radio" name="subject" th:value="${s.name()}" class="peer sr-only">
                         <span class="rounded-full border px-3 py-1.5 text-sm font-medium text-slate-600
                                      peer-checked:border-indigo-500 peer-checked:bg-indigo-50 peer-checked:text-indigo-700
-                                     hover:border-indigo-300 hover:bg-indigo-50"
+                                     hover:border-indigo-300 hover:bg-indigo-50
+                                     dark:border-slate-600 dark:text-slate-300
+                                     dark:peer-checked:bg-indigo-900/40 dark:peer-checked:border-indigo-500 dark:peer-checked:text-indigo-300
+                                     dark:hover:border-indigo-500 dark:hover:bg-indigo-900/20"
                               th:text="${s.label}">
                         </span>
                     </label>
@@ -35,9 +41,9 @@
             </div>
             <!-- 문항 수 + 시작 -->
             <div class="flex items-center gap-3">
-                <label class="text-sm text-slate-600">문항 수</label>
+                <label class="text-sm text-slate-600 dark:text-slate-300">문항 수</label>
                 <input type="number" name="questionsPerSubject" value="20" min="1" max="60"
-                       class="w-20 rounded-md border px-2 py-1.5 text-sm focus:border-indigo-400 focus:outline-none">
+                       class="w-20 rounded-md border px-2 py-1.5 text-sm focus:border-indigo-400 focus:outline-none dark:bg-slate-700 dark:border-slate-600 dark:text-slate-200">
                 <button type="submit"
                         class="rounded-md bg-indigo-600 px-4 py-1.5 text-sm font-semibold text-white hover:bg-indigo-700">
                     시작하기
@@ -46,11 +52,11 @@
         </form>
     </section>
 
-    <section class="rounded-lg border bg-white p-5 shadow-sm">
-        <h2 class="mb-1 text-lg font-semibold text-slate-800">지정년도 모드</h2>
-        <p class="mb-4 text-sm text-slate-500">특정 연도·회차의 기출문제를 그대로 풀어봅니다.</p>
+    <section class="rounded-lg border bg-white p-5 shadow-sm dark:bg-slate-800 dark:border-slate-700">
+        <h2 class="mb-1 text-lg font-semibold text-slate-800 dark:text-slate-100">지정년도 모드</h2>
+        <p class="mb-4 text-sm text-slate-500 dark:text-slate-400">특정 연도·회차의 기출문제를 그대로 풀어봅니다.</p>
 
-        <div th:if="${#lists.isEmpty(sittings)}" class="rounded-lg border border-dashed p-6 text-center text-slate-400">
+        <div th:if="${#lists.isEmpty(sittings)}" class="rounded-lg border border-dashed p-6 text-center text-slate-400 dark:border-slate-600 dark:text-slate-500">
             등록된 회차 데이터가 없습니다.
         </div>
 
@@ -59,7 +65,7 @@
                 <input type="hidden" name="examYear" th:value="${s.examYear}">
                 <input type="hidden" name="examRound" th:value="${s.examRound}">
                 <button type="submit"
-                        class="rounded-full border bg-white px-3 py-1.5 text-sm font-medium text-slate-600 hover:border-indigo-300 hover:bg-indigo-50 hover:text-indigo-600"
+                        class="rounded-full border bg-white px-3 py-1.5 text-sm font-medium text-slate-600 hover:border-indigo-300 hover:bg-indigo-50 hover:text-indigo-600 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-300 dark:hover:border-indigo-500 dark:hover:bg-indigo-900/30 dark:hover:text-indigo-300"
                         th:text="${s.examYear} + '년 ' + ${s.examRound} + '회'">
                 </button>
             </form>

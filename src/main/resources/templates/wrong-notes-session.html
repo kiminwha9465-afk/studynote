@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/common :: head('시험 상세')}"></head>
-<body class="min-h-screen bg-slate-50">
+<body class="min-h-screen bg-slate-50 dark:bg-slate-900">
 <div th:replace="~{fragments/common :: nav('wrong-notes')}"></div>
 
 <main class="mx-auto max-w-3xl px-4 py-8">
 
     <!-- 뒤로가기 -->
     <a th:href="@{/wrong-notes(mode=${examSession.mode.name().toLowerCase()})}"
-       class="mb-4 inline-flex items-center gap-1 text-sm text-slate-500 hover:text-slate-700">
+       class="mb-4 inline-flex items-center gap-1 text-sm text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200">
         ← 목록으로
     </a>
 
     <!-- 시험 제목 + 요약 -->
-    <div class="mb-6 rounded-lg border bg-white p-5 shadow-sm">
+    <div class="mb-6 rounded-lg border bg-white p-5 shadow-sm dark:bg-slate-800 dark:border-slate-700">
         <div class="flex items-start justify-between gap-4">
             <div>
-                <h1 class="text-lg font-bold text-slate-800" th:text="${examSession.title}"></h1>
-                <p class="mt-1 text-xs text-slate-400"
+                <h1 class="text-lg font-bold text-slate-800 dark:text-slate-100" th:text="${examSession.title}"></h1>
+                <p class="mt-1 text-xs text-slate-400 dark:text-slate-500"
                    th:text="${#temporals.format(examSession.createdAt, 'yyyy년 MM월 dd일 HH:mm')}"></p>
             </div>
             <a th:if="${!#lists.isEmpty(wrongDetails)}"
@@ -28,75 +28,75 @@
         </div>
         <div class="mt-3 flex items-center gap-4">
             <span class="text-sm font-bold"
-                  th:classappend="${detail.scorePercent() >= 60} ? 'text-indigo-600' : 'text-red-500'"
+                  th:classappend="${detail.scorePercent() >= 60} ? 'text-indigo-600 dark:text-indigo-400' : 'text-red-500 dark:text-red-400'"
                   th:text="${detail.scorePercent()} + '점'"></span>
-            <div class="flex gap-4 text-sm text-slate-600">
+            <div class="flex gap-4 text-sm text-slate-600 dark:text-slate-300">
                 <span>총 <strong th:text="${detail.totalCount()}"></strong>문제</span>
-                <span class="font-semibold text-green-700">정답 <span th:text="${detail.correctList().size()}"></span>개</span>
-                <span class="font-semibold text-red-600">오답 <span th:text="${detail.wrongDetails().size()}"></span>개</span>
+                <span class="font-semibold text-green-700 dark:text-green-400">정답 <span th:text="${detail.correctList().size()}"></span>개</span>
+                <span class="font-semibold text-red-600 dark:text-red-400">오답 <span th:text="${detail.wrongDetails().size()}"></span>개</span>
             </div>
         </div>
     </div>
 
-    <!-- 풀이기록 없음 (뒤로가기로 나간 세션) -->
+    <!-- 풀이기록 없음 -->
     <div th:if="${detail.totalCount() == 0}"
-         class="rounded-lg border border-dashed p-10 text-center text-slate-400">
+         class="rounded-lg border border-dashed p-10 text-center text-slate-400 dark:border-slate-600 dark:text-slate-500">
         <p class="mb-1 font-medium">풀이 기록이 없습니다.</p>
         <p class="text-xs">시험을 완료하지 않고 나간 경우입니다.</p>
     </div>
 
     <!-- ===== 오답 섹션 ===== -->
     <div th:if="${!#lists.isEmpty(wrongDetails)}">
-        <h2 class="mb-3 flex items-center gap-2 text-base font-bold text-slate-700">
-            <span class="rounded-full bg-red-100 px-2.5 py-0.5 text-sm text-red-600">오답</span>
+        <h2 class="mb-3 flex items-center gap-2 text-base font-bold text-slate-700 dark:text-slate-200">
+            <span class="rounded-full bg-red-100 px-2.5 py-0.5 text-sm text-red-600 dark:bg-red-900/40 dark:text-red-400">오답</span>
             <span th:text="${#lists.size(wrongDetails)} + '개'"></span>
         </h2>
 
         <div class="mb-8 flex flex-col gap-5">
-            <div class="rounded-lg border bg-white p-5 shadow-sm" th:each="d : ${wrongDetails}">
+            <div class="rounded-lg border bg-white p-5 shadow-sm dark:bg-slate-800 dark:border-slate-700" th:each="d : ${wrongDetails}">
 
                 <!-- 나중에 맞힌 경우 배지 -->
                 <div th:if="${d.laterCorrected}"
-                     class="mb-3 inline-flex items-center rounded-full bg-blue-50 px-3 py-0.5 text-xs font-semibold text-blue-600">
+                     class="mb-3 inline-flex items-center rounded-full bg-blue-50 px-3 py-0.5 text-xs font-semibold text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
                     이후 맞힘 ✓
                 </div>
 
                 <!-- 과목 + 년도 -->
                 <div class="mb-3 flex flex-wrap items-center gap-2">
-                    <span class="rounded bg-indigo-50 px-2 py-0.5 text-xs font-semibold text-indigo-600"
+                    <span class="rounded bg-indigo-50 px-2 py-0.5 text-xs font-semibold text-indigo-600 dark:bg-indigo-900/40 dark:text-indigo-300"
                           th:text="${d.record.question.subject.label}"></span>
                     <span th:if="${d.record.question.examYear != null}"
-                          class="rounded bg-slate-100 px-2 py-0.5 text-xs text-slate-500"
+                          class="rounded bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-slate-700 dark:text-slate-400"
                           th:text="${d.record.question.examYear} + '년 ' + ${d.record.question.examRound} + '회'"></span>
                 </div>
 
                 <!-- 문제 내용 -->
-                <div class="mb-4 font-medium leading-relaxed text-slate-800"
+                <div class="mb-4 font-medium leading-relaxed text-slate-800 dark:text-slate-100"
                      th:utext="${d.record.question.content}"></div>
 
                 <!-- 선지 4개 -->
                 <div class="mb-4 space-y-2">
                     <div class="flex items-start gap-2 rounded-md px-3 py-2 text-sm"
-                         th:classappend="${d.record.question.answerNo == 1} ? 'bg-green-50 font-semibold text-green-800' :
-                                         (${d.record.selectedAnswer == 1} ? 'bg-red-50 text-red-800' : 'bg-slate-50 text-slate-700')">
+                         th:classappend="${d.record.question.answerNo == 1} ? 'bg-green-50 font-semibold text-green-800 dark:bg-green-900/30 dark:text-green-300' :
+                                         (${d.record.selectedAnswer == 1} ? 'bg-red-50 text-red-800 dark:bg-red-900/30 dark:text-red-300' : 'bg-slate-50 text-slate-700 dark:bg-slate-700 dark:text-slate-300')">
                         <span class="shrink-0 font-medium">①</span>
                         <span th:utext="${d.record.question.choice1}"></span>
                     </div>
                     <div class="flex items-start gap-2 rounded-md px-3 py-2 text-sm"
-                         th:classappend="${d.record.question.answerNo == 2} ? 'bg-green-50 font-semibold text-green-800' :
-                                         (${d.record.selectedAnswer == 2} ? 'bg-red-50 text-red-800' : 'bg-slate-50 text-slate-700')">
+                         th:classappend="${d.record.question.answerNo == 2} ? 'bg-green-50 font-semibold text-green-800 dark:bg-green-900/30 dark:text-green-300' :
+                                         (${d.record.selectedAnswer == 2} ? 'bg-red-50 text-red-800 dark:bg-red-900/30 dark:text-red-300' : 'bg-slate-50 text-slate-700 dark:bg-slate-700 dark:text-slate-300')">
                         <span class="shrink-0 font-medium">②</span>
                         <span th:utext="${d.record.question.choice2}"></span>
                     </div>
                     <div class="flex items-start gap-2 rounded-md px-3 py-2 text-sm"
-                         th:classappend="${d.record.question.answerNo == 3} ? 'bg-green-50 font-semibold text-green-800' :
-                                         (${d.record.selectedAnswer == 3} ? 'bg-red-50 text-red-800' : 'bg-slate-50 text-slate-700')">
+                         th:classappend="${d.record.question.answerNo == 3} ? 'bg-green-50 font-semibold text-green-800 dark:bg-green-900/30 dark:text-green-300' :
+                                         (${d.record.selectedAnswer == 3} ? 'bg-red-50 text-red-800 dark:bg-red-900/30 dark:text-red-300' : 'bg-slate-50 text-slate-700 dark:bg-slate-700 dark:text-slate-300')">
                         <span class="shrink-0 font-medium">③</span>
                         <span th:utext="${d.record.question.choice3}"></span>
                     </div>
                     <div class="flex items-start gap-2 rounded-md px-3 py-2 text-sm"
-                         th:classappend="${d.record.question.answerNo == 4} ? 'bg-green-50 font-semibold text-green-800' :
-                                         (${d.record.selectedAnswer == 4} ? 'bg-red-50 text-red-800' : 'bg-slate-50 text-slate-700')">
+                         th:classappend="${d.record.question.answerNo == 4} ? 'bg-green-50 font-semibold text-green-800 dark:bg-green-900/30 dark:text-green-300' :
+                                         (${d.record.selectedAnswer == 4} ? 'bg-red-50 text-red-800 dark:bg-red-900/30 dark:text-red-300' : 'bg-slate-50 text-slate-700 dark:bg-slate-700 dark:text-slate-300')">
                         <span class="shrink-0 font-medium">④</span>
                         <span th:utext="${d.record.question.choice4}"></span>
                     </div>
@@ -104,24 +104,24 @@
 
                 <!-- 오답 표시 -->
                 <p class="mb-3 text-sm">
-                    <span class="font-semibold text-red-600">내가 고른 답: <span th:text="${d.record.selectedAnswer}"></span>번</span>
-                    <span class="mx-1 text-slate-300">|</span>
-                    <span class="font-semibold text-green-700">정답: <span th:text="${d.record.question.answerNo}"></span>번</span>
+                    <span class="font-semibold text-red-600 dark:text-red-400">내가 고른 답: <span th:text="${d.record.selectedAnswer}"></span>번</span>
+                    <span class="mx-1 text-slate-300 dark:text-slate-600">|</span>
+                    <span class="font-semibold text-green-700 dark:text-green-400">정답: <span th:text="${d.record.question.answerNo}"></span>번</span>
                 </p>
 
                 <!-- 해설 -->
                 <div th:if="${d.record.question.explanation != null and !#strings.isEmpty(d.record.question.explanation)}"
-                     class="mb-3 rounded-md bg-amber-50 px-3 py-2 text-sm text-slate-700"
+                     class="mb-3 rounded-md bg-amber-50 px-3 py-2 text-sm text-slate-700 dark:bg-amber-900/20 dark:text-slate-300"
                      th:utext="${d.record.question.explanation}"></div>
 
                 <!-- 메모 -->
                 <form method="post" th:action="@{/wrong-notes/{id}/memo(id=${d.record.id})}">
                     <input type="hidden" name="sessionId" th:value="${examSession.id}">
                     <textarea name="memo" placeholder="오답 메모를 남겨보세요" th:text="${d.record.memo}"
-                              class="w-full rounded-md border p-2 text-sm focus:border-indigo-400 focus:outline-none"
+                              class="w-full rounded-md border p-2 text-sm focus:border-indigo-400 focus:outline-none dark:bg-slate-700 dark:border-slate-600 dark:text-slate-200 dark:placeholder-slate-500"
                               rows="2"></textarea>
                     <button type="submit"
-                            class="mt-2 rounded-md bg-slate-700 px-4 py-1.5 text-sm font-medium text-white hover:bg-slate-800">
+                            class="mt-2 rounded-md bg-slate-700 px-4 py-1.5 text-sm font-medium text-white hover:bg-slate-800 dark:bg-slate-600 dark:hover:bg-slate-500">
                         메모 저장
                     </button>
                 </form>
@@ -131,46 +131,46 @@
 
     <!-- ===== 정답 섹션 ===== -->
     <div th:if="${!#lists.isEmpty(correctList)}">
-        <h2 class="mb-3 flex items-center gap-2 text-base font-bold text-slate-700">
-            <span class="rounded-full bg-green-100 px-2.5 py-0.5 text-sm text-green-700">정답</span>
+        <h2 class="mb-3 flex items-center gap-2 text-base font-bold text-slate-700 dark:text-slate-200">
+            <span class="rounded-full bg-green-100 px-2.5 py-0.5 text-sm text-green-700 dark:bg-green-900/40 dark:text-green-400">정답</span>
             <span th:text="${#lists.size(correctList)} + '개'"></span>
         </h2>
 
         <div class="flex flex-col gap-4">
-            <div class="rounded-lg border bg-white p-5 shadow-sm opacity-80" th:each="r : ${correctList}">
+            <div class="rounded-lg border bg-white p-5 shadow-sm opacity-80 dark:bg-slate-800 dark:border-slate-700" th:each="r : ${correctList}">
 
                 <!-- 과목 + 년도 -->
                 <div class="mb-3 flex flex-wrap items-center gap-2">
-                    <span class="rounded bg-indigo-50 px-2 py-0.5 text-xs font-semibold text-indigo-600"
+                    <span class="rounded bg-indigo-50 px-2 py-0.5 text-xs font-semibold text-indigo-600 dark:bg-indigo-900/40 dark:text-indigo-300"
                           th:text="${r.question.subject.label}"></span>
                     <span th:if="${r.question.examYear != null}"
-                          class="rounded bg-slate-100 px-2 py-0.5 text-xs text-slate-500"
+                          class="rounded bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-slate-700 dark:text-slate-400"
                           th:text="${r.question.examYear} + '년 ' + ${r.question.examRound} + '회'"></span>
                 </div>
 
                 <!-- 문제 내용 -->
-                <div class="mb-4 font-medium leading-relaxed text-slate-800"
+                <div class="mb-4 font-medium leading-relaxed text-slate-800 dark:text-slate-100"
                      th:utext="${r.question.content}"></div>
 
                 <!-- 선지 4개 (정답만 초록, 나머지는 일반) -->
                 <div class="space-y-2">
                     <div class="flex items-start gap-2 rounded-md px-3 py-2 text-sm"
-                         th:classappend="${r.question.answerNo == 1} ? 'bg-green-50 font-semibold text-green-800' : 'bg-slate-50 text-slate-700'">
+                         th:classappend="${r.question.answerNo == 1} ? 'bg-green-50 font-semibold text-green-800 dark:bg-green-900/30 dark:text-green-300' : 'bg-slate-50 text-slate-700 dark:bg-slate-700 dark:text-slate-300'">
                         <span class="shrink-0 font-medium">①</span>
                         <span th:utext="${r.question.choice1}"></span>
                     </div>
                     <div class="flex items-start gap-2 rounded-md px-3 py-2 text-sm"
-                         th:classappend="${r.question.answerNo == 2} ? 'bg-green-50 font-semibold text-green-800' : 'bg-slate-50 text-slate-700'">
+                         th:classappend="${r.question.answerNo == 2} ? 'bg-green-50 font-semibold text-green-800 dark:bg-green-900/30 dark:text-green-300' : 'bg-slate-50 text-slate-700 dark:bg-slate-700 dark:text-slate-300'">
                         <span class="shrink-0 font-medium">②</span>
                         <span th:utext="${r.question.choice2}"></span>
                     </div>
                     <div class="flex items-start gap-2 rounded-md px-3 py-2 text-sm"
-                         th:classappend="${r.question.answerNo == 3} ? 'bg-green-50 font-semibold text-green-800' : 'bg-slate-50 text-slate-700'">
+                         th:classappend="${r.question.answerNo == 3} ? 'bg-green-50 font-semibold text-green-800 dark:bg-green-900/30 dark:text-green-300' : 'bg-slate-50 text-slate-700 dark:bg-slate-700 dark:text-slate-300'">
                         <span class="shrink-0 font-medium">③</span>
                         <span th:utext="${r.question.choice3}"></span>
                     </div>
                     <div class="flex items-start gap-2 rounded-md px-3 py-2 text-sm"
-                         th:classappend="${r.question.answerNo == 4} ? 'bg-green-50 font-semibold text-green-800' : 'bg-slate-50 text-slate-700'">
+                         th:classappend="${r.question.answerNo == 4} ? 'bg-green-50 font-semibold text-green-800 dark:bg-green-900/30 dark:text-green-300' : 'bg-slate-50 text-slate-700 dark:bg-slate-700 dark:text-slate-300'">
                         <span class="shrink-0 font-medium">④</span>
                         <span th:utext="${r.question.choice4}"></span>
                     </div>
