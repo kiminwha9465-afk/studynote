@@ -1,6 +1,5 @@
 package com.example.studynote.web;
 
-import com.example.studynote.domain.ExamSession;
 import com.example.studynote.domain.Question;
 import com.example.studynote.domain.SolveMode;
 import com.example.studynote.domain.Subject;
@@ -94,13 +93,12 @@ public class ExamController {
         if (mode == null) mode = SolveMode.MOCK;
 
         Long examSessionId = (Long) session.getAttribute(SESSION_EXAM_SESSION_ID);
-        ExamSession examSession = examSessionId != null ? solveRecordService.getExamSession(examSessionId) : null;
 
         List<SolveResult> results = new ArrayList<>();
         for (Long id : ids) {
             String param = request.getParameter("answer_" + id);
             int selected = (param == null || param.isBlank()) ? 0 : Integer.parseInt(param);
-            results.add(solveRecordService.submitAnswer(id, selected, mode, examSession));
+            results.add(solveRecordService.submitAnswer(id, selected, mode, examSessionId));
         }
 
         String title = (String) session.getAttribute(SESSION_TITLE);

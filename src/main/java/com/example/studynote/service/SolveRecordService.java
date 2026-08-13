@@ -35,15 +35,17 @@ public class SolveRecordService {
 
     @Transactional
     public SolveResult submitAnswer(Long questionId, int selectedAnswer, SolveMode mode) {
-        return submitAnswer(questionId, selectedAnswer, mode, null);
+        return submitAnswer(questionId, selectedAnswer, mode, (Long) null);
     }
 
     @Transactional
-    public SolveResult submitAnswer(Long questionId, int selectedAnswer, SolveMode mode, ExamSession session) {
+    public SolveResult submitAnswer(Long questionId, int selectedAnswer, SolveMode mode, Long examSessionId) {
         Question question = questionService.getQuestion(questionId);
         boolean correct = question.isCorrectAnswer(selectedAnswer);
         SolveRecord record = new SolveRecord(question, selectedAnswer, correct, mode);
-        record.setExamSession(session);
+        if (examSessionId != null) {
+            record.setExamSession(examSessionRepository.getReferenceById(examSessionId));
+        }
         solveRecordRepository.save(record);
         return new SolveResult(question, selectedAnswer, correct);
     }
