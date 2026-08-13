@@ -29,6 +29,11 @@ public record SessionDetail(
         return Math.round(100f * correctList.size() / total);
     }
 
+    public boolean passed() {
+        if (scorePercent() < 60) return false;
+        return subjectStats().stream().noneMatch(s -> s.scorePercent() < 40);
+    }
+
     public List<SubjectStat> subjectStats() {
         Map<Subject, int[]> stats = new LinkedHashMap<>();
         for (Subject s : Subject.values()) {
