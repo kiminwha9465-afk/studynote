@@ -36,5 +36,26 @@
         </button>
     </form>
 </main>
+<script>
+    var submitted = false;
+
+    document.querySelector('form').addEventListener('submit', function() {
+        submitted = true;
+    });
+
+    // 뒤로가기·탭닫기 등 이탈 시 자동 저장
+    window.addEventListener('pagehide', function() {
+        if (!submitted && navigator.sendBeacon) {
+            var data = new URLSearchParams(new FormData(document.querySelector('form')));
+            navigator.sendBeacon('/exam/submit', data);
+            submitted = true;
+        }
+    });
+
+    // 브라우저 뒤로가기로 캐시된 페이지 복귀 시 재로드 (이중 제출 방지)
+    window.addEventListener('pageshow', function(e) {
+        if (e.persisted) window.location.reload();
+    });
+</script>
 </body>
 </html>
