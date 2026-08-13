@@ -119,7 +119,7 @@ public class ExamController {
         }
         ExamSession orig = solveRecordService.getExamSession(sessionId);
         List<Question> questions = wrongIds.stream().map(questionService::getQuestion).toList();
-        startAttempt(session, questions, "오답 재시험 - " + orig.getTitle(), SolveMode.PRACTICE);
+        startAttempt(session, questions, "오답 재시험 - " + orig.getTitle(), orig.getMode());
         return "redirect:/exam/take";
     }
 
