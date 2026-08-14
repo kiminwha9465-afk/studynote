@@ -7,14 +7,14 @@
 <main class="mx-auto max-w-3xl px-4 py-8">
     <h1 class="mb-6 text-xl font-bold text-slate-800 dark:text-zinc-100">모의고사</h1>
 
-    <section class="mb-8 rounded-lg border bg-white p-5 shadow-sm dark:bg-zinc-800 dark:border-zinc-700">
+    <section class="mb-8 rounded-lg border bg-white p-6 shadow-sm dark:bg-zinc-800 dark:border-zinc-700">
         <h2 class="mb-1 text-lg font-semibold text-slate-800 dark:text-zinc-100">모의고사 모드</h2>
-        <p class="mb-4 text-sm text-slate-500 dark:text-zinc-400">과목별로 문제를 무작위로 뽑아 실제 시험처럼 풀어봅니다.</p>
+        <p class="mb-5 text-sm text-slate-500 dark:text-zinc-400">과목별로 문제를 무작위로 뽑아 실제 시험처럼 풀어봅니다.</p>
         <form method="post" th:action="@{/exam/mock/start}">
             <!-- 과목 선택 -->
-            <div class="mb-4">
-                <p class="mb-2 text-sm text-slate-600 dark:text-zinc-300">과목 선택</p>
-                <div class="flex flex-wrap gap-2">
+            <div class="mb-5">
+                <p class="mb-3 text-sm text-slate-600 dark:text-zinc-300">과목 선택</p>
+                <div class="flex flex-wrap gap-3">
                     <label class="cursor-pointer">
                         <input type="radio" name="subject" value="" class="peer sr-only" checked>
                         <span class="rounded-full border px-3 py-1.5 text-sm font-medium text-slate-600
