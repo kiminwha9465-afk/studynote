@@ -51,6 +51,12 @@ public class WrongNoteController {
         return "redirect:/wrong-notes";
     }
 
+    @PostMapping("/session/{sessionId}/delete")
+    public String deleteSession(@PathVariable Long sessionId) {
+        solveRecordService.deleteSession(sessionId);
+        return "redirect:/wrong-notes";
+    }
+
     @PostMapping("/{recordId}/memo")
     public String saveMemo(
             @PathVariable Long recordId,

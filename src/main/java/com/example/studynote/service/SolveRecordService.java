@@ -113,6 +113,13 @@ public class SolveRecordService {
     }
 
     @Transactional
+    public void deleteSession(Long sessionId) {
+        ExamSession session = getExamSession(sessionId);
+        solveRecordRepository.deleteByExamSession(session);
+        examSessionRepository.delete(session);
+    }
+
+    @Transactional
     public void saveSessionDuration(Long sessionId, int durationSeconds) {
         ExamSession session = getExamSession(sessionId);
         session.setDurationSeconds(durationSeconds);

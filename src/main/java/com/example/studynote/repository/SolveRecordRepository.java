@@ -20,4 +20,6 @@ public interface SolveRecordRepository extends JpaRepository<SolveRecord, Long> 
     List<SolveRecord> findByExamSessionOrderBySolvedAtAsc(ExamSession session);
 
     boolean existsByQuestionIdAndCorrectTrueAndSolvedAtAfter(Long questionId, LocalDateTime after);
+
+    void deleteByExamSession(ExamSession session);
 }
