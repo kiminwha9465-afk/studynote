@@ -8,7 +8,13 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /** 모의고사/지정년도 시험 제출 결과 화면에 쓰이는 요약 뷰. */
-public record ExamResultView(String title, List<SolveResult> results) {
+public record ExamResultView(String title, List<SolveResult> results, int durationSeconds) {
+
+    public String formattedDuration() {
+        int m = durationSeconds / 60;
+        int s = durationSeconds % 60;
+        return "%d분 %02d초".formatted(m, s);
+    }
 
     public record SubjectStat(Subject subject, int total, int correct) {
         public int scorePercent() {

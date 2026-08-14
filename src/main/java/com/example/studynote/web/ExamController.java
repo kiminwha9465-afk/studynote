@@ -102,8 +102,14 @@ public class ExamController {
             results.add(solveRecordService.submitAnswer(id, selected, mode, examSessionId));
         }
 
+        int elapsedSeconds = 0;
+        String elapsed = request.getParameter("elapsedSeconds");
+        if (elapsed != null && !elapsed.isBlank()) {
+            try { elapsedSeconds = Integer.parseInt(elapsed); } catch (NumberFormatException ignored) {}
+        }
+
         String title = (String) session.getAttribute(SESSION_TITLE);
-        session.setAttribute(SESSION_RESULT, new ExamResultView(title, results));
+        session.setAttribute(SESSION_RESULT, new ExamResultView(title, results, elapsedSeconds));
         session.removeAttribute(SESSION_QUESTION_IDS);
         session.removeAttribute(SESSION_TITLE);
         session.removeAttribute(SESSION_MODE);
