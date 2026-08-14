@@ -113,6 +113,13 @@ public class SolveRecordService {
     }
 
     @Transactional
+    public void saveSessionDuration(Long sessionId, int durationSeconds) {
+        ExamSession session = getExamSession(sessionId);
+        session.setDurationSeconds(durationSeconds);
+        examSessionRepository.save(session);
+    }
+
+    @Transactional
     public void saveMemo(Long recordId, String memo) {
         SolveRecord record = solveRecordRepository.findById(recordId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 풀이 기록입니다. id=" + recordId));

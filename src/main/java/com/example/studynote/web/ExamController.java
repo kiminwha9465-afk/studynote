@@ -107,6 +107,9 @@ public class ExamController {
         if (elapsed != null && !elapsed.isBlank()) {
             try { elapsedSeconds = Integer.parseInt(elapsed); } catch (NumberFormatException ignored) {}
         }
+        if (examSessionId != null && elapsedSeconds > 0) {
+            solveRecordService.saveSessionDuration(examSessionId, elapsedSeconds);
+        }
 
         String title = (String) session.getAttribute(SESSION_TITLE);
         session.setAttribute(SESSION_RESULT, new ExamResultView(title, results, elapsedSeconds));

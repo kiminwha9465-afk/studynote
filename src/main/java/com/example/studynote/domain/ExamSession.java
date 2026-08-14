@@ -31,6 +31,8 @@ public class ExamSession {
 
     private LocalDateTime createdAt;
 
+    private Integer durationSeconds;
+
     public ExamSession(String title, SolveMode mode) {
         this.title = title;
         this.mode = mode;
@@ -39,5 +41,10 @@ public class ExamSession {
     @PrePersist
     void onCreate() {
         this.createdAt = LocalDateTime.now();
+    }
+
+    public String formattedDuration() {
+        if (durationSeconds == null) return null;
+        return "%d분 %02d초".formatted(durationSeconds / 60, durationSeconds % 60);
     }
 }
