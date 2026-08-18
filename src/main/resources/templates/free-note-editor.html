@@ -100,9 +100,10 @@ tinymce.init({
                 .catch(function() { reject('이미지 업로드 실패'); });
         });
     },
-    content_style: isDarkMode
+    content_style: (isDarkMode
         ? 'body { font-family: -apple-system, sans-serif; font-size: 15px; line-height: 1.7; background: #27272a; color: #e4e4e7; } blockquote { border-left: 4px solid #52525b; margin: 0.5em 0; padding: 0.5em 1em; color: #a1a1aa; } pre { background: #18181b; border: 1px solid #3f3f46; border-radius: 6px; padding: 1em 1.2em; font-size: 0.875em; overflow-x: auto; }'
-        : 'body { font-family: -apple-system, sans-serif; font-size: 15px; line-height: 1.7; } blockquote { border-left: 4px solid #e2e8f0; margin: 0.5em 0; padding: 0.5em 1em; color: #64748b; } pre { background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 6px; padding: 1em 1.2em; font-size: 0.875em; overflow-x: auto; }'
+        : 'body { font-family: -apple-system, sans-serif; font-size: 15px; line-height: 1.7; } blockquote { border-left: 4px solid #e2e8f0; margin: 0.5em 0; padding: 0.5em 1em; color: #64748b; } pre { background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 6px; padding: 1em 1.2em; font-size: 0.875em; overflow-x: auto; }')
+        + ' ul { list-style: none; padding-left: 1.4em; margin: 0.5em 0; } ul > li { position: relative; } ul > li::before { content: "-"; position: absolute; left: -1.1em; color: inherit; } ul ul { padding-left: 1.3em; margin: 0.25em 0; } ul ul > li::before { content: "→"; left: -1.1em; } ul ul ul { padding-left: 1.3em; margin: 0.25em 0; } ul ul ul > li::before { content: "▸"; left: -1.05em; } ul ul ul ul { padding-left: 1.3em; margin: 0.25em 0; } ul ul ul ul > li::before { content: "·"; left: -1em; }'
 });
 
 document.getElementById('noteForm').addEventListener('submit', function() {
