@@ -95,6 +95,14 @@ tinymce.init({
             { pattern: '->', text: '→' },
             { pattern: '>', text: '▸' }
         ];
+        editor.on('keydown', function(e) {
+            if (e.key !== 'Tab' || e.shiftKey) return;
+            var li = editor.dom.getParent(editor.selection.getNode(), 'LI');
+            if (li && !li.previousElementSibling) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+            }
+        });
         editor.on('keyup', function() {
             var rng = editor.selection.getRng();
             var node = rng.startContainer;
