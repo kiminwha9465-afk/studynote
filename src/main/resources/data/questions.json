@@ -17144,9 +17144,9 @@
     "choice2": "폴딩법",
     "choice3": "기수 변환법",
     "choice4": "숫자 분석법",
-    "answerNo": 4,
+    "answerNo": 2,
     "multiAnswer": null,
-    "explanation": null,
+    "explanation": "폴딩법은 레코드 키를 여러 부분으로 나누어 각 부분의 숫자를 더하거나 XOR 연산한 값을 홈 주소로 사용하는 해싱 방식입니다.\n\n오답 노트\n제산법: 키를 해시표 크기로 나눈 나머지 사용\n기수 변환법: 진수 변환 후 자릿수 절단 및 조정\n숫자 분석법: 키 값의 숫자 분포를 분석하여 특정 자리 선택",
     "theme": null
   },
   {
