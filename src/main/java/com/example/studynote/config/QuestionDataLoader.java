@@ -1,8 +1,10 @@
 package com.example.studynote.config;
 
 import com.example.studynote.domain.Question;
+import com.example.studynote.domain.SolveRecord;
 import com.example.studynote.domain.Subject;
 import com.example.studynote.repository.QuestionRepository;
+import com.example.studynote.repository.SolveRecordRepository;
 import tools.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,16 +20,20 @@ import org.springframework.transaction.annotation.Transactional;
  * 앱 시작 시 questions.json을 DB에 동기화한다.
  * content를 자연키로 삼아 기존 문제는 ID를 유지한 채 필드만 갱신하고,
  * 새 문제만 insert한다. 풀이기록(FK)을 보존하기 위해 삭제는 하지 않는다.
+ * 동기화 후에는 정답이 바뀐 문항의 기존 풀이기록도 함께 재채점한다.
  */
 @Component
 public class QuestionDataLoader implements CommandLineRunner {
 
     private final QuestionRepository questionRepository;
+    private final SolveRecordRepository solveRecordRepository;
     private final ObjectMapper objectMapper;
 
     public QuestionDataLoader(QuestionRepository questionRepository,
+                               SolveRecordRepository solveRecordRepository,
                                ObjectMapper objectMapper) {
         this.questionRepository = questionRepository;
+        this.solveRecordRepository = solveRecordRepository;
         this.objectMapper = objectMapper;
     }
 
@@ -62,6 +68,13 @@ public class QuestionDataLoader implements CommandLineRunner {
                 } else {
                     questionRepository.save(toEntity(r));
                 }
+            }
+        }
+
+        for (SolveRecord record : solveRecordRepository.findAll()) {
+            boolean recomputed = record.getQuestion().isCorrectAnswer(record.getSelectedAnswer());
+            if (recomputed != record.isCorrect()) {
+                record.setCorrect(recomputed);
             }
         }
     }
