@@ -147,5 +147,20 @@
         </div>
     </div>
 </main>
+<script>
+(function() {
+    var key = 'scrollPos:' + location.pathname;
+    document.querySelectorAll('form').forEach(function(f) {
+        f.addEventListener('submit', function() {
+            sessionStorage.setItem(key, window.scrollY);
+        });
+    });
+    var saved = sessionStorage.getItem(key);
+    if (saved !== null) {
+        sessionStorage.removeItem(key);
+        window.scrollTo(0, parseInt(saved, 10));
+    }
+})();
+</script>
 </body>
 </html>
