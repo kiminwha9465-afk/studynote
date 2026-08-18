@@ -90,6 +90,31 @@ tinymce.init({
         {text: '기타', value: 'none'}
     ],
     table_toolbar: 'tableprops tabledelete | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol',
+    setup: function(editor) {
+        var replacements = [
+            { pattern: '->', text: '→' },
+            { pattern: '>', text: '▸' }
+        ];
+        editor.on('keyup', function() {
+            var rng = editor.selection.getRng();
+            var node = rng.startContainer;
+            if (node.nodeType !== 3) return;
+            var offset = rng.startOffset;
+            var text = node.textContent;
+            for (var i = 0; i < replacements.length; i++) {
+                var p = replacements[i].pattern;
+                if (offset >= p.length && text.slice(offset - p.length, offset) === p) {
+                    var newText = text.slice(0, offset - p.length) + replacements[i].text + text.slice(offset);
+                    node.textContent = newText;
+                    var newOffset = offset - p.length + replacements[i].text.length;
+                    rng.setStart(node, newOffset);
+                    rng.setEnd(node, newOffset);
+                    editor.selection.setRng(rng);
+                    break;
+                }
+            }
+        });
+    },
     images_upload_handler: function(blobInfo) {
         return new Promise(function(resolve, reject) {
             var fd = new FormData();
