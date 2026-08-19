@@ -17088,9 +17088,9 @@
     "choice2": "Hub & Spoke",
     "choice3": "Message Bus",
     "choice4": "Tree",
-    "answerNo": 1,
+    "answerNo": 4,
     "multiAnswer": null,
-    "explanation": null,
+    "explanation": "EAI 구축 유형에는 Point-to-Point, Hub & Spoke, Message Bus, Hybrid가 있습니다. Tree는 EAI 구축 유형에 해당하지 않습니다.",
     "theme": null
   },
   {
