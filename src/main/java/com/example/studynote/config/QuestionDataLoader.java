@@ -65,6 +65,7 @@ public class QuestionDataLoader implements CommandLineRunner {
                     existing.setExplanation(r.explanation());
                     existing.setMultiAnswer(r.multiAnswer());
                     existing.setTheme(r.theme());
+                    questionRepository.save(existing);
                 } else {
                     questionRepository.save(toEntity(r));
                 }
