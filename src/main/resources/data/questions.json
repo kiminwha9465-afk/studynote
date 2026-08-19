@@ -17172,9 +17172,9 @@
     "choice2": "checkstyle",
     "choice3": "valance",
     "choice4": "cppcheck",
-    "answerNo": 2,
+    "answerNo": 3,
     "multiAnswer": null,
-    "explanation": null,
+    "explanation": "정적 분석 도구는 프로그램을 실행하지 않고 소스 코드 자체를 분석하는 도구입니다. pmd, checkstyle, cppcheck은 모두 정적 분석 도구이며, valance는 실행 중인 프로그램을 분석하는 동적 분석 도구입니다.",
     "theme": null
   },
   {
