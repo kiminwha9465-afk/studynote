@@ -17858,9 +17858,9 @@
     "choice2": "Anycast",
     "choice3": "Broadcast",
     "choice4": "Multicast",
-    "answerNo": 4,
+    "answerNo": 3,
     "multiAnswer": null,
-    "explanation": null,
+    "explanation": "IPv6 주소 체계는 유니캐스트(Unicast), 멀티캐스트(Multicast), 애니캐스트(Anycast)로 구성되며, IPv4에서 사용하던 브로드캐스트(Broadcast)는 IPv6에서 지원하지 않습니다.",
     "theme": null
   },
   {
