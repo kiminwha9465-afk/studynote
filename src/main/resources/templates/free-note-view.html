@@ -89,5 +89,14 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-coy.min.css">
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.note-content li').forEach(function(li) {
+            if (li.textContent.trim().startsWith('→')) {
+                li.style.paddingLeft = '1.5em';
+            }
+        });
+    });
+</script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -63,81 +63,96 @@
 <script>
 var isDarkMode = document.documentElement.classList.contains('dark');
 
-tinymce.init({
-    selector: '#editor',
-    base_url: 'https://cdn.jsdelivr.net/npm/tinymce@6.8.3',
-    suffix: '.min',
-    height: 520,
-    skin: isDarkMode ? 'oxide-dark' : 'oxide',
-    content_css: isDarkMode ? 'dark' : 'default',
-    plugins: 'table image link lists codesample',
-    toolbar: [
-        'undo redo | blocks blockquote | bold italic underline strikethrough | forecolor backcolor',
-        'alignleft aligncenter alignright | numlist bullist | table | image link | codesample'
-    ],
-    toolbar_mode: 'wrap',
-    block_formats: '본문=p; 제목 1=h1; 제목 2=h2; 제목 3=h3; 인용문=blockquote',
-    codesample_languages: [
-        {text: 'Python', value: 'python'},
-        {text: 'JavaScript', value: 'javascript'},
-        {text: 'Java', value: 'java'},
-        {text: 'C', value: 'c'},
-        {text: 'C++', value: 'cpp'},
-        {text: 'SQL', value: 'sql'},
-        {text: 'HTML', value: 'markup'},
-        {text: 'CSS', value: 'css'},
-        {text: 'Bash', value: 'bash'},
-        {text: '기타', value: 'none'}
-    ],
-    table_toolbar: 'tableprops tabledelete | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol',
-    setup: function(editor) {
-        var replacements = [
-            { pattern: '->', text: '→' },
-            { pattern: '>', text: '▸' }
-        ];
-        editor.on('keydown', function(e) {
-            if (e.key !== 'Tab' || e.shiftKey) return;
-            var li = editor.dom.getParent(editor.selection.getNode(), 'LI');
-            if (li && !li.previousElementSibling) {
-                e.preventDefault();
-                e.stopImmediatePropagation();
-            }
-        });
-        editor.on('keyup', function() {
-            var rng = editor.selection.getRng();
-            var node = rng.startContainer;
-            if (node.nodeType !== 3) return;
-            var offset = rng.startOffset;
-            var text = node.textContent;
-            for (var i = 0; i < replacements.length; i++) {
-                var p = replacements[i].pattern;
-                if (offset >= p.length && text.slice(offset - p.length, offset) === p) {
-                    var newText = text.slice(0, offset - p.length) + replacements[i].text + text.slice(offset);
-                    node.textContent = newText;
-                    var newOffset = offset - p.length + replacements[i].text.length;
-                    rng.setStart(node, newOffset);
-                    rng.setEnd(node, newOffset);
-                    editor.selection.setRng(rng);
-                    break;
+var LIST_CSS = ' ul { list-style: none; padding-left: 1.4em; margin: 0.5em 0; } ul > li { position: relative; } ul > li::before { content: "-"; position: absolute; left: -1.1em; color: inherit; } ul ul { padding-left: 1.3em; margin: 0.25em 0; } ul ul > li::before { content: "→"; left: -1.1em; } ul ul ul { padding-left: 1.3em; margin: 0.25em 0; } ul ul ul > li::before { content: "▸"; left: -1.05em; } ul ul ul ul { padding-left: 1.3em; margin: 0.25em 0; } ul ul ul ul > li::before { content: "·"; left: -1em; }';
+
+function buildEditorConfig(dark) {
+    return {
+        selector: '#editor',
+        base_url: 'https://cdn.jsdelivr.net/npm/tinymce@6.8.3',
+        suffix: '.min',
+        height: 520,
+        skin: dark ? 'oxide-dark' : 'oxide',
+        content_css: dark ? 'dark' : 'default',
+        plugins: 'table image link lists codesample',
+        toolbar: [
+            'undo redo | blocks blockquote | bold italic underline strikethrough | forecolor backcolor',
+            'alignleft aligncenter alignright | numlist bullist | table | image link | codesample'
+        ],
+        toolbar_mode: 'wrap',
+        block_formats: '본문=p; 제목 1=h1; 제목 2=h2; 제목 3=h3; 인용문=blockquote',
+        codesample_languages: [
+            {text: 'Python', value: 'python'},
+            {text: 'JavaScript', value: 'javascript'},
+            {text: 'Java', value: 'java'},
+            {text: 'C', value: 'c'},
+            {text: 'C++', value: 'cpp'},
+            {text: 'SQL', value: 'sql'},
+            {text: 'HTML', value: 'markup'},
+            {text: 'CSS', value: 'css'},
+            {text: 'Bash', value: 'bash'},
+            {text: '기타', value: 'none'}
+        ],
+        table_toolbar: 'tableprops tabledelete | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol',
+        setup: function(editor) {
+            var replacements = [
+                { pattern: '->', text: '→' },
+                { pattern: '>', text: '▸' }
+            ];
+            editor.on('keydown', function(e) {
+                if (e.key !== 'Tab' || e.shiftKey) return;
+                var li = editor.dom.getParent(editor.selection.getNode(), 'LI');
+                if (li && !li.previousElementSibling) {
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
                 }
-            }
-        });
-    },
-    images_upload_handler: function(blobInfo) {
-        return new Promise(function(resolve, reject) {
-            var fd = new FormData();
-            fd.append('file', blobInfo.blob(), blobInfo.filename());
-            fetch('/free-notes/upload-image', {method: 'POST', body: fd})
-                .then(function(r) { return r.json(); })
-                .then(function(d) { resolve(d.url); })
-                .catch(function() { reject('이미지 업로드 실패'); });
-        });
-    },
-    content_style: (isDarkMode
-        ? 'body { font-family: -apple-system, sans-serif; font-size: 15px; line-height: 1.7; background: #27272a; color: #e4e4e7; } blockquote { border-left: 4px solid #52525b; margin: 0.5em 0; padding: 0.5em 1em; color: #a1a1aa; } pre { background: #18181b; border: 1px solid #3f3f46; border-radius: 6px; padding: 1em 1.2em; font-size: 0.875em; overflow-x: auto; }'
-        : 'body { font-family: -apple-system, sans-serif; font-size: 15px; line-height: 1.7; } blockquote { border-left: 4px solid #e2e8f0; margin: 0.5em 0; padding: 0.5em 1em; color: #64748b; } pre { background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 6px; padding: 1em 1.2em; font-size: 0.875em; overflow-x: auto; }')
-        + ' ul { list-style: none; padding-left: 1.4em; margin: 0.5em 0; } ul > li { position: relative; } ul > li::before { content: "-"; position: absolute; left: -1.1em; color: inherit; } ul ul { padding-left: 1.3em; margin: 0.25em 0; } ul ul > li::before { content: "→"; left: -1.1em; } ul ul ul { padding-left: 1.3em; margin: 0.25em 0; } ul ul ul > li::before { content: "▸"; left: -1.05em; } ul ul ul ul { padding-left: 1.3em; margin: 0.25em 0; } ul ul ul ul > li::before { content: "·"; left: -1em; }'
-});
+            });
+            editor.on('keyup', function() {
+                var rng = editor.selection.getRng();
+                var node = rng.startContainer;
+                if (node.nodeType !== 3) return;
+                var offset = rng.startOffset;
+                var text = node.textContent;
+                for (var i = 0; i < replacements.length; i++) {
+                    var p = replacements[i].pattern;
+                    if (offset >= p.length && text.slice(offset - p.length, offset) === p) {
+                        var newText = text.slice(0, offset - p.length) + replacements[i].text + text.slice(offset);
+                        node.textContent = newText;
+                        var newOffset = offset - p.length + replacements[i].text.length;
+                        rng.setStart(node, newOffset);
+                        rng.setEnd(node, newOffset);
+                        editor.selection.setRng(rng);
+                        break;
+                    }
+                }
+            });
+        },
+        images_upload_handler: function(blobInfo) {
+            return new Promise(function(resolve, reject) {
+                var fd = new FormData();
+                fd.append('file', blobInfo.blob(), blobInfo.filename());
+                fetch('/free-notes/upload-image', {method: 'POST', body: fd})
+                    .then(function(r) { return r.json(); })
+                    .then(function(d) { resolve(d.url); })
+                    .catch(function() { reject('이미지 업로드 실패'); });
+            });
+        },
+        content_style: (dark
+            ? 'body { font-family: -apple-system, sans-serif; font-size: 15px; line-height: 1.7; background: #27272a; color: #e4e4e7; } blockquote { border-left: 4px solid #52525b; margin: 0.5em 0; padding: 0.5em 1em; color: #a1a1aa; } pre { background: #18181b; border: 1px solid #3f3f46; border-radius: 6px; padding: 1em 1.2em; font-size: 0.875em; overflow-x: auto; }'
+            : 'body { font-family: -apple-system, sans-serif; font-size: 15px; line-height: 1.7; } blockquote { border-left: 4px solid #e2e8f0; margin: 0.5em 0; padding: 0.5em 1em; color: #64748b; } pre { background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 6px; padding: 1em 1.2em; font-size: 0.875em; overflow-x: auto; }')
+            + LIST_CSS
+    };
+}
+
+tinymce.init(buildEditorConfig(isDarkMode));
+
+new MutationObserver(function() {
+    var newDark = document.documentElement.classList.contains('dark');
+    if (newDark !== isDarkMode) {
+        isDarkMode = newDark;
+        tinymce.remove('#editor');
+        tinymce.init(buildEditorConfig(isDarkMode));
+    }
+}).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
 
 document.getElementById('noteForm').addEventListener('submit', function() {
     tinymce.triggerSave();

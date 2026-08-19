@@ -17536,9 +17536,9 @@
     "choice2": "삽입 이상",
     "choice3": "삭제 이상",
     "choice4": "갱신 이상",
-    "answerNo": 2,
+    "answerNo": 1,
     "multiAnswer": null,
-    "explanation": null,
+    "explanation": "데이터베이스 설계 오류로 인해 발생하는 이상 현상(Anomaly)에는 삽입 이상, 삭제 이상, 갱신 이상 세 가지가 있으며, 검색 이상은 이에 해당하지 않습니다.",
     "theme": null
   },
   {
