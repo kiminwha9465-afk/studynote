@@ -46,12 +46,12 @@ public class QuestionDataLoader implements CommandLineRunner {
 
             Map<String, Question> byContent = questionRepository.findAll().stream()
                     .collect(Collectors.toMap(
-                            q -> q.getContent().trim(),
+                            q -> q.getExamYear() + "|" + q.getExamRound() + "|" + q.getContent().trim(),
                             q -> q,
                             (a, b) -> a));
 
             for (QuestionRecord r : records) {
-                String key = r.content() == null ? "" : r.content().trim();
+                String key = r.examYear() + "|" + r.examRound() + "|" + (r.content() == null ? "" : r.content().trim());
                 Question existing = byContent.get(key);
                 if (existing != null) {
                     existing.setSubject(r.subject() == null ? null : Subject.valueOf(r.subject()));
