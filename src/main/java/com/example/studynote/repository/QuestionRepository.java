@@ -14,6 +14,8 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
 
     List<Question> findByExamYearAndExamRoundOrderByIdAsc(Integer examYear, Integer examRound);
 
+    List<Question> findByExamYearAndExamRoundAndContent(Integer examYear, Integer examRound, String content);
+
     @Query("select distinct q.examYear, q.examRound from Question q "
             + "where q.examYear is not null and q.examRound is not null "
             + "order by q.examYear desc, q.examRound desc")

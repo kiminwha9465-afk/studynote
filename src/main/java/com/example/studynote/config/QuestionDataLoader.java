@@ -9,8 +9,6 @@ import tools.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
@@ -44,28 +42,25 @@ public class QuestionDataLoader implements CommandLineRunner {
             List<QuestionRecord> records = objectMapper.readValue(in, objectMapper.getTypeFactory()
                     .constructCollectionType(List.class, QuestionRecord.class));
 
-            Map<String, Question> byContent = questionRepository.findAll().stream()
-                    .collect(Collectors.toMap(
-                            q -> q.getExamYear() + "|" + q.getExamRound() + "|" + q.getContent().trim(),
-                            q -> q,
-                            (a, b) -> a));
-
             for (QuestionRecord r : records) {
-                String key = r.examYear() + "|" + r.examRound() + "|" + (r.content() == null ? "" : r.content().trim());
-                Question existing = byContent.get(key);
-                if (existing != null) {
-                    existing.setSubject(r.subject() == null ? null : Subject.valueOf(r.subject()));
-                    existing.setExamYear(r.examYear());
-                    existing.setExamRound(r.examRound());
-                    existing.setChoice1(r.choice1());
-                    existing.setChoice2(r.choice2());
-                    existing.setChoice3(r.choice3());
-                    existing.setChoice4(r.choice4());
-                    existing.setAnswerNo(r.answerNo());
-                    existing.setExplanation(r.explanation());
-                    existing.setMultiAnswer(r.multiAnswer());
-                    existing.setTheme(r.theme());
-                    questionRepository.save(existing);
+                String content = r.content() == null ? "" : r.content().trim();
+                List<Question> matches = questionRepository.findByExamYearAndExamRoundAndContent(
+                        r.examYear(), r.examRound(), content);
+                if (!matches.isEmpty()) {
+                    for (Question existing : matches) {
+                        existing.setSubject(r.subject() == null ? null : Subject.valueOf(r.subject()));
+                        existing.setExamYear(r.examYear());
+                        existing.setExamRound(r.examRound());
+                        existing.setChoice1(r.choice1());
+                        existing.setChoice2(r.choice2());
+                        existing.setChoice3(r.choice3());
+                        existing.setChoice4(r.choice4());
+                        existing.setAnswerNo(r.answerNo());
+                        existing.setExplanation(r.explanation());
+                        existing.setMultiAnswer(r.multiAnswer());
+                        existing.setTheme(r.theme());
+                        questionRepository.save(existing);
+                    }
                 } else {
                     questionRepository.save(toEntity(r));
                 }
