@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/common :: head('실기 결과')}"></head>
+<body class="min-h-screen bg-slate-50 dark:bg-zinc-900">
+<div th:replace="~{fragments/common :: nav('practical')}"></div>
+
+<main class="mx-auto max-w-3xl px-4 py-8">
+    <!-- 점수 요약 -->
+    <div class="mb-6 rounded-lg border bg-white p-6 shadow-sm text-center dark:bg-zinc-800 dark:border-zinc-700">
+        <p class="mb-1 text-sm text-slate-500 dark:text-zinc-400" th:text="${result.title}"></p>
+        <p class="text-4xl font-bold text-indigo-600 dark:text-indigo-400"
+           th:text="${result.score()} + ' / ' + ${#lists.size(result.items())}"></p>
+        <p class="mt-1 text-sm text-slate-500 dark:text-zinc-400"
+           th:text="'정답률 ' + ${#numbers.formatDecimal(result.score() * 100.0 / #lists.size(result.items()), 1, 1)} + '%'"></p>
+    </div>
+
+    <!-- 문제별 결과 -->
+    <div class="flex flex-col gap-4">
+        <div th:each="item, iter : ${result.items()}"
+             th:classappend="${item.correct()} ? 'border-green-300 dark:border-green-700' : 'border-red-300 dark:border-red-700'"
+             class="rounded-lg border bg-white p-5 shadow-sm dark:bg-zinc-800">
+
+            <!-- 헤더: 번호 + 정오 뱃지 -->
+            <div class="mb-3 flex items-center gap-2">
+                <span class="flex h-6 w-6 items-center justify-center rounded-full text-xs font-bold"
+                      th:classappend="${item.correct()} ? 'bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-300' : 'bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300'"
+                      th:text="${iter.count}"></span>
+                <span class="text-xs font-semibold"
+                      th:classappend="${item.correct()} ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'"
+                      th:text="${item.correct()} ? '정답' : '오답'"></span>
+                <span class="text-xs text-slate-400 dark:text-zinc-500"
+                      th:text="${item.question().examYear} + '년 ' + ${item.question().examRound} + '회 ' + ${item.question().questionNo} + '번'"></span>
+            </div>
+
+            <!-- 문제 내용 -->
+            <div class="mb-3 text-sm text-slate-800 dark:text-zinc-100 leading-relaxed"
+                 th:utext="${item.question().contentHtml}"></div>
+
+            <!-- 제출 답안 / 정답 -->
+            <div class="mt-2 grid grid-cols-2 gap-3 text-sm">
+                <div class="rounded-md bg-slate-50 px-3 py-2 dark:bg-zinc-700/50">
+                    <p class="mb-0.5 text-xs font-semibold text-slate-400 dark:text-zinc-500">내 답안</p>
+                    <p th:if="${!#strings.isEmpty(item.submitted())}"
+                       th:classappend="${item.correct()} ? 'font-semibold text-green-700 dark:text-green-300' : 'font-semibold text-red-700 dark:text-red-300'"
+                       th:text="${item.submitted()}"></p>
+                    <p th:if="${#strings.isEmpty(item.submitted())}"
+                       class="text-slate-400 dark:text-zinc-500 italic">미응답</p>
+                </div>
+                <div class="rounded-md bg-slate-50 px-3 py-2 dark:bg-zinc-700/50">
+                    <p class="mb-0.5 text-xs font-semibold text-slate-400 dark:text-zinc-500">정답</p>
+                    <p class="font-semibold text-slate-800 dark:text-zinc-100"
+                       th:text="${#strings.replace(item.question().answer, '|', ' / ')}"></p>
+                </div>
+            </div>
+
+            <!-- 해설 (토글) -->
+            <div th:if="${item.question().explanation != null}" class="mt-3">
+                <button type="button"
+                        onclick="this.nextElementSibling.classList.toggle('hidden')"
+                        class="text-xs font-semibold text-indigo-600 hover:underline dark:text-indigo-400">
+                    해설 보기 ▾
+                </button>
+                <div class="hidden mt-2 rounded-md bg-indigo-50 px-3 py-2 text-xs text-slate-700 leading-relaxed dark:bg-indigo-900/20 dark:text-zinc-300"
+                     th:text="${item.question().explanation}"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 하단 버튼 -->
+    <div class="mt-6 flex gap-3 justify-center">
+        <a th:href="@{/practical}"
+           class="rounded-md border border-slate-300 bg-white px-5 py-2 text-sm font-semibold text-slate-600
+                  hover:bg-slate-50 dark:bg-zinc-700 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-600">
+            회차 선택으로
+        </a>
+    </div>
+</main>
+</body>
+</html>

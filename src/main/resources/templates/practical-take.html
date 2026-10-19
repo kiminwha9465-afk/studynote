@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/common :: head('실기 문제풀이 응시')}"></head>
+<body class="min-h-screen bg-slate-50 dark:bg-zinc-900">
+<div th:replace="~{fragments/common :: nav('practical')}"></div>
+
+<main class="mx-auto max-w-3xl px-4 py-8">
+    <div class="mb-1 flex items-center justify-between">
+        <h1 class="text-xl font-bold text-slate-800 dark:text-zinc-100" th:text="${title}"></h1>
+        <span class="font-mono text-sm font-semibold text-indigo-600 dark:text-indigo-400" id="timer">00:00</span>
+    </div>
+    <p class="mb-6 text-sm text-slate-500 dark:text-zinc-400">각 문제의 답을 단답으로 작성한 후 제출하세요.</p>
+
+    <form method="post" th:action="@{/practical/submit}" class="flex flex-col gap-4" autocomplete="off">
+        <input type="hidden" name="elapsedSeconds" id="elapsedSeconds" value="0">
+
+        <div class="rounded-lg border bg-white p-5 shadow-sm dark:bg-zinc-800 dark:border-zinc-700"
+             th:each="q, iter : ${questions}">
+            <div class="mb-3 flex items-center gap-2">
+                <span class="flex h-6 w-6 items-center justify-center rounded-full bg-indigo-100 text-xs font-bold text-indigo-700 dark:bg-indigo-900/50 dark:text-indigo-300"
+                      th:text="${iter.count}"></span>
+                <span class="text-xs text-slate-400 dark:text-zinc-500"
+                      th:text="${q.examYear} + '년 ' + ${q.examRound} + '회 ' + ${q.questionNo} + '번'"></span>
+            </div>
+
+            <div class="mb-4 text-sm text-slate-800 dark:text-zinc-100 leading-relaxed"
+                 th:utext="${q.contentHtml}"></div>
+
+            <div class="flex items-center gap-2">
+                <label class="text-sm text-slate-500 dark:text-zinc-400 shrink-0">답:</label>
+                <input type="text"
+                       th:name="${'answer_' + q.id}"
+                       placeholder="단답으로 입력하세요"
+                       class="flex-1 rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-800
+                              focus:border-indigo-400 focus:outline-none focus:ring-1 focus:ring-indigo-300
+                              dark:bg-zinc-700 dark:border-zinc-600 dark:text-zinc-200 dark:placeholder-zinc-500
+                              dark:focus:border-indigo-500">
+            </div>
+        </div>
+
+        <button type="submit"
+                class="sticky bottom-4 self-center rounded-md bg-indigo-600 px-8 py-2.5 text-sm font-semibold text-white shadow-lg hover:bg-indigo-700">
+            제출하기
+        </button>
+    </form>
+</main>
+
+<script>
+    var startTime = Date.now();
+    var timerEl = document.getElementById('timer');
+    var elapsedEl = document.getElementById('elapsedSeconds');
+
+    setInterval(function () {
+        var s = Math.floor((Date.now() - startTime) / 1000);
+        timerEl.textContent = String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0');
+    }, 1000);
+
+    document.querySelector('form').addEventListener('submit', function () {
+        elapsedEl.value = Math.floor((Date.now() - startTime) / 1000);
+    });
+
+    window.addEventListener('pageshow', function (e) {
+        if (e.persisted) window.location.reload();
+    });
+</script>
+</body>
+</html>
