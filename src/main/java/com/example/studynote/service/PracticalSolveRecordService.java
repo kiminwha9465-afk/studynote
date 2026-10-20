@@ -43,8 +43,11 @@ public class PracticalSolveRecordService {
                     .filter(r -> !r.isCorrect()).toList();
             if (!wrongRecords.isEmpty()) {
                 PracticalSolveRecord first = e.getValue().get(0);
+                int totalCount = e.getValue().size();
+                int correctCount = totalCount - wrongRecords.size();
                 sessions.add(new PracticalWrongSession(
-                        e.getKey(), first.getSessionTitle(), first.getSolvedAt(), wrongRecords));
+                        e.getKey(), first.getSessionTitle(), first.getSolvedAt(), wrongRecords,
+                        totalCount, correctCount));
             }
         }
         return sessions;
