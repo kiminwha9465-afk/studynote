@@ -3382,5 +3382,405 @@
     "content": "위 문제와 동일한 참조열과 프레임 수(3개)에서 OPT(최적 교체) 알고리즘을 사용할 경우 페이지 부재 횟수를 구하시오.\n\n참조열: 7, 0, 1, 2, 0, 3, 0, 4, 2, 3, 0, 3, 2",
     "answer": "7",
     "explanation": "OPT는 앞으로 가장 오래 사용되지 않을 페이지를 교체합니다. 추적 결과 부재는 7,0,1,2,3,4,0에서 발생해 총 7회로 세 알고리즘 중 가장 적습니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 4,
+    "questionNo": 1,
+    "content": "인스턴스를 오직 하나만 생성하여 어디서든 동일한 객체를 참조하도록 하는 디자인 패턴은?",
+    "answer": "싱글톤 패턴|싱글턴 패턴|Singleton|Singleton Pattern",
+    "explanation": "생성자를 외부에서 직접 호출하지 못하게 막고, 클래스 내부에서 하나의 인스턴스만 만들어 재사용합니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 4,
+    "questionNo": 2,
+    "content": "여러 알고리즘을 동일한 인터페이스로 캡슐화하여 실행 중에 서로 교체할 수 있게 하는 디자인 패턴은?",
+    "answer": "전략 패턴|Strategy|Strategy Pattern",
+    "explanation": "클라이언트는 인터페이스만 보고 호출하므로, 내부 알고리즘(전략)을 자유롭게 바꿔 끼울 수 있습니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 4,
+    "questionNo": 3,
+    "content": "서로 다른 인터페이스를 가진 클래스를 연결하여 함께 동작하도록 변환해주는 디자인 패턴은?",
+    "answer": "어댑터 패턴|Adapter|Adapter Pattern",
+    "explanation": "기존 클래스를 변경하지 않고, 클라이언트가 원하는 인터페이스로 감싸서 변환해줍니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 4,
+    "questionNo": 4,
+    "content": "객체 생성 로직을 서브클래스에 위임하여, 어떤 클래스의 인스턴스를 만들지는 서브클래스가 결정하게 하는 디자인 패턴은?",
+    "answer": "팩토리 메서드 패턴|팩토리 패턴|Factory Method|Factory Method Pattern",
+    "explanation": "객체 생성 코드를 한 곳(팩토리)에 모아, 생성 로직과 사용 로직을 분리합니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 4,
+    "questionNo": 5,
+    "content": "애플리케이션을 직접 설치하지 않고 인터넷을 통해 소프트웨어 자체를 제공받아 사용하는 클라우드 서비스 모델은?",
+    "answer": "SaaS|Software as a Service",
+    "explanation": "이미 완성된 소프트웨어를 웹 브라우저 등으로 바로 사용하는 형태로, Gmail·Office365 등이 대표적입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 4,
+    "questionNo": 6,
+    "content": "운영체제 커널을 공유하면서 애플리케이션과 실행 환경을 격리된 단위로 패키징하여 가볍게 실행하는 가상화 기술은?",
+    "answer": "컨테이너|컨테이너 가상화|Container",
+    "explanation": "하이퍼바이저 기반 가상머신과 달리 OS 커널을 공유하므로 더 가볍고 빠르게 실행·배포할 수 있습니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 4,
+    "questionNo": 7,
+    "content": "하나의 큰 애플리케이션을 독립적으로 배포·확장 가능한 작은 서비스 단위로 나누어 구성하는 아키텍처는?",
+    "answer": "마이크로서비스 아키텍처|마이크로서비스|Microservices|Microservice Architecture",
+    "explanation": "각 서비스가 독립적으로 개발·배포되어 장애 격리와 확장이 쉬운 반면, 서비스 간 통신 관리가 필요합니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 4,
+    "questionNo": 8,
+    "content": "코드 변경 사항을 자동으로 빌드·테스트하고(지속적 통합), 검증된 결과물을 자동으로 운영 환경까지 배포하는(지속적 배포) 개발 관행을 묶어 부르는 용어는?",
+    "answer": "CI/CD|지속적 통합·지속적 배포|Continuous Integration Continuous Deployment",
+    "explanation": "CI는 코드 통합 시 자동 빌드·테스트를, CD는 검증된 빌드를 자동으로 배포하는 것을 의미합니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 4,
+    "questionNo": 9,
+    "content": "관계대수에서 두 릴레이션의 속성 구조가 같을 때, 두 릴레이션의 모든 튜플을 중복 없이 합치는 연산은?",
+    "answer": "합집합|Union|합집합 연산",
+    "explanation": "두 릴레이션의 차수(속성 수)와 도메인이 같아야 하며, 결과에서 중복된 튜플은 제거됩니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 4,
+    "questionNo": 10,
+    "content": "두 릴레이션에서 공통된 속성 값이 같은 튜플끼리 연결하여 하나의 릴레이션으로 결합하는 관계대수 연산은?",
+    "answer": "조인|Join|자연 조인|Natural Join",
+    "explanation": "SQL의 JOIN 구문에 대응하는 관계대수 연산으로, 공통 속성을 기준으로 두 릴레이션을 결합합니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 4,
+    "questionNo": 11,
+    "content": "테이블에서 특정 행을 삭제했을 때, 그 행에만 존재하던 다른 유용한 정보까지 함께 사라지는 이상 현상은?",
+    "answer": "삭제 이상|Deletion Anomaly",
+    "explanation": "예를 들어 한 사원의 퇴사로 행을 삭제했는데, 그 사원이 유일하게 담당하던 부서 정보까지 함께 사라지는 경우입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 4,
+    "questionNo": 12,
+    "content": "트랜잭션이 갖추어야 할 원자성(Atomicity)·일관성(Consistency)·고립성(Isolation)·지속성(Durability) 네 가지 성질을 묶어 부르는 용어는?",
+    "answer": "ACID",
+    "explanation": "트랜잭션의 신뢰성을 보장하기 위한 네 가지 특성의 앞글자를 딴 용어입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 4,
+    "questionNo": 13,
+    "content": "시스템과 액터(사용자) 간의 상호작용과 기능 범위를 타원과 막대 인물로 표현하는 UML 다이어그램은?",
+    "answer": "유스케이스 다이어그램|Use Case Diagram",
+    "explanation": "시스템이 제공하는 기능을 사용자 관점에서 기술하는 행위 다이어그램입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 4,
+    "questionNo": 14,
+    "content": "객체 간에 주고받는 메시지의 순서를 시간 흐름에 따라 표현하는 UML 다이어그램은?",
+    "answer": "시퀀스 다이어그램|Sequence Diagram",
+    "explanation": "생명선(lifeline)과 메시지 화살표로 객체 간 상호작용의 순서를 나타냅니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 4,
+    "questionNo": 15,
+    "content": "객체가 가질 수 있는 상태와 이벤트에 따른 상태 전이를 표현하는 UML 다이어그램은?",
+    "answer": "상태 다이어그램|State Diagram|상태 전이도",
+    "explanation": "객체의 생명 주기 동안 상태가 어떤 이벤트로 바뀌는지를 표현합니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 4,
+    "questionNo": 16,
+    "content": "업무 처리나 제어 흐름의 절차를 순서도처럼 표현하는 UML 다이어그램은?",
+    "answer": "액티비티 다이어그램|활동 다이어그램|Activity Diagram",
+    "explanation": "분기·병렬 처리 등 작업의 흐름을 표현하는 행위 다이어그램입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 5,
+    "questionNo": 1,
+    "content": "다음 SQL을 완성하시오. 테이블의 구조(스키마)까지 완전히 삭제한다.\n\n```sql\n( ? ) TABLE 직원;\n```\n\n( ? )에 들어갈 DDL 키워드를 쓰시오.",
+    "answer": "DROP",
+    "explanation": "DROP TABLE은 테이블 구조와 데이터를 모두 영구적으로 삭제합니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 5,
+    "questionNo": 2,
+    "content": "다음 SQL을 완성하시오. 테이블 구조는 유지한 채 모든 행 데이터만 빠르게 비운다.\n\n```sql\n( ? ) TABLE 로그;\n```\n\n( ? )에 들어갈 DDL 키워드를 쓰시오.",
+    "answer": "TRUNCATE",
+    "explanation": "TRUNCATE는 DELETE보다 빠르게 테이블의 모든 행을 제거하지만, 테이블 구조 자체는 남겨둡니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 5,
+    "questionNo": 3,
+    "content": "다음 SQL을 완성하시오. 급여가 3000000 이상 5000000 이하인 직원을 조회한다.\n\n```sql\nSELECT *\nFROM 직원\nWHERE 급여 ( ? ) 3000000 AND 5000000;\n```\n\n( ? )에 들어갈 키워드를 쓰시오.",
+    "answer": "BETWEEN",
+    "explanation": "BETWEEN A AND B는 A 이상 B 이하의 범위 조건을 나타냅니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 5,
+    "questionNo": 4,
+    "content": "다음 SQL을 완성하시오. 부서 테이블에 존재하는 부서코드를 가진 직원만 조회한다.\n\n```sql\nSELECT *\nFROM 직원 e\nWHERE ( ? ) (SELECT 1 FROM 부서 d WHERE d.부서코드 = e.부서코드);\n```\n\n( ? )에 들어갈 키워드를 쓰시오.",
+    "answer": "EXISTS",
+    "explanation": "EXISTS는 서브쿼리 결과가 하나라도 있으면 참이 되는 연산자로, 상관 서브쿼리와 함께 자주 사용됩니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 5,
+    "questionNo": 5,
+    "content": "GRANT로 부여한 권한을 다시 회수하는 DCL 명령어는?",
+    "answer": "REVOKE",
+    "explanation": "REVOKE는 GRANT의 반대 개념으로, 사용자에게 부여했던 권한을 거두어들입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 5,
+    "questionNo": 6,
+    "content": "다음 SQL의 실행 결과(COUNT 값)를 구하시오.\n\n```sql\nSELECT COUNT(*) FROM 직원\nWHERE 부서 = '개발';\n```\n\n직원 테이블 데이터:\n| 이름 | 부서 | 급여 |\n|------|------|------|\n| 홍길동 | 개발 | 3500000 |\n| 이순신 | 영업 | 4000000 |\n| 강감찬 | 개발 | 3000000 |\n| 유관순 | 총무 | 2800000 |\n| 안중근 | 개발 | 4200000 |",
+    "answer": "3",
+    "explanation": "부서가 '개발'인 행은 홍길동, 강감찬, 안중근 3명입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 6,
+    "questionNo": 1,
+    "content": "다음 파이썬 코드의 실행 결과를 쓰시오.\n\n```python\na = [1, 2, 3, 4, 5]\nb = [x * 2 for x in a if x % 2 == 0]\nprint(b)\n```",
+    "answer": "[4, 8]",
+    "explanation": "리스트 a에서 짝수(2, 4)만 골라 2배 한 값으로 새 리스트를 만듭니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 6,
+    "questionNo": 2,
+    "content": "다음 파이썬 코드의 실행 결과를 쓰시오.\n\n```python\ndef fact(n):\n    if n <= 1:\n        return 1\n    return n * fact(n - 1)\n\nprint(fact(5))\n```",
+    "answer": "120",
+    "explanation": "fact(5) = 5*4*3*2*1 = 120인 재귀 팩토리얼 함수입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 6,
+    "questionNo": 3,
+    "content": "다음 파이썬 코드의 실행 결과를 순서대로 쓰시오.\n\n```python\ns = \"Hello, Python!\"\nprint(s[7:13])\nprint(s[::-1])\n```",
+    "answer": "Python\n!nohtyP ,olleH",
+    "explanation": "s[7:13]은 인덱스 7부터 12까지('Python'), s[::-1]은 문자열 전체를 뒤집은 결과입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 6,
+    "questionNo": 4,
+    "content": "다음 파이썬 코드의 실행 결과를 순서대로 쓰시오.\n\n```python\nd = {\"a\": 1, \"b\": 2, \"c\": 3}\ntotal = 0\nfor k, v in d.items():\n    total += v\nprint(total)\nd[\"d\"] = 4\nprint(len(d))\n```",
+    "answer": "6\n4",
+    "explanation": "딕셔너리 값의 합(1+2+3=6)을 출력한 뒤, 새 키를 추가하여 길이(4)를 출력합니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 6,
+    "questionNo": 5,
+    "content": "다음 파이썬 코드의 실행 결과를 순서대로 쓰시오.\n\n```python\nnums = [3, 1, 4, 1, 5, 9, 2, 6]\nresult = list(filter(lambda x: x > 3, nums))\nprint(result)\nprint(sum(result))\n```",
+    "answer": "[4, 5, 9, 6]\n24",
+    "explanation": "filter로 3보다 큰 값만 남기면 [4, 5, 9, 6]이고, 이 값들의 합은 24입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 7,
+    "questionNo": 1,
+    "content": "다음 자바 코드의 실행 결과를 쓰시오.\n\n```java\npublic class Main {\n    public static void main(String[] args) {\n        int sum = 0;\n        for (int i = 1; i <= 10; i++) {\n            if (i % 2 == 0) continue;\n            sum += i;\n        }\n        System.out.println(sum);\n    }\n}\n```",
+    "answer": "25",
+    "explanation": "continue로 짝수는 건너뛰므로 1~10 중 홀수(1+3+5+7+9)의 합인 25가 출력됩니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 7,
+    "questionNo": 2,
+    "content": "다음 자바 코드의 실행 결과를 쓰시오.\n\n```java\npublic class Main {\n    public static void main(String[] args) {\n        int[] arr = {10, 20, 30, 40, 50};\n        int sum = 0;\n        for (int i = arr.length - 1; i >= 0; i--) {\n            sum += arr[i];\n            if (sum > 60) break;\n        }\n        System.out.println(sum);\n    }\n}\n```",
+    "answer": "90",
+    "explanation": "뒤에서부터 더하면 50, 50+40=90에서 60을 초과해 break 하므로 최종 합은 90입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 7,
+    "questionNo": 3,
+    "content": "다음 자바 코드의 실행 결과를 쓰시오.\n\n```java\npublic class Main {\n    public static void main(String[] args) {\n        String result = \"\";\n        for (int i = 1; i <= 5; i++) {\n            if (i % 3 == 0) {\n                result += \"X\";\n            } else {\n                result += i;\n            }\n        }\n        System.out.println(result);\n    }\n}\n```",
+    "answer": "12X45",
+    "explanation": "3의 배수(3)일 때만 'X'로 바뀌고, 나머지는 숫자 그대로 이어붙여 \"12X45\"가 됩니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 7,
+    "questionNo": 4,
+    "content": "다음 자바 코드의 실행 결과를 쓰시오.\n\n```java\npublic class Main {\n    static void modify(int[] arr) {\n        arr[0] = 100;\n    }\n    public static void main(String[] args) {\n        int[] data = {1, 2, 3};\n        modify(data);\n        System.out.println(data[0]);\n    }\n}\n```",
+    "answer": "100",
+    "explanation": "자바 배열은 객체(참조형)이므로, 메서드에 배열을 넘기면 같은 배열을 참조해 원본이 변경됩니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 7,
+    "questionNo": 5,
+    "content": "다음 자바 코드의 실행 결과를 쓰시오.\n\n```java\npublic class Main {\n    public static void main(String[] args) {\n        char ch = 'A';\n        int code = ch + 2;\n        System.out.println((char) code + \"\" + code);\n    }\n}\n```",
+    "answer": "C67",
+    "explanation": "'A'는 아스키코드 65이므로 code는 67이고 (char)67은 'C'입니다. 문자열과 +로 연결되므로 \"C\"+67이 이어져 \"C67\"이 출력됩니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 8,
+    "questionNo": 1,
+    "content": "다음 C 코드의 실행 결과를 순서대로 쓰시오. (공백으로 구분)\n\n```c\n#include <stdio.h>\nint main() {\n    int a = 7, b = 2;\n    int c = a / b;\n    float d = (float)a / b;\n    printf(\"%d %.1f\", c, d);\n    return 0;\n}\n```",
+    "answer": "3 3.5|3,3.5|3, 3.5",
+    "explanation": "정수 나눗셈 7/2는 3이고, (float)로 형변환한 7/2는 3.5입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 8,
+    "questionNo": 2,
+    "content": "다음 C 코드의 실행 결과를 쓰시오.\n\n```c\n#include <stdio.h>\nint gcd(int a, int b) {\n    while (b != 0) {\n        int t = b;\n        b = a % b;\n        a = t;\n    }\n    return a;\n}\nint main() {\n    printf(\"%d\", gcd(48, 18));\n    return 0;\n}\n```",
+    "answer": "6",
+    "explanation": "유클리드 호제법으로 최대공약수를 구합니다. (48,18)→(18,12)→(12,6)→(6,0)이 되어 최종적으로 6이 반환됩니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 8,
+    "questionNo": 3,
+    "content": "다음 C 코드의 실행 결과를 순서대로 쓰시오. (공백으로 구분)\n\n```c\n#include <stdio.h>\nvoid swap(int *x, int *y) {\n    int temp = *x;\n    *x = *y;\n    *y = temp;\n}\nint main() {\n    int a = 10, b = 20;\n    swap(&a, &b);\n    printf(\"%d %d\", a, b);\n    return 0;\n}\n```",
+    "answer": "20 10|20,10|20, 10",
+    "explanation": "포인터로 주소를 넘겨받아 실제 변수 a, b의 값을 서로 교환하므로 20 10이 출력됩니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 8,
+    "questionNo": 4,
+    "content": "다음 C 코드의 실행 결과를 순서대로 쓰시오. (공백으로 구분)\n\n```c\n#include <stdio.h>\nint counter() {\n    static int count = 0;\n    count++;\n    return count;\n}\nint main() {\n    for (int i = 0; i < 3; i++) {\n        printf(\"%d \", counter());\n    }\n    return 0;\n}\n```",
+    "answer": "1 2 3|1,2,3|1, 2, 3",
+    "explanation": "static 변수는 함수 호출 사이에도 값이 유지되므로 호출할 때마다 1씩 증가한 값이 이어서 출력됩니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 8,
+    "questionNo": 5,
+    "content": "다음 C 코드의 실행 결과를 순서대로 쓰시오. (공백으로 구분)\n\n```c\n#include <stdio.h>\nint main() {\n    int arr[] = {10, 20, 30, 40, 50};\n    int *p = arr;\n    printf(\"%d %d\", *(p + 2), *p + 2);\n    return 0;\n}\n```",
+    "answer": "30 12|30,12|30, 12",
+    "explanation": "*(p+2)는 세 번째 원소인 30이고, *p + 2는 첫 번째 원소 10에 2를 더한 12입니다. (* 연산자가 +보다 먼저 계산됩니다.)"
+  },
+  {
+    "examYear": 9999,
+    "examRound": 9,
+    "questionNo": 1,
+    "content": "자원의 소유자가 직접 다른 사용자의 접근 권한을 지정하는 접근 통제 모델의 약자는?",
+    "answer": "DAC|임의적 접근 통제|Discretionary Access Control",
+    "explanation": "리소스 소유자가 재량으로 권한을 부여하거나 회수할 수 있는 접근 통제 방식입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 9,
+    "questionNo": 2,
+    "content": "사용자에게 역할(Role)을 부여하고, 그 역할에 따라 접근 권한이 결정되는 접근 통제 모델의 약자는?",
+    "answer": "RBAC|역할 기반 접근 통제|Role-Based Access Control",
+    "explanation": "사용자 개개인이 아니라 역할 단위로 권한을 관리하여 유지보수가 쉽습니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 9,
+    "questionNo": 3,
+    "content": "출발지 IP·MAC 주소 등을 위조하여 정상적인 송신자인 것처럼 속이는 공격 기법은?",
+    "answer": "스푸핑|Spoofing",
+    "explanation": "IP 스푸핑, ARP 스푸핑처럼 주소 정보를 위조해 신뢰할 수 있는 대상인 척 위장하는 공격입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 9,
+    "questionNo": 4,
+    "content": "로그인한 사용자의 브라우저가 의도치 않게 공격자가 만든 요청을 서버로 전송하게 하여, 비밀번호 변경·송금 등의 동작을 사용자 모르게 수행시키는 공격은?",
+    "answer": "CSRF|사이트 간 요청 위조|Cross-Site Request Forgery",
+    "explanation": "XSS가 스크립트를 주입하는 것과 달리, CSRF는 사용자의 인증된 세션을 이용해 원치 않는 요청을 대신 전송시킵니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 9,
+    "questionNo": 5,
+    "content": "할당된 메모리 버퍼의 경계를 벗어나 데이터를 덮어써 프로그램의 실행 흐름을 조작하는 공격 기법은?",
+    "answer": "버퍼 오버플로우|Buffer Overflow",
+    "explanation": "입력값 길이를 검증하지 않을 때 발생하며, 리턴 주소를 덮어써 임의 코드를 실행시키는 데 악용될 수 있습니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 10,
+    "questionNo": 1,
+    "content": "여러 프로세스가 공유 자원에 접근할 때 상호배제와 동기화를 위해 사용하는, P 연산과 V 연산으로 제어되는 정수형 변수 기법은?",
+    "answer": "세마포어|Semaphore",
+    "explanation": "P(wait) 연산으로 자원을 점유하고 V(signal) 연산으로 자원을 반납하여 동시 접근을 제어합니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 10,
+    "questionNo": 2,
+    "content": "CPU가 한 프로세스에서 다른 프로세스로 전환될 때, 현재 프로세스의 레지스터·상태 정보를 저장하고 다음 프로세스의 정보를 복원하는 과정은?",
+    "answer": "문맥 교환|컨텍스트 스위칭|Context Switch|Context Switching",
+    "explanation": "멀티태스킹을 위해 반드시 필요하지만, 너무 자주 일어나면 오버헤드가 커집니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 10,
+    "questionNo": 3,
+    "content": "페이지 부재가 지나치게 자주 발생하여, 프로세스가 실제 작업보다 페이지 교체에 더 많은 시간을 소비하는 현상은?",
+    "answer": "스래싱|스레싱|Thrashing",
+    "explanation": "다중 프로그래밍 정도가 너무 높을 때 발생하며, 작업 집합(Working Set) 모델 등으로 완화할 수 있습니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 10,
+    "questionNo": 4,
+    "content": "디스크 헤드의 현재 위치에서 가장 가까운 거리에 있는 요청을 먼저 처리하는 디스크 스케줄링 기법은?",
+    "answer": "SSTF|Shortest Seek Time First",
+    "explanation": "탐색 거리를 최소화해 평균 응답 시간을 줄이지만, 특정 요청이 계속 밀리는 기아 현상이 생길 수 있습니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 11,
+    "questionNo": 1,
+    "content": "먼저 들어온 데이터가 먼저 나가는(선입선출) 선형 자료구조는?",
+    "answer": "큐|Queue",
+    "explanation": "삽입은 뒤(Rear)에서, 삭제는 앞(Front)에서 이루어지는 FIFO 구조입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 11,
+    "questionNo": 2,
+    "content": "나중에 들어온 데이터가 먼저 나가는(후입선출) 선형 자료구조는?",
+    "answer": "스택|Stack",
+    "explanation": "삽입과 삭제가 한쪽 끝(Top)에서만 이루어지는 LIFO 구조로, 함수 호출·undo 기능 등에 쓰입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 11,
+    "questionNo": 3,
+    "content": "이진트리를 '왼쪽 서브트리 → 루트 → 오른쪽 서브트리' 순서로 방문하는 순회 방법은?",
+    "answer": "중위 순회|Inorder|Inorder Traversal",
+    "explanation": "이진 탐색 트리를 중위 순회하면 정렬된 순서로 값을 얻을 수 있습니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 11,
+    "questionNo": 4,
+    "content": "인접한 두 원소를 비교하여 필요하면 자리를 교환하는 과정을 반복하는, 구현이 단순하지만 비효율적인 정렬 알고리즘은?",
+    "answer": "버블 정렬|Bubble Sort",
+    "explanation": "한 번의 패스마다 가장 큰(혹은 작은) 값이 끝으로 이동하며, 시간복잡도는 O(n^2)입니다."
   }
 ]
