@@ -36,4 +36,11 @@ public class PracticalWrongNoteController {
         solveRecordService.saveMemo(id, memo);
         return "redirect:/practical/wrong-notes";
     }
+
+    @PostMapping("/re-evaluate")
+    public String reEvaluate(org.springframework.web.servlet.mvc.support.RedirectAttributes ra) {
+        int fixed = solveRecordService.reEvaluateWrongRecords();
+        ra.addFlashAttribute("reEvaluateResult", fixed + "개의 오답이 정답으로 정정되었습니다.");
+        return "redirect:/practical/wrong-notes";
+    }
 }

@@ -54,4 +54,18 @@ public class PracticalSolveRecordService {
     public void saveMemo(Long id, String memo) {
         repo.findById(id).ifPresent(r -> r.setMemo(memo));
     }
+
+    /** 저장된 오답 기록을 현재 채점 로직으로 재채점하여 이제 정답인 항목을 correct=true 로 갱신한다. */
+    @Transactional
+    public int reEvaluateWrongRecords() {
+        List<PracticalSolveRecord> wrongRecords = repo.findByCorrectFalseOrderBySolvedAtDesc();
+        int fixed = 0;
+        for (PracticalSolveRecord r : wrongRecords) {
+            if (r.getQuestion().isCorrectAnswer(r.getSubmitted())) {
+                r.setCorrect(true);
+                fixed++;
+            }
+        }
+        return fixed;
+    }
 }
