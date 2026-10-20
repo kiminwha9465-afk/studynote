@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -38,24 +39,44 @@ public class PracticalSolveRecordService {
         }
 
         List<PracticalWrongSession> sessions = new ArrayList<>();
-        for (Map.Entry<String, List<PracticalSolveRecord>> e : grouped.entrySet()) {
-            List<PracticalSolveRecord> wrongRecords = e.getValue().stream()
-                    .filter(r -> !r.isCorrect()).toList();
-            if (!wrongRecords.isEmpty()) {
-                PracticalSolveRecord first = e.getValue().get(0);
-                int totalCount = e.getValue().size();
-                int correctCount = totalCount - wrongRecords.size();
-                sessions.add(new PracticalWrongSession(
-                        e.getKey(), first.getSessionTitle(), first.getSolvedAt(), wrongRecords,
-                        totalCount, correctCount));
-            }
+        for (List<PracticalSolveRecord> records : grouped.values()) {
+            toWrongSession(records).ifPresent(sessions::add);
         }
         return sessions;
+    }
+
+    @Transactional(readOnly = true)
+    public PracticalWrongSession findWrongSessionDetail(String sessionKey) {
+        List<PracticalSolveRecord> records = repo.findBySessionKeyOrderBySolvedAtDesc(sessionKey);
+        return toWrongSession(records)
+                .orElseThrow(() -> new IllegalArgumentException("시험 기록을 찾을 수 없습니다."));
+    }
+
+    private Optional<PracticalWrongSession> toWrongSession(List<PracticalSolveRecord> records) {
+        if (records.isEmpty()) {
+            return Optional.empty();
+        }
+        List<PracticalSolveRecord> wrongRecords = records.stream()
+                .filter(r -> !r.isCorrect()).toList();
+        if (wrongRecords.isEmpty()) {
+            return Optional.empty();
+        }
+        PracticalSolveRecord first = records.get(0);
+        int totalCount = records.size();
+        int correctCount = totalCount - wrongRecords.size();
+        return Optional.of(new PracticalWrongSession(
+                first.getSessionKey(), first.getSessionTitle(), first.getSolvedAt(), wrongRecords,
+                totalCount, correctCount));
     }
 
     @Transactional
     public void deleteRecord(Long id) {
         repo.deleteById(id);
+    }
+
+    @Transactional
+    public void deleteSession(String sessionKey) {
+        repo.deleteBySessionKey(sessionKey);
     }
 
     @Transactional
