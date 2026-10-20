@@ -193,6 +193,38 @@
   },
   {
     "examYear": 2020,
+    "examRound": 1,
+    "questionNo": 25,
+    "content": "다음 C언어 코드의 실행 결과를 쓰시오.\n\n```c\n#include <stdio.h>\nint main() {\n    int i, sum = 0;\n    for (i = 1; i <= 10; i += 2) {\n        sum += i;\n    }\n    printf(\"%d\", sum);\n    return 0;\n}\n```",
+    "answer": "25",
+    "explanation": "i = 1, 3, 5, 7, 9 (홀수)의 합: 1+3+5+7+9 = 25"
+  },
+  {
+    "examYear": 2020,
+    "examRound": 1,
+    "questionNo": 26,
+    "content": "다음 Java 코드의 실행 결과를 쓰시오.\n\n```java\npublic class Main {\n    public static void main(String[] args) {\n        int result = 0;\n        for (int i = 1; i <= 5; i++) {\n            result += i * i;\n        }\n        System.out.println(result);\n    }\n}\n```",
+    "answer": "55",
+    "explanation": "1²+2²+3²+4²+5² = 1+4+9+16+25 = 55"
+  },
+  {
+    "examYear": 2020,
+    "examRound": 1,
+    "questionNo": 27,
+    "content": "다음 Python 코드의 실행 결과를 쓰시오.\n\n```python\nnums = [1, 2, 3, 4, 5]\nresult = list(map(lambda x: x * x, nums))\nprint(result)\n```",
+    "answer": "[1, 4, 9, 16, 25]",
+    "explanation": "map()은 리스트의 각 원소에 함수를 적용합니다. x*x → 각 원소의 제곱: [1, 4, 9, 16, 25]"
+  },
+  {
+    "examYear": 2020,
+    "examRound": 1,
+    "questionNo": 28,
+    "content": "다음 SQL을 완성하시오.\n\n```sql\nSELECT 학과, COUNT(*) AS 학생수\nFROM 학생\n( ? ) 학과\nHAVING COUNT(*) >= 3;\n```\n\n( ? )에 들어갈 키워드를 쓰시오.",
+    "answer": "GROUP BY",
+    "explanation": "HAVING은 GROUP BY로 그룹화된 결과에 조건을 적용합니다. HAVING 절은 반드시 GROUP BY 뒤에 와야 합니다."
+  },
+  {
+    "examYear": 2020,
     "examRound": 2,
     "questionNo": 1,
     "content": "장애 후 서비스를 복구할 때 목표로 하는 최대 허용 시간은?",
@@ -329,6 +361,38 @@
   },
   {
     "examYear": 2020,
+    "examRound": 2,
+    "questionNo": 18,
+    "content": "다음 C언어 코드의 실행 결과를 쓰시오.\n\n```c\n#include <stdio.h>\nint main() {\n    int arr[] = {10, 20, 30, 40, 50};\n    int *p = arr + 2;\n    printf(\"%d %d\", *p, *(p + 1));\n    return 0;\n}\n```",
+    "answer": "30 40",
+    "explanation": "arr + 2는 arr[2](값 30)를 가리킵니다. *p = 30, *(p+1) = arr[3] = 40"
+  },
+  {
+    "examYear": 2020,
+    "examRound": 2,
+    "questionNo": 19,
+    "content": "다음 Java 코드의 실행 결과를 쓰시오.\n\n```java\nclass Animal {\n    String sound() { return \"...\"; }\n}\nclass Dog extends Animal {\n    String sound() { return \"Woof\"; }\n}\npublic class Main {\n    public static void main(String[] args) {\n        Animal a = new Dog();\n        System.out.println(a.sound());\n    }\n}\n```",
+    "answer": "Woof",
+    "explanation": "다형성(Polymorphism): 참조 변수 타입은 Animal이지만 실제 객체는 Dog이므로, 오버라이딩된 Dog의 sound()가 호출됩니다."
+  },
+  {
+    "examYear": 2020,
+    "examRound": 2,
+    "questionNo": 20,
+    "content": "다음 Python 코드의 실행 결과를 쓰시오.\n\n```python\na = [1, 2, 3, 4, 5]\nb = [x for x in a if x % 2 == 0]\nprint(b)\n```",
+    "answer": "[2, 4]",
+    "explanation": "리스트 컴프리헨션으로 a에서 짝수(2, 4)만 필터링합니다."
+  },
+  {
+    "examYear": 2020,
+    "examRound": 2,
+    "questionNo": 21,
+    "content": "다음 SQL을 완성하시오.\n\n```sql\nSELECT 부서, AVG(급여)\nFROM 직원\nGROUP BY 부서\n( ? ) AVG(급여) > 3000000;\n```\n\n( ? )에 들어갈 키워드를 쓰시오.",
+    "answer": "HAVING",
+    "explanation": "그룹화된 결과에 조건을 적용할 때 WHERE 대신 HAVING을 사용합니다. WHERE는 GROUP BY 이전에, HAVING은 GROUP BY 이후에 적용됩니다."
+  },
+  {
+    "examYear": 2020,
     "examRound": 3,
     "questionNo": 1,
     "content": "다익스트라 알고리즘을 사용하는 링크 상태 내부 라우팅 프로토콜은?",
@@ -454,6 +518,38 @@
     "content": "관계대수에서 다른 릴레이션의 모든 조건값에 대응하는 항목을 찾는 연산은?",
     "answer": "디비전|Division|나눗셈|÷",
     "explanation": "기출 단서: 다른 집합의 조건을 ‘모두’ 만족 → ÷."
+  },
+  {
+    "examYear": 2020,
+    "examRound": 3,
+    "questionNo": 17,
+    "content": "다음 C언어 코드의 실행 결과를 쓰시오.\n\n```c\n#include <stdio.h>\n#include <string.h>\nint main() {\n    char str[] = \"Hello World\";\n    printf(\"%d %c\", strlen(str), str[6]);\n    return 0;\n}\n```",
+    "answer": "11 W",
+    "explanation": "strlen(\"Hello World\") = 11(공백 포함, NULL 제외). str[6]은 'W'(H=0,e=1,l=2,l=3,o=4,' '=5,W=6)."
+  },
+  {
+    "examYear": 2020,
+    "examRound": 3,
+    "questionNo": 18,
+    "content": "다음 Java 코드의 실행 결과를 쓰시오.\n\n```java\npublic class Main {\n    static int add(int a, int b) { return a + b; }\n    static int add(int a, int b, int c) { return a + b + c; }\n    public static void main(String[] args) {\n        System.out.println(add(1, 2) + \" \" + add(1, 2, 3));\n    }\n}\n```",
+    "answer": "3 6",
+    "explanation": "메서드 오버로딩: 매개변수 수에 따라 다른 메서드가 호출됩니다. add(1,2)=3, add(1,2,3)=6"
+  },
+  {
+    "examYear": 2020,
+    "examRound": 3,
+    "questionNo": 19,
+    "content": "다음 Python 코드의 실행 결과를 쓰시오.\n\n```python\ndef count_vowels(s):\n    return sum(1 for c in s if c in 'aeiouAEIOU')\nprint(count_vowels(\"Hello World\"))\n```",
+    "answer": "3",
+    "explanation": "모음 찾기: H(x)e(O)l(x)l(x)o(O) (x)W(x)o(O)r(x)l(x)d(x) → e, o, o = 3개"
+  },
+  {
+    "examYear": 2020,
+    "examRound": 3,
+    "questionNo": 20,
+    "content": "다음 SQL을 완성하시오.\n\n```sql\nSELECT 이름, 급여\nFROM 직원\nWHERE 급여 > (\n    SELECT ( ? )(급여) FROM 직원\n);\n```\n\n직원 중 평균 급여보다 많이 받는 직원을 조회한다. ( ? )에 알맞은 집계 함수를 쓰시오.",
+    "answer": "AVG",
+    "explanation": "서브쿼리에서 전체 직원의 평균 급여를 AVG(급여)로 구하고, 그보다 높은 급여를 받는 직원을 조회합니다."
   },
   {
     "examYear": 2020,
@@ -632,6 +728,38 @@
     "explanation": "이상 현상 중 넣을 때 생기는 문제예요."
   },
   {
+    "examYear": 2020,
+    "examRound": 4,
+    "questionNo": 23,
+    "content": "다음 C언어 코드의 실행 결과를 쓰시오.\n\n```c\n#include <stdio.h>\nstruct Point {\n    int x, y;\n};\nint main() {\n    struct Point p = {3, 4};\n    printf(\"%d\", p.x * p.x + p.y * p.y);\n    return 0;\n}\n```",
+    "answer": "25",
+    "explanation": "구조체 Point의 x=3, y=4. 3²+4² = 9+16 = 25"
+  },
+  {
+    "examYear": 2020,
+    "examRound": 4,
+    "questionNo": 24,
+    "content": "다음 Java 코드의 실행 결과를 쓰시오.\n\n```java\npublic class Main {\n    public static void main(String[] args) {\n        String s = \"Java Programming\";\n        System.out.println(s.substring(5, 12));\n    }\n}\n```",
+    "answer": "Program",
+    "explanation": "substring(5, 12): 인덱스 5부터 12 미만까지. J(0)a(1)v(2)a(3) (4)P(5)r(6)o(7)g(8)r(9)a(10)m(11) → \"Program\""
+  },
+  {
+    "examYear": 2020,
+    "examRound": 4,
+    "questionNo": 25,
+    "content": "다음 Python 코드의 실행 결과를 쓰시오.\n\n```python\ndata = {'name': 'Alice', 'age': 25, 'city': 'Seoul'}\nfiltered = {k: v for k, v in data.items() if isinstance(v, str)}\nprint(len(filtered))\n```",
+    "answer": "2",
+    "explanation": "딕셔너리 컴프리헨션으로 값이 str 타입인 항목만 필터링: 'name': 'Alice', 'city': 'Seoul' → 2개"
+  },
+  {
+    "examYear": 2020,
+    "examRound": 4,
+    "questionNo": 26,
+    "content": "다음 SQL을 완성하시오.\n\n```sql\nSELECT a.이름, b.부서명\nFROM 직원 a ( ? ) JOIN 부서 b\nON a.부서코드 = b.부서코드;\n```\n\n직원 테이블과 부서 테이블을 부서코드로 연결하여 조회한다. ( ? )에 들어갈 키워드를 쓰시오.",
+    "answer": "INNER",
+    "explanation": "INNER JOIN은 두 테이블에서 조인 조건이 일치하는 행만 반환합니다. 단순히 JOIN만 써도 동일하게 동작합니다."
+  },
+  {
     "examYear": 2021,
     "examRound": 1,
     "questionNo": 1,
@@ -766,6 +894,38 @@
     "content": "모듈 사이에서 필요한 단순 데이터 값만 매개변수로 전달하는 결합도는?",
     "answer": "자료 결합도|Data Coupling|데이터 결합도",
     "explanation": "구조체 전체를 전달하는 스탬프 결합도와 구분해요."
+  },
+  {
+    "examYear": 2021,
+    "examRound": 1,
+    "questionNo": 18,
+    "content": "다음 C언어 코드의 실행 결과를 쓰시오.\n\n```c\n#include <stdio.h>\nint power(int base, int exp) {\n    if (exp == 0) return 1;\n    return base * power(base, exp - 1);\n}\nint main() {\n    printf(\"%d\", power(2, 8));\n    return 0;\n}\n```",
+    "answer": "256",
+    "explanation": "재귀로 2^8 계산: 2×2×2×2×2×2×2×2 = 256"
+  },
+  {
+    "examYear": 2021,
+    "examRound": 1,
+    "questionNo": 19,
+    "content": "다음 Java 코드의 실행 결과를 쓰시오.\n\n```java\npublic class Main {\n    public static void main(String[] args) {\n        int n = 12345;\n        int sum = 0;\n        while (n > 0) {\n            sum += n % 10;\n            n /= 10;\n        }\n        System.out.println(sum);\n    }\n}\n```",
+    "answer": "15",
+    "explanation": "각 자릿수 합: 5+4+3+2+1 = 15. n%10으로 1의 자리를 추출하고 n/10으로 다음 자리로 이동합니다."
+  },
+  {
+    "examYear": 2021,
+    "examRound": 1,
+    "questionNo": 20,
+    "content": "다음 Python 코드의 실행 결과를 쓰시오.\n\n```python\nmatrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]\nprint(matrix[1][2])\n```",
+    "answer": "6",
+    "explanation": "matrix[1]은 두 번째 행 [4, 5, 6], matrix[1][2]는 그 세 번째 원소 6입니다."
+  },
+  {
+    "examYear": 2021,
+    "examRound": 1,
+    "questionNo": 21,
+    "content": "다음 SQL을 완성하시오.\n\n```sql\nSELECT 이름, 급여\nFROM 직원\n( ? ) BY 급여 DESC;\n```\n\n급여 기준 내림차순으로 정렬하여 조회한다. ( ? )에 알맞은 키워드를 쓰시오.",
+    "answer": "ORDER",
+    "explanation": "ORDER BY는 조회 결과를 정렬합니다. DESC는 내림차순, ASC(기본값)는 오름차순입니다."
   },
   {
     "examYear": 2021,
@@ -1166,6 +1326,38 @@
     "content": "아이콘·창·메뉴 같은 그래픽 요소로 조작하는 인터페이스는?",
     "answer": "GUI|Graphical User Interface",
     "explanation": "기출 단서: 그래픽 기반 사용자 인터페이스."
+  },
+  {
+    "examYear": 2021,
+    "examRound": 3,
+    "questionNo": 16,
+    "content": "다음 C언어 코드의 실행 결과를 쓰시오.\n\n```c\n#include <stdio.h>\nint main() {\n    int n = 255;\n    printf(\"%x\", n);\n    return 0;\n}\n```",
+    "answer": "ff",
+    "explanation": "%x는 16진수(소문자)로 출력합니다. 255 = 0xFF이므로 'ff'가 출력됩니다."
+  },
+  {
+    "examYear": 2021,
+    "examRound": 3,
+    "questionNo": 17,
+    "content": "다음 Java 코드의 실행 결과를 쓰시오.\n\n```java\npublic class Main {\n    public static void main(String[] args) {\n        int[] arr = {5, 3, 8, 1, 9, 2};\n        int max = arr[0];\n        for (int x : arr) {\n            if (x > max) max = x;\n        }\n        System.out.println(max);\n    }\n}\n```",
+    "answer": "9",
+    "explanation": "배열에서 최댓값을 찾습니다. {5,3,8,1,9,2} 중 최댓값은 9입니다."
+  },
+  {
+    "examYear": 2021,
+    "examRound": 3,
+    "questionNo": 18,
+    "content": "다음 Python 코드의 실행 결과를 쓰시오.\n\n```python\nnumbers = list(range(1, 6))\ntotal = 1\nfor n in numbers:\n    total *= n\nprint(total)\n```",
+    "answer": "120",
+    "explanation": "1부터 5까지의 팩토리얼: 1×2×3×4×5 = 120"
+  },
+  {
+    "examYear": 2021,
+    "examRound": 3,
+    "questionNo": 19,
+    "content": "다음 SQL을 완성하시오.\n\n```sql\n( ? ) INTO 직원(이름, 부서, 급여)\nVALUES ('홍길동', '개발', 4000000);\n```\n\n( ? )에 들어갈 DML 키워드를 쓰시오.",
+    "answer": "INSERT",
+    "explanation": "INSERT INTO는 테이블에 새로운 행을 삽입하는 DML 명령어입니다. VALUES 절에 삽입할 값을 지정합니다."
   },
   {
     "examYear": 2022,
@@ -1593,6 +1785,38 @@
   },
   {
     "examYear": 2022,
+    "examRound": 2,
+    "questionNo": 14,
+    "content": "다음 C언어 코드의 실행 결과를 쓰시오.\n\n```c\n#include <stdio.h>\nint main() {\n    int a = 10;\n    int *p = &a;\n    *p += 5;\n    printf(\"%d %d\", a, *p);\n    return 0;\n}\n```",
+    "answer": "15 15",
+    "explanation": "포인터 p는 변수 a의 주소를 가리킵니다. *p += 5는 a의 값을 10+5=15로 변경합니다. a와 *p는 같은 메모리를 참조하므로 둘 다 15입니다."
+  },
+  {
+    "examYear": 2022,
+    "examRound": 2,
+    "questionNo": 15,
+    "content": "다음 Java 코드의 실행 결과를 쓰시오.\n\n```java\nimport java.util.ArrayList;\npublic class Main {\n    public static void main(String[] args) {\n        ArrayList<Integer> list = new ArrayList<>();\n        for (int i = 1; i <= 5; i++) list.add(i);\n        list.remove(2);\n        System.out.println(list);\n    }\n}\n```",
+    "answer": "[1, 2, 4, 5]",
+    "explanation": "ArrayList.remove(int index)는 인덱스로 삭제합니다. 인덱스 2의 값(3)이 삭제되어 [1, 2, 4, 5]가 됩니다."
+  },
+  {
+    "examYear": 2022,
+    "examRound": 2,
+    "questionNo": 16,
+    "content": "다음 Python 코드의 실행 결과를 쓰시오.\n\n```python\ndef apply(func, lst):\n    return [func(x) for x in lst]\nresult = apply(lambda x: x ** 2, [1, 2, 3, 4])\nprint(result)\n```",
+    "answer": "[1, 4, 9, 16]",
+    "explanation": "apply 함수는 lst의 각 원소에 func를 적용합니다. lambda x: x**2로 각 원소를 제곱: [1, 4, 9, 16]"
+  },
+  {
+    "examYear": 2022,
+    "examRound": 2,
+    "questionNo": 17,
+    "content": "다음 SQL을 완성하시오.\n\n```sql\n( ? ) FROM 직원\nWHERE 부서 = '개발';\n```\n\n개발 부서 직원을 모두 삭제한다. ( ? )에 들어갈 DML 명령어를 쓰시오.",
+    "answer": "DELETE",
+    "explanation": "DELETE FROM은 조건에 맞는 행을 삭제하는 DML 명령어입니다. WHERE 절 없이 사용하면 전체 행이 삭제됩니다."
+  },
+  {
+    "examYear": 2022,
     "examRound": 3,
     "questionNo": 1,
     "content": "추상부와 구현부를 분리해 각각 확장하게 하는 패턴은?",
@@ -1686,6 +1910,38 @@
     "content": "기본 E-R 표기에서 타원이 나타내는 것은?",
     "answer": "속성|Attribute",
     "explanation": "개체=사각형, 관계=마름모, 속성=타원으로 연결해요."
+  },
+  {
+    "examYear": 2022,
+    "examRound": 3,
+    "questionNo": 13,
+    "content": "다음 C언어 코드의 실행 결과를 쓰시오.\n\n```c\n#include <stdio.h>\nint main() {\n    int result = 0;\n    for (int i = 0; i < 10; i++) {\n        if (i % 3 == 0) result += i;\n    }\n    printf(\"%d\", result);\n    return 0;\n}\n```",
+    "answer": "18",
+    "explanation": "0~9에서 3의 배수: 0+3+6+9 = 18"
+  },
+  {
+    "examYear": 2022,
+    "examRound": 3,
+    "questionNo": 14,
+    "content": "다음 Java 코드의 실행 결과를 쓰시오.\n\n```java\npublic class Main {\n    public static void main(String[] args) {\n        String s = \"Hello World\";\n        System.out.println(s.toUpperCase());\n    }\n}\n```",
+    "answer": "HELLO WORLD",
+    "explanation": "toUpperCase()는 문자열의 모든 문자를 대문자로 변환합니다."
+  },
+  {
+    "examYear": 2022,
+    "examRound": 3,
+    "questionNo": 15,
+    "content": "다음 Python 코드의 실행 결과를 쓰시오.\n\n```python\ntext = \"abcdefghij\"\nprint(text[::3])\n```",
+    "answer": "adgj",
+    "explanation": "슬라이싱 [::3]은 처음부터 끝까지 3씩 건너뜁니다. 인덱스 0(a), 3(d), 6(g), 9(j) → 'adgj'"
+  },
+  {
+    "examYear": 2022,
+    "examRound": 3,
+    "questionNo": 16,
+    "content": "다음 SQL을 완성하시오.\n\n```sql\n( ? ) 직원\nSET 급여 = 급여 * 1.1\nWHERE 부서 = '개발';\n```\n\n개발 부서 직원의 급여를 10% 인상한다. ( ? )에 들어갈 DML 명령어를 쓰시오.",
+    "answer": "UPDATE",
+    "explanation": "UPDATE는 기존 행의 데이터를 수정하는 DML 명령어입니다. SET으로 변경할 값을, WHERE로 대상 행을 지정합니다."
   },
   {
     "examYear": 2023,
@@ -2281,6 +2537,38 @@
   },
   {
     "examYear": 2024,
+    "examRound": 1,
+    "questionNo": 21,
+    "content": "다음 C언어 코드의 실행 결과를 쓰시오.\n\n```c\n#include <stdio.h>\nint main() {\n    int a = 6, b = 11;\n    printf(\"%d %d\", a | b, a & b);\n    return 0;\n}\n```",
+    "answer": "15 2",
+    "explanation": "a=6(0110₂), b=11(1011₂).\nOR: 0110|1011=1111=15\nAND: 0110&1011=0010=2"
+  },
+  {
+    "examYear": 2024,
+    "examRound": 1,
+    "questionNo": 22,
+    "content": "다음 Java 코드의 실행 결과를 쓰시오.\n\n```java\npublic class Main {\n    interface Calc {\n        int operate(int a, int b);\n    }\n    public static void main(String[] args) {\n        Calc add = (a, b) -> a + b;\n        Calc mul = (a, b) -> a * b;\n        System.out.println(add.operate(3, 4) + \" \" + mul.operate(3, 4));\n    }\n}\n```",
+    "answer": "7 12",
+    "explanation": "람다 표현식으로 함수형 인터페이스 Calc를 구현합니다. add(3,4)=7, mul(3,4)=12"
+  },
+  {
+    "examYear": 2024,
+    "examRound": 1,
+    "questionNo": 23,
+    "content": "다음 Python 코드의 실행 결과를 쓰시오.\n\n```python\ndef is_prime(n):\n    if n < 2: return False\n    for i in range(2, int(n**0.5) + 1):\n        if n % i == 0: return False\n    return True\nprimes = [x for x in range(1, 20) if is_prime(x)]\nprint(len(primes))\n```",
+    "answer": "8",
+    "explanation": "1~19 사이의 소수: 2, 3, 5, 7, 11, 13, 17, 19 → 8개"
+  },
+  {
+    "examYear": 2024,
+    "examRound": 1,
+    "questionNo": 24,
+    "content": "다음 SQL을 완성하시오.\n\n```sql\nCREATE TABLE 학생 (\n    학번 INT ( ? ) KEY,\n    이름 VARCHAR(50) NOT NULL,\n    학과 VARCHAR(50)\n);\n```\n\n( ? )에 들어갈 키워드를 쓰시오.",
+    "answer": "PRIMARY",
+    "explanation": "PRIMARY KEY는 테이블의 기본키를 지정합니다. NOT NULL과 UNIQUE 제약을 자동으로 포함합니다."
+  },
+  {
+    "examYear": 2024,
     "examRound": 2,
     "questionNo": 1,
     "content": "내부 표현을 노출하지 않고 컬렉션 요소를 순서대로 접근하는 패턴은?",
@@ -2310,6 +2598,30 @@
     "content": "실행 순서에 밀접하게 관련된 기능들을 묶는 응집도는?",
     "answer": "절차적 응집도|절차적|절차|Procedural Cohesion",
     "explanation": "같은 정답을 다른 단서로 떠올리는 기출 변형이에요."
+  },
+  {
+    "examYear": 2024,
+    "examRound": 2,
+    "questionNo": 5,
+    "content": "다음 C언어 코드의 실행 결과를 쓰시오.\n\n```c\n#include <stdio.h>\nint main() {\n    int n = 100, count = 0;\n    while (n > 0) {\n        n /= 2;\n        count++;\n    }\n    printf(\"%d\", count);\n    return 0;\n}\n```",
+    "answer": "7",
+    "explanation": "100→50→25→12→6→3→1→0: 총 7번 나눔. count=7"
+  },
+  {
+    "examYear": 2024,
+    "examRound": 2,
+    "questionNo": 6,
+    "content": "다음 Java 코드의 실행 결과를 쓰시오.\n\n```java\npublic class Main {\n    public static void main(String[] args) {\n        String[] fruits = {\"apple\", \"banana\", \"cherry\"};\n        for (String f : fruits) {\n            System.out.print(f.charAt(0));\n        }\n    }\n}\n```",
+    "answer": "abc",
+    "explanation": "각 과일 이름의 첫 글자(charAt(0))를 출력: a, b, c → 'abc'"
+  },
+  {
+    "examYear": 2024,
+    "examRound": 2,
+    "questionNo": 7,
+    "content": "다음 Python 코드의 실행 결과를 쓰시오.\n\n```python\nfrom collections import Counter\nwords = ['apple', 'banana', 'apple', 'cherry', 'banana', 'apple']\nc = Counter(words)\nprint(c.most_common(1)[0][0])\n```",
+    "answer": "apple",
+    "explanation": "Counter는 각 원소의 빈도를 셉니다. most_common(1)은 가장 많이 등장한 1개를 반환: apple(3번). [0][0]으로 이름만 추출."
   },
   {
     "examYear": 2024,
@@ -2456,6 +2768,38 @@
     "explanation": "기출 단서: 유일성 + 최소성."
   },
   {
+    "examYear": 2024,
+    "examRound": 3,
+    "questionNo": 19,
+    "content": "다음 C언어 코드의 실행 결과를 쓰시오.\n\n```c\n#include <stdio.h>\nint main() {\n    int arr[3][3] = {{1,2,3},{4,5,6},{7,8,9}};\n    int sum = 0;\n    for (int i = 0; i < 3; i++) {\n        sum += arr[i][i];\n    }\n    printf(\"%d\", sum);\n    return 0;\n}\n```",
+    "answer": "15",
+    "explanation": "2차원 배열의 대각선 원소 합: arr[0][0]=1, arr[1][1]=5, arr[2][2]=9 → 1+5+9=15"
+  },
+  {
+    "examYear": 2024,
+    "examRound": 3,
+    "questionNo": 20,
+    "content": "다음 Java 코드의 실행 결과를 쓰시오.\n\n```java\npublic class Main {\n    public static void main(String[] args) {\n        StringBuilder sb = new StringBuilder();\n        for (int i = 1; i <= 5; i++) {\n            sb.append(i);\n            if (i < 5) sb.append(\"-\");\n        }\n        System.out.println(sb.toString());\n    }\n}\n```",
+    "answer": "1-2-3-4-5",
+    "explanation": "StringBuilder로 1부터 5까지를 '-'로 연결합니다. 마지막(i=5)에는 '-'를 붙이지 않습니다."
+  },
+  {
+    "examYear": 2024,
+    "examRound": 3,
+    "questionNo": 21,
+    "content": "다음 Python 코드의 실행 결과를 쓰시오.\n\n```python\ndata = [3, 1, 4, 1, 5, 9, 2, 6]\nprint(sorted(set(data)))\n```",
+    "answer": "[1, 2, 3, 4, 5, 6, 9]",
+    "explanation": "set()으로 중복을 제거하면 {1,2,3,4,5,6,9}, sorted()로 오름차순 정렬하면 [1,2,3,4,5,6,9]"
+  },
+  {
+    "examYear": 2024,
+    "examRound": 3,
+    "questionNo": 22,
+    "content": "다음 SQL을 완성하시오.\n\n```sql\nSELECT 이름\nFROM 직원\nWHERE 급여 > (\n    SELECT ( ? )(급여) FROM 직원\n    WHERE 부서 = '영업'\n);\n```\n\n영업 부서 최고 급여보다 더 많이 받는 직원 이름을 조회한다. ( ? )에 들어갈 집계 함수를 쓰시오.",
+    "answer": "MAX",
+    "explanation": "MAX()는 집계 함수로 최댓값을 반환합니다. 서브쿼리에서 영업 부서의 최고 급여를 구해 외부 쿼리에서 비교합니다."
+  },
+  {
     "examYear": 2025,
     "examRound": 1,
     "questionNo": 1,
@@ -2593,6 +2937,38 @@
   },
   {
     "examYear": 2025,
+    "examRound": 1,
+    "questionNo": 18,
+    "content": "다음 C언어 코드의 실행 결과를 쓰시오.\n\n```c\n#include <stdio.h>\nint gcd(int a, int b) {\n    if (b == 0) return a;\n    return gcd(b, a % b);\n}\nint main() {\n    printf(\"%d\", gcd(48, 18));\n    return 0;\n}\n```",
+    "answer": "6",
+    "explanation": "유클리드 호제법으로 최대공약수 계산: gcd(48,18)→gcd(18,12)→gcd(12,6)→gcd(6,0)=6"
+  },
+  {
+    "examYear": 2025,
+    "examRound": 1,
+    "questionNo": 19,
+    "content": "다음 Java 코드의 실행 결과를 쓰시오.\n\n```java\npublic class Main {\n    public static void main(String[] args) {\n        int[] arr = {1, 5, 3, 2, 4};\n        int temp;\n        for (int i = 0; i < arr.length - 1; i++) {\n            for (int j = 0; j < arr.length - 1 - i; j++) {\n                if (arr[j] > arr[j+1]) {\n                    temp = arr[j]; arr[j] = arr[j+1]; arr[j+1] = temp;\n                }\n            }\n        }\n        System.out.println(arr[2]);\n    }\n}\n```",
+    "answer": "3",
+    "explanation": "버블 정렬 후 [1,2,3,4,5]. arr[2] = 3"
+  },
+  {
+    "examYear": 2025,
+    "examRound": 1,
+    "questionNo": 20,
+    "content": "다음 Python 코드의 실행 결과를 쓰시오.\n\n```python\nclass Stack:\n    def __init__(self):\n        self.items = []\n    def push(self, item):\n        self.items.append(item)\n    def pop(self):\n        return self.items.pop()\n\ns = Stack()\nfor i in [1, 2, 3]:\n    s.push(i)\nprint(s.pop(), s.pop())\n```",
+    "answer": "3 2",
+    "explanation": "스택에 1,2,3을 push. LIFO 구조로 pop()하면 3, 다음 pop()은 2 → '3 2'"
+  },
+  {
+    "examYear": 2025,
+    "examRound": 1,
+    "questionNo": 21,
+    "content": "다음 SQL을 완성하시오.\n\n```sql\nSELECT ( ? )(이름) AS 직원수\nFROM 직원;\n```\n\n전체 직원 수를 조회한다. ( ? )에 들어갈 집계 함수를 쓰시오.",
+    "answer": "COUNT",
+    "explanation": "COUNT()는 행의 개수를 반환합니다. COUNT(*)은 NULL 포함, COUNT(컬럼명)은 NULL 제외하고 셉니다."
+  },
+  {
+    "examYear": 2025,
     "examRound": 2,
     "questionNo": 1,
     "content": "키와 위치 정보를 이용해 검색을 빠르게 하는 구조는?",
@@ -2646,6 +3022,30 @@
     "content": "SYN을 대량 전송하고 연결 완료를 하지 않아 자원을 소모시키는 공격은?",
     "answer": "SYN Flooding|SYN 플러딩|SYN Flooding 공격",
     "explanation": "미완료 TCP 연결이 쌓이게 합니다."
+  },
+  {
+    "examYear": 2025,
+    "examRound": 2,
+    "questionNo": 8,
+    "content": "다음 C언어 코드의 실행 결과를 쓰시오.\n\n```c\n#include <stdio.h>\nint main() {\n    int a = 3, b = 7;\n    int max = (a > b) ? a : b;\n    int min = (a < b) ? a : b;\n    printf(\"%d %d\", max, min);\n    return 0;\n}\n```",
+    "answer": "7 3",
+    "explanation": "삼항 연산자: 3>7은 거짓이므로 max=7, 3<7은 참이므로 min=3"
+  },
+  {
+    "examYear": 2025,
+    "examRound": 2,
+    "questionNo": 9,
+    "content": "다음 Java 코드의 실행 결과를 쓰시오.\n\n```java\npublic class Main {\n    public static void main(String[] args) {\n        String s = \"Hello, World!\";\n        System.out.println(s.toUpperCase().replace(\"O\", \"0\"));\n    }\n}\n```",
+    "answer": "HELL0, W0RLD!",
+    "explanation": "toUpperCase() → \"HELLO, WORLD!\", replace(\"O\",\"0\") → 'O'를 '0'으로 교체: \"HELL0, W0RLD!\""
+  },
+  {
+    "examYear": 2025,
+    "examRound": 2,
+    "questionNo": 10,
+    "content": "다음 Python 코드의 실행 결과를 쓰시오.\n\n```python\npairs = [(1, 'a'), (3, 'c'), (2, 'b')]\npairs.sort(key=lambda x: x[0], reverse=True)\nprint([p[1] for p in pairs])\n```",
+    "answer": "['c', 'b', 'a']",
+    "explanation": "첫 번째 원소 기준 내림차순 정렬: (3,'c'),(2,'b'),(1,'a'). 두 번째 원소만 추출: ['c','b','a']"
   },
   {
     "examYear": 2025,
@@ -2790,5 +3190,37 @@
     "content": "군사 기밀 등에서 보안 등급을 기준으로 중앙 정책을 강제하는 접근 통제는?",
     "answer": "MAC|강제적 접근 통제|강제 접근 통제|Mandatory Access Control",
     "explanation": "소유자가 권한을 정하는 DAC와 구분하세요."
+  },
+  {
+    "examYear": 2025,
+    "examRound": 3,
+    "questionNo": 19,
+    "content": "다음 C언어 코드의 실행 결과를 쓰시오.\n\n```c\n#include <stdio.h>\nvoid reverse(int arr[], int n) {\n    int i, temp;\n    for (i = 0; i < n / 2; i++) {\n        temp = arr[i];\n        arr[i] = arr[n - 1 - i];\n        arr[n - 1 - i] = temp;\n    }\n}\nint main() {\n    int arr[] = {1, 2, 3, 4, 5};\n    reverse(arr, 5);\n    printf(\"%d %d\", arr[0], arr[4]);\n    return 0;\n}\n```",
+    "answer": "5 1",
+    "explanation": "reverse 함수로 배열을 역순으로: {5,4,3,2,1}. arr[0]=5, arr[4]=1"
+  },
+  {
+    "examYear": 2025,
+    "examRound": 3,
+    "questionNo": 20,
+    "content": "다음 Java 코드의 실행 결과를 쓰시오.\n\n```java\nimport java.util.HashMap;\npublic class Main {\n    public static void main(String[] args) {\n        HashMap<String, Integer> map = new HashMap<>();\n        String[] words = {\"apple\",\"banana\",\"apple\",\"cherry\",\"banana\",\"apple\"};\n        for (String w : words) {\n            map.put(w, map.getOrDefault(w, 0) + 1);\n        }\n        System.out.println(map.get(\"apple\"));\n    }\n}\n```",
+    "answer": "3",
+    "explanation": "HashMap으로 단어 빈도수를 셉니다. getOrDefault(w, 0)+1로 누적. 'apple'은 3번 등장합니다."
+  },
+  {
+    "examYear": 2025,
+    "examRound": 3,
+    "questionNo": 21,
+    "content": "다음 Python 코드의 실행 결과를 쓰시오.\n\n```python\ndef fibonacci(n):\n    a, b = 0, 1\n    for _ in range(n):\n        a, b = b, a + b\n    return a\nprint(fibonacci(10))\n```",
+    "answer": "55",
+    "explanation": "반복적 피보나치: n=10일 때 F(10)=55. (수열: 0,1,1,2,3,5,8,13,21,34,55)"
+  },
+  {
+    "examYear": 2025,
+    "examRound": 3,
+    "questionNo": 22,
+    "content": "다음 SQL을 완성하시오.\n\n```sql\nSELECT a.이름, b.부서명, a.급여\nFROM 직원 a\nLEFT ( ? ) 부서 b ON a.부서코드 = b.부서코드\nWHERE a.급여 >= 3000000;\n```\n\n( ? )에 들어갈 키워드를 쓰시오.",
+    "answer": "JOIN",
+    "explanation": "LEFT JOIN은 왼쪽 테이블(직원)의 모든 행을 유지하고, 오른쪽 테이블(부서)에서 일치하는 행을 연결합니다. 일치하지 않으면 NULL로 표시됩니다."
   }
 ]
