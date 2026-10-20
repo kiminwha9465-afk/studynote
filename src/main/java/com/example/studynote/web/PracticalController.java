@@ -2,6 +2,7 @@ package com.example.studynote.web;
 
 import com.example.studynote.domain.PracticalQuestion;
 import com.example.studynote.service.PracticalService;
+import com.example.studynote.service.PracticalSolveRecordService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -22,9 +23,12 @@ public class PracticalController {
     private static final String SESSION_RESULT = "practicalResult";
 
     private final PracticalService practicalService;
+    private final PracticalSolveRecordService solveRecordService;
 
-    public PracticalController(PracticalService practicalService) {
+    public PracticalController(PracticalService practicalService,
+                                PracticalSolveRecordService solveRecordService) {
         this.practicalService = practicalService;
+        this.solveRecordService = solveRecordService;
     }
 
     @GetMapping
@@ -74,7 +78,9 @@ public class PracticalController {
             items.add(new PracticalResultView.Item(q, submitted, q.isCorrectAnswer(submitted)));
         }
 
-        session.setAttribute(SESSION_RESULT, new PracticalResultView(title, items));
+        PracticalResultView resultView = new PracticalResultView(title, items);
+        solveRecordService.saveResults(title, items);
+        session.setAttribute(SESSION_RESULT, resultView);
         session.removeAttribute(SESSION_IDS);
         session.removeAttribute(SESSION_TITLE);
         return "redirect:/practical/result";

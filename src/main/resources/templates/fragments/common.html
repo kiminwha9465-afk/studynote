@@ -31,6 +31,9 @@
         <a th:href="@{/practical}"
            th:classappend="${active == 'practical'} ? 'text-indigo-600' : 'text-slate-500 hover:text-slate-800 dark:text-zinc-400 dark:hover:text-zinc-200'"
            class="text-sm font-semibold">실기</a>
+        <a th:href="@{/practical/wrong-notes}"
+           th:classappend="${active == 'practical-wrong-notes'} ? 'text-indigo-600' : 'text-slate-500 hover:text-slate-800 dark:text-zinc-400 dark:hover:text-zinc-200'"
+           class="text-sm font-semibold">실기 오답노트</a>
         <a th:href="@{/free-notes}"
            th:classappend="${active == 'free-notes'} ? 'text-indigo-600' : 'text-slate-500 hover:text-slate-800 dark:text-zinc-400 dark:hover:text-zinc-200'"
            class="text-sm font-semibold">자유노트</a>
