@@ -33,6 +33,14 @@ public class PracticalController {
         return "practical-home";
     }
 
+    @PostMapping("/mock/start")
+    public String startMock(@RequestParam(defaultValue = "20") int count, HttpSession session) {
+        List<PracticalQuestion> questions = practicalService.buildMockExam(count);
+        session.setAttribute(SESSION_IDS, questions.stream().map(PracticalQuestion::getId).toList());
+        session.setAttribute(SESSION_TITLE, "실기 모의고사 (%d문항)".formatted(questions.size()));
+        return "redirect:/practical/take";
+    }
+
     @PostMapping("/year/start")
     public String startYear(@RequestParam int examYear, @RequestParam int examRound, HttpSession session) {
         List<PracticalQuestion> questions = practicalService.buildExam(examYear, examRound);

@@ -2,6 +2,8 @@ package com.example.studynote.service;
 
 import com.example.studynote.domain.PracticalQuestion;
 import com.example.studynote.repository.PracticalQuestionRepository;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,12 @@ public class PracticalService {
         return practicalQuestionRepository.findDistinctExamSittings().stream()
                 .map(row -> new ExamSitting((Integer) row[0], (Integer) row[1]))
                 .toList();
+    }
+
+    public List<PracticalQuestion> buildMockExam(int count) {
+        List<PracticalQuestion> pool = new ArrayList<>(practicalQuestionRepository.findAll());
+        Collections.shuffle(pool);
+        return pool.subList(0, Math.min(count, pool.size()));
     }
 
     public List<PracticalQuestion> buildExam(int examYear, int examRound) {
