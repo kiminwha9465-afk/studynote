@@ -1,6 +1,8 @@
 package com.example.studynote.web;
 
 import com.example.studynote.service.PracticalSolveRecordService;
+import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+@Slf4j
 @Controller
 @RequestMapping("/practical/wrong-notes")
 public class PracticalWrongNoteController {
@@ -21,7 +24,13 @@ public class PracticalWrongNoteController {
 
     @GetMapping
     public String list(Model model) {
-        model.addAttribute("sessions", solveRecordService.findWrongSessions());
+        try {
+            model.addAttribute("sessions", solveRecordService.findWrongSessions());
+        } catch (Exception e) {
+            log.error("실기 오답노트 로드 실패", e);
+            model.addAttribute("sessions", List.of());
+            model.addAttribute("loadError", e.getMessage());
+        }
         return "practical-wrong-notes";
     }
 
