@@ -9,8 +9,5 @@ public interface PracticalSolveRecordRepository extends JpaRepository<PracticalS
 
     List<PracticalSolveRecord> findByCorrectFalseOrderBySolvedAtDesc();
 
-    @Query("SELECT r.sessionKey, r.sessionTitle, MIN(r.solvedAt) FROM PracticalSolveRecord r GROUP BY r.sessionKey, r.sessionTitle ORDER BY MIN(r.solvedAt) DESC")
-    List<Object[]> findDistinctSessions();
-
-    List<PracticalSolveRecord> findBySessionKeyOrderByIdAsc(String sessionKey);
+    List<PracticalSolveRecord> findAllByOrderBySolvedAtDesc();
 }

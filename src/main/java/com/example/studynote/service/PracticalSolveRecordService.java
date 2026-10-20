@@ -29,20 +29,25 @@ public class PracticalSolveRecordService {
 
     @Transactional(readOnly = true)
     public List<PracticalWrongSession> findWrongSessions() {
-        List<Object[]> rows = repo.findDistinctSessions();
-        // sessionKey 순서로 각 세션의 오답 목록 구성
-        Map<String, PracticalWrongSession> map = new LinkedHashMap<>();
-        for (Object[] row : rows) {
-            String key = (String) row[0];
-            String title = (String) row[1];
-            java.time.LocalDateTime at = (java.time.LocalDateTime) row[2];
-            List<PracticalSolveRecord> wrong = repo.findBySessionKeyOrderByIdAsc(key)
-                    .stream().filter(r -> !r.isCorrect()).toList();
-            if (!wrong.isEmpty()) {
-                map.put(key, new PracticalWrongSession(key, title, at, wrong));
+        List<PracticalSolveRecord> all = repo.findAllByOrderBySolvedAtDesc();
+
+        // sessionKey 기준으로 그룹핑 (최신 순 유지)
+        Map<String, List<PracticalSolveRecord>> grouped = new LinkedHashMap<>();
+        for (PracticalSolveRecord r : all) {
+            grouped.computeIfAbsent(r.getSessionKey(), k -> new ArrayList<>()).add(r);
+        }
+
+        List<PracticalWrongSession> sessions = new ArrayList<>();
+        for (Map.Entry<String, List<PracticalSolveRecord>> e : grouped.entrySet()) {
+            List<PracticalSolveRecord> wrongRecords = e.getValue().stream()
+                    .filter(r -> !r.isCorrect()).toList();
+            if (!wrongRecords.isEmpty()) {
+                PracticalSolveRecord first = e.getValue().get(0);
+                sessions.add(new PracticalWrongSession(
+                        e.getKey(), first.getSessionTitle(), first.getSolvedAt(), wrongRecords));
             }
         }
-        return new ArrayList<>(map.values());
+        return sessions;
     }
 
     @Transactional
