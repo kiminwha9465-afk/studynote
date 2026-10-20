@@ -2580,7 +2580,7 @@
     "examRound": 2,
     "questionNo": 2,
     "content": "패킷 전송 전 논리적 경로를 설정하는 연결형 교환 방식은?",
-    "answer": "가상회선 방식",
+    "answer": "가상회선 방식|가상회선|Virtual Circuit|VC",
     "explanation": "미리 정한 논리 경로를 따라 패킷을 전달합니다."
   },
   {
