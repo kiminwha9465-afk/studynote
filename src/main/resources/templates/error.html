@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>오류 디버그</title>
+    <style>
+        body { font-family: monospace; padding: 20px; background: #1e1e1e; color: #d4d4d4; }
+        h1 { color: #f44; }
+        .field { margin: 8px 0; }
+        .label { color: #888; }
+        pre { background: #2d2d2d; padding: 12px; overflow-x: auto; white-space: pre-wrap; font-size: 12px; border-left: 3px solid #f44; }
+    </style>
+</head>
+<body>
+<h1>오류 발생 (디버그 페이지)</h1>
+<div class="field"><span class="label">Status: </span><strong th:text="${status}">?</strong></div>
+<div class="field"><span class="label">Error: </span><span th:text="${error}">?</span></div>
+<div class="field"><span class="label">Path: </span><span th:text="${path}">?</span></div>
+<div class="field"><span class="label">Message: </span><span th:text="${message}">?</span></div>
+<div class="field"><span class="label">Exception: </span><span th:text="${exception}">?</span></div>
+<pre th:if="${trace != null}" th:text="${trace}">스택 트레이스 없음</pre>
+</body>
+</html>
