@@ -61,12 +61,14 @@ public class PracticalSolveRecordService {
         if (wrongRecords.isEmpty()) {
             return Optional.empty();
         }
+        List<PracticalSolveRecord> correctRecords = records.stream()
+                .filter(PracticalSolveRecord::isCorrect).toList();
         PracticalSolveRecord first = records.get(0);
         int totalCount = records.size();
-        int correctCount = totalCount - wrongRecords.size();
+        int correctCount = correctRecords.size();
         return Optional.of(new PracticalWrongSession(
                 first.getSessionKey(), first.getSessionTitle(), first.getSolvedAt(), wrongRecords,
-                totalCount, correctCount));
+                correctRecords, totalCount, correctCount));
     }
 
     @Transactional

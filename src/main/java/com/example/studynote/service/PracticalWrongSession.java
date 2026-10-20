@@ -9,10 +9,11 @@ public record PracticalWrongSession(
         String title,
         LocalDateTime solvedAt,
         List<PracticalSolveRecord> wrongRecords,
+        List<PracticalSolveRecord> correctRecords,
         int totalCount,
         int correctCount
 ) {
-    public double scorePercent() {
-        return totalCount == 0 ? 0 : correctCount * 100.0 / totalCount;
+    public int scorePercent() {
+        return totalCount == 0 ? 0 : Math.round(100f * correctCount / totalCount);
     }
 }
