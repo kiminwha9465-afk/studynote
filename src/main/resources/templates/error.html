@@ -7,17 +7,40 @@
         body { font-family: monospace; padding: 20px; background: #1e1e1e; color: #d4d4d4; }
         h1 { color: #f44; }
         .field { margin: 8px 0; }
-        .label { color: #888; }
-        pre { background: #2d2d2d; padding: 12px; overflow-x: auto; white-space: pre-wrap; font-size: 12px; border-left: 3px solid #f44; }
+        .label { color: #9cdcfe; font-weight: bold; }
+        pre { background: #2d2d2d; padding: 12px; overflow-x: auto; white-space: pre-wrap; font-size: 11px; border-left: 3px solid #f44; margin-top: 4px; }
     </style>
 </head>
 <body>
 <h1>오류 발생 (디버그 페이지)</h1>
-<div class="field"><span class="label">Status: </span><strong th:text="${status}">?</strong></div>
+
+<div class="field"><span class="label">Status: </span><span th:text="${status}">?</span></div>
 <div class="field"><span class="label">Error: </span><span th:text="${error}">?</span></div>
 <div class="field"><span class="label">Path: </span><span th:text="${path}">?</span></div>
-<div class="field"><span class="label">Message: </span><span th:text="${message}">?</span></div>
-<div class="field"><span class="label">Exception: </span><span th:text="${exception}">?</span></div>
-<pre th:if="${trace != null}" th:text="${trace}">스택 트레이스 없음</pre>
+<div class="field"><span class="label">Message (attrs): </span><span th:text="${message}">?</span></div>
+<div class="field"><span class="label">Exception (attrs): </span><span th:text="${exception}">?</span></div>
+
+<!-- 서블릿 요청에서 직접 예외 읽기 -->
+<div th:with="rawEx=${#request.getAttribute('jakarta.servlet.error.exception')}">
+    <div class="field"><span class="label">Raw Exception Type: </span>
+        <span th:if="${rawEx != null}" th:text="${rawEx.getClass().getName()}">없음</span>
+        <span th:if="${rawEx == null}">없음 (null)</span>
+    </div>
+    <div class="field"><span class="label">Raw Exception Message: </span>
+        <span th:if="${rawEx != null}" th:text="${rawEx.getMessage()}">없음</span>
+    </div>
+    <div th:if="${rawEx != null and rawEx.getCause() != null}">
+        <div class="field"><span class="label">Root Cause Type: </span>
+            <span th:text="${rawEx.getCause().getClass().getName()}"></span>
+        </div>
+        <div class="field"><span class="label">Root Cause Message: </span>
+            <span th:text="${rawEx.getCause().getMessage()}"></span>
+        </div>
+    </div>
+</div>
+
+<div class="field"><span class="label">Stack Trace:</span></div>
+<pre th:if="${trace != null and !#strings.isEmpty(trace)}" th:text="${trace}">없음</pre>
+<pre th:if="${trace == null or #strings.isEmpty(trace)}">trace 없음 - server.error.include-stacktrace 미동작</pre>
 </body>
 </html>
