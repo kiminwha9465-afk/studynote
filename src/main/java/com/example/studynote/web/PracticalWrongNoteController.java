@@ -1,11 +1,8 @@
 package com.example.studynote.web;
 
 import com.example.studynote.service.PracticalSolveRecordService;
-import com.example.studynote.service.PracticalWrongSession;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Slf4j
 @Controller
@@ -24,29 +20,6 @@ public class PracticalWrongNoteController {
 
     public PracticalWrongNoteController(PracticalSolveRecordService solveRecordService) {
         this.solveRecordService = solveRecordService;
-    }
-
-    /** 디버그용: Thymeleaf 없이 컨트롤러/서비스 동작 확인 */
-    @GetMapping("/debug")
-    @ResponseBody
-    public ResponseEntity<String> debug() {
-        StringBuilder sb = new StringBuilder("<html><body style='font-family:monospace;padding:20px'>");
-        sb.append("<h2>DEBUG: PracticalWrongNoteController</h2>");
-        try {
-            List<PracticalWrongSession> sessions = solveRecordService.findWrongSessions();
-            sb.append("<p style='color:green'>✅ 서비스 호출 성공 - sessions=").append(sessions.size()).append("</p>");
-        } catch (Throwable t) {
-            sb.append("<p style='color:red'>❌ 서비스 오류: ").append(t.getClass().getName())
-              .append(": ").append(t.getMessage()).append("</p>");
-            Throwable cause = t.getCause();
-            while (cause != null) {
-                sb.append("<p style='color:red; margin-left:20px'>원인: ")
-                  .append(cause.getClass().getName()).append(": ").append(cause.getMessage()).append("</p>");
-                cause = cause.getCause();
-            }
-        }
-        sb.append("</body></html>");
-        return ResponseEntity.ok().contentType(MediaType.TEXT_HTML).body(sb.toString());
     }
 
     @GetMapping
