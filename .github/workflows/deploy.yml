@@ -33,3 +33,5 @@ jobs:
             sudo systemctl restart studynote
 
             sudo systemctl status studynote --no-pager
+            sleep 10
+            sudo journalctl -u studynote -n 80 --no-pager
