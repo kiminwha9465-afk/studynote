@@ -1076,7 +1076,7 @@
     "examRound": 2,
     "questionNo": 19,
     "content": "다음에서 설명하는 암호화 방식은 무엇인가?\n\n- 암호화와 복호화에 서로 다른 키를 사용\n- 공개키(Public Key)와 개인키(Private Key)로 구성\n- 대표적 알고리즘: RSA, ECC",
-    "answer": "비대칭 키 암호화|공개키 암호화|Public Key Encryption|비대칭 암호화",
+    "answer": "비대칭 키 암호화|공개키 암호화|Public Key Encryption|비대칭 암호화|비대칭키|비대칭 키|공개키",
     "explanation": "비대칭 키 암호화(공개키 암호화)는 암호화와 복호화에 다른 키를 사용합니다. 공개키로 암호화하면 개인키로만 복호화할 수 있으며, 디지털 서명에도 활용됩니다."
   },
   {
