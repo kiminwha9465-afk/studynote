@@ -28,7 +28,7 @@
          class="mb-4 rounded-md bg-green-50 border border-green-200 px-4 py-2.5 text-sm text-green-700 dark:bg-green-900/20 dark:border-green-700/40 dark:text-green-300"
          th:text="${reEvaluateResult}"></div>
 
-    <div th:if="${#lists.isEmpty(sessions)}"
+    <div th:if="${sessions.empty}"
          class="rounded-lg border border-dashed p-10 text-center text-slate-400 dark:border-zinc-600 dark:text-zinc-500">
         <p class="text-base font-medium">오답 기록이 없습니다.</p>
         <p class="mt-1 text-sm">문제를 풀면 틀린 문제가 자동으로 저장됩니다.</p>
@@ -44,7 +44,7 @@
                     <p class="text-sm font-semibold text-slate-800 dark:text-zinc-100"
                        th:text="${session.title()}"></p>
                     <p class="text-xs text-slate-400 dark:text-zinc-500"
-                       th:text="${#temporals.format(session.solvedAt(), 'yyyy.MM.dd HH:mm')} + ' · 오답 ' + ${#lists.size(session.wrongRecords())} + '문항'"></p>
+                       th:text="|${session.solvedAt().toString().substring(0,16).replace('T',' ')} · 오답 ${session.wrongRecords().size()}문항|"></p>
                 </div>
             </div>
 

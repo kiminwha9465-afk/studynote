@@ -34,5 +34,6 @@ jobs:
 
             sleep 30
             sudo systemctl status studynote --no-pager
-            curl -s -o /dev/null -w "HTTP status: %{http_code}\n" http://localhost:8080/practical/wrong-notes || true
-            sudo journalctl -u studynote -n 50 --no-pager | grep -v "at org\.\|at java\.\|at jakarta\." | tail -30
+            curl -s http://localhost:8080/practical/wrong-notes | head -5 || true
+            echo "=== APP LOGS (last 100 lines) ==="
+            sudo journalctl -u studynote -n 100 --no-pager
