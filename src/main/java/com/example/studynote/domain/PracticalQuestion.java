@@ -88,7 +88,7 @@ public class PracticalQuestion {
     }
 
     private static String normalize(String s) {
-        return s.trim().toLowerCase().replaceAll("\\s+", " ");
+        return s.trim().toLowerCase().replaceAll("\\s+", "");
     }
 
     @PrePersist
