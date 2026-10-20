@@ -32,6 +32,6 @@ jobs:
 
             sudo systemctl restart studynote
 
-            sudo systemctl status studynote --no-pager
-            sleep 10
-            sudo journalctl -u studynote -n 80 --no-pager
+            sleep 15
+            curl -s -o /dev/null -w "HTTP status: %{http_code}\n" http://localhost:8080/practical/wrong-notes || true
+            sudo journalctl -u studynote -n 200 --no-pager | grep -E "ERROR|Exception|Caused by|wrong-notes|Practical" | tail -30
