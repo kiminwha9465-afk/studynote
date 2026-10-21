@@ -13,7 +13,5 @@ public interface PracticalSolveRecordRepository extends JpaRepository<PracticalS
 
     List<PracticalSolveRecord> findBySessionKeyOrderBySolvedAtDesc(String sessionKey);
 
-    boolean existsBySessionKeyAndCorrectFalse(String sessionKey);
-
     void deleteBySessionKey(String sessionKey);
 }

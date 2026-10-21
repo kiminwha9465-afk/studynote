@@ -58,9 +58,6 @@ public class PracticalSolveRecordService {
         }
         List<PracticalSolveRecord> wrongRecords = records.stream()
                 .filter(r -> !r.isCorrect()).toList();
-        if (wrongRecords.isEmpty()) {
-            return Optional.empty();
-        }
         List<PracticalSolveRecord> correctRecords = records.stream()
                 .filter(PracticalSolveRecord::isCorrect).toList();
         PracticalSolveRecord first = records.get(0);
@@ -80,11 +77,6 @@ public class PracticalSolveRecordService {
     @Transactional
     public void markCorrect(Long id) {
         repo.findById(id).ifPresent(r -> r.setCorrect(true));
-    }
-
-    @Transactional(readOnly = true)
-    public boolean hasWrongRecords(String sessionKey) {
-        return repo.existsBySessionKeyAndCorrectFalse(sessionKey);
     }
 
     @Transactional
