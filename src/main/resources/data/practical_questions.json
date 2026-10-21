@@ -1004,7 +1004,7 @@
     "examRound": 2,
     "questionNo": 10,
     "content": "다음에서 설명하는 정보보안 공격 기법은 무엇인가?\n\n- 웹 애플리케이션에서 사용자 입력값에 악성 스크립트를 삽입\n- 다른 사용자의 브라우저에서 해당 스크립트가 실행\n- 세션 탈취, 피싱 등에 악용",
-    "answer": "XSS|크로스 사이트 스크립팅|Cross-Site Scripting",
+    "answer": "XSS|크로스 사이트 스크립팅|Cross-Site Scripting|크로스 사이트 스크립트",
     "explanation": "XSS(Cross-Site Scripting)는 공격자가 웹 페이지에 악성 스크립트를 삽입하여 다른 사용자의 브라우저에서 실행되도록 하는 공격입니다. 사용자 입력값을 적절히 인코딩하거나 검증함으로써 예방할 수 있습니다."
   },
   {
