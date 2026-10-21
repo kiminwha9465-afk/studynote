@@ -63,6 +63,16 @@ public class PracticalWrongNoteController {
         return "redirect:/practical/wrong-notes";
     }
 
+    @PostMapping("/{id}/mark-correct")
+    public String markCorrect(@PathVariable Long id, @RequestParam(required = false) String sessionKey) {
+        solveRecordService.markCorrect(id);
+        // 세션에 남은 오답이 없으면 상세 페이지가 사라지므로 목록으로 이동
+        if (sessionKey != null && solveRecordService.hasWrongRecords(sessionKey)) {
+            return "redirect:/practical/wrong-notes/session/" + sessionKey;
+        }
+        return "redirect:/practical/wrong-notes";
+    }
+
     @PostMapping("/{id}/memo")
     public String saveMemo(@PathVariable Long id, @RequestParam String memo,
                             @RequestParam(required = false) String sessionKey) {

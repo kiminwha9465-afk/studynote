@@ -76,6 +76,17 @@ public class PracticalSolveRecordService {
         repo.deleteById(id);
     }
 
+    /** 오답 기록을 수동으로 정답 처리한다. */
+    @Transactional
+    public void markCorrect(Long id) {
+        repo.findById(id).ifPresent(r -> r.setCorrect(true));
+    }
+
+    @Transactional(readOnly = true)
+    public boolean hasWrongRecords(String sessionKey) {
+        return repo.existsBySessionKeyAndCorrectFalse(sessionKey);
+    }
+
     @Transactional
     public void deleteSession(String sessionKey) {
         repo.deleteBySessionKey(sessionKey);
