@@ -1,6 +1,7 @@
 package com.example.studynote.web;
 
 import com.example.studynote.service.PracticalSolveRecordService;
+import java.time.LocalDateTime;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -40,6 +41,13 @@ public class PracticalWrongNoteController {
     public String sessionDetail(@PathVariable String sessionKey, Model model) {
         model.addAttribute("wrongSess", solveRecordService.findWrongSessionDetail(sessionKey));
         return "practical-wrong-notes-session";
+    }
+
+    @GetMapping("/print")
+    public String print(Model model) {
+        model.addAttribute("items", solveRecordService.findWrongItemsForPrint());
+        model.addAttribute("printedAt", LocalDateTime.now());
+        return "practical-wrong-notes-print";
     }
 
     @ExceptionHandler(IllegalArgumentException.class)

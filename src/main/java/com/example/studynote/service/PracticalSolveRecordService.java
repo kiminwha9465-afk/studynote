@@ -4,6 +4,7 @@ import com.example.studynote.domain.PracticalSolveRecord;
 import com.example.studynote.repository.PracticalSolveRecordRepository;
 import com.example.studynote.web.PracticalResultView;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -66,6 +67,31 @@ public class PracticalSolveRecordService {
         return Optional.of(new PracticalWrongSession(
                 first.getSessionKey(), first.getSessionTitle(), first.getSolvedAt(), wrongRecords,
                 correctRecords, totalCount, correctCount));
+    }
+
+    /** 현재 오답인 기록을 문제별로 묶어 연도·회차·번호 순으로 반환한다. */
+    @Transactional(readOnly = true)
+    public List<PracticalWrongItem> findWrongItemsForPrint() {
+        Map<Long, List<PracticalSolveRecord>> byQuestion = new LinkedHashMap<>();
+        for (PracticalSolveRecord r : repo.findByCorrectFalseOrderBySolvedAtDesc()) {
+            byQuestion.computeIfAbsent(r.getQuestion().getId(), k -> new ArrayList<>()).add(r);
+        }
+
+        List<PracticalWrongItem> items = new ArrayList<>();
+        for (List<PracticalSolveRecord> records : byQuestion.values()) {
+            List<String> submitted = records.stream()
+                    .map(r -> r.getSubmitted() == null || r.getSubmitted().isBlank() ? "(미응답)" : r.getSubmitted())
+                    .distinct().toList();
+            String memo = records.stream()
+                    .map(PracticalSolveRecord::getMemo)
+                    .filter(m -> m != null && !m.isBlank())
+                    .findFirst().orElse(null);
+            items.add(new PracticalWrongItem(records.get(0).getQuestion(), records.size(), submitted, memo));
+        }
+        items.sort(Comparator.comparing((PracticalWrongItem i) -> i.question().getExamYear())
+                .thenComparing(i -> i.question().getExamRound())
+                .thenComparing(i -> i.question().getQuestionNo()));
+        return items;
     }
 
     @Transactional
