@@ -3782,5 +3782,805 @@
     "content": "인접한 두 원소를 비교하여 필요하면 자리를 교환하는 과정을 반복하는, 구현이 단순하지만 비효율적인 정렬 알고리즘은?",
     "answer": "버블 정렬|Bubble Sort",
     "explanation": "한 번의 패스마다 가장 큰(혹은 작은) 값이 끝으로 이동하며, 시간복잡도는 O(n^2)입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 12,
+    "questionNo": 1,
+    "content": "객체의 생성 과정을 단계별로 분리하여, 동일한 생성 절차로 서로 다른 표현의 객체를 만들 수 있게 하는 생성 패턴은?",
+    "answer": "빌더 패턴|빌더|Builder|Builder Pattern",
+    "explanation": "Builder 패턴은 복잡한 객체를 단계별로 조립하며, 같은 조립 절차로 다른 결과물을 만들 수 있게 합니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 12,
+    "questionNo": 2,
+    "content": "다음 파이썬 코드의 실행 결과를 쓰시오.\n\n```python\na = [5, 3, 8, 1]\na.sort(reverse=True)\nb = a[1:3]\nprint(b, len(a) + sum(b))\n```",
+    "answer": "[5, 3] 12",
+    "explanation": "내림차순 정렬 후 a=[8, 5, 3, 1]이고, a[1:3]=[5, 3]입니다. len(a)=4, sum(b)=8이므로 12가 함께 출력됩니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 12,
+    "questionNo": 3,
+    "content": "다음 SQL을 완성하시오. 전화번호가 입력되지 않은(NULL) 학생을 조회한다.\n\n```sql\nSELECT *\nFROM 학생\nWHERE 전화번호 ( ? ) NULL;\n```\n\n( ? )에 들어갈 키워드를 쓰시오.",
+    "answer": "IS",
+    "explanation": "NULL은 = 연산자로 비교할 수 없으므로 IS NULL / IS NOT NULL로 비교합니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 12,
+    "questionNo": 4,
+    "content": "교착상태(Deadlock) 발생의 4가지 필요조건 중, 프로세스가 최소 하나의 자원을 보유한 채 다른 프로세스가 가진 자원을 추가로 기다리는 조건은?",
+    "answer": "점유와 대기|점유 대기|Hold and Wait",
+    "explanation": "교착상태의 필요조건은 상호 배제, 점유와 대기, 비선점, 환형 대기이며, 자원을 쥔 채 기다리는 것이 점유와 대기입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 12,
+    "questionNo": 5,
+    "content": "다음 C 코드의 실행 결과를 쓰시오. (공백으로 구분)\n\n```c\n#include <stdio.h>\nint main() {\n    int a = 5, b = 3;\n    printf(\"%d %d %d\", a & b, a | b, a ^ b);\n    return 0;\n}\n```",
+    "answer": "1 7 6|1, 7, 6",
+    "explanation": "5=101, 3=011입니다. AND=001(1), OR=111(7), XOR=110(6)입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 12,
+    "questionNo": 6,
+    "content": "192.168.20.0/24 네트워크를 서브넷 마스크 255.255.255.240으로 분할하였다. 세 번째 서브넷의 네트워크 주소는?",
+    "answer": "192.168.20.32",
+    "explanation": "/28은 블록 크기가 256-240=16이므로 서브넷은 .0, .16, .32, ... 순입니다. 세 번째 서브넷은 192.168.20.32입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 12,
+    "questionNo": 7,
+    "content": "사용자 PC의 hosts 파일이나 DNS 정보를 변조하여, 사용자가 정상 사이트 주소를 입력해도 가짜 사이트로 접속되도록 하는 공격 기법은?",
+    "answer": "파밍|Pharming",
+    "explanation": "파밍은 도메인 주소 해석 과정을 조작해 정상 URL로도 위조 사이트에 접속하게 만드는 공격입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 12,
+    "questionNo": 8,
+    "content": "다음 자바 코드의 실행 결과를 쓰시오. (공백으로 구분)\n\n```java\npublic class Main {\n    public static void main(String[] args) {\n        int x = 10;\n        int y = x++ + ++x;\n        System.out.println(x + \" \" + y);\n    }\n}\n```",
+    "answer": "12 22|12, 22",
+    "explanation": "x++는 10을 사용한 뒤 x를 11로, ++x는 x를 12로 만든 뒤 12를 사용합니다. y=10+12=22, x=12입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 12,
+    "questionNo": 9,
+    "content": "트랜잭션의 상태 중, 마지막 연산까지 실행을 마쳤지만 아직 Commit 연산이 실행되기 직전인 상태는?",
+    "answer": "부분 완료|부분완료|Partially Committed",
+    "explanation": "트랜잭션 상태는 활동 → 부분 완료 → 완료(Committed) 또는 실패 → 철회(Aborted) 순으로 전이됩니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 12,
+    "questionNo": 10,
+    "content": "HRN 스케줄링에서 다음 프로세스들의 우선순위가 높은 순서대로 쓰시오.\n\n| 프로세스 | 대기 시간 | 서비스 시간 |\n|---|---|---|\n| A | 8 | 4 |\n| B | 12 | 3 |\n| C | 5 | 5 |\n| D | 10 | 2 |",
+    "answer": "D, B, A, C|DBAC|D-B-A-C|D>B>A>C|D→B→A→C",
+    "explanation": "우선순위=(대기+서비스)/서비스입니다. A=3, B=5, C=2, D=6이므로 D, B, A, C 순입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 12,
+    "questionNo": 11,
+    "content": "다음 파이썬 코드의 실행 결과를 쓰시오.\n\n```python\ndef f(n):\n    if n == 0:\n        return 0\n    return n % 10 + f(n // 10)\n\nprint(f(1234))\n```",
+    "answer": "10",
+    "explanation": "재귀적으로 각 자릿수를 더하는 함수입니다. 4+3+2+1=10입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 12,
+    "questionNo": 12,
+    "content": "객체지향 설계 원칙(SOLID) 중 '하위 타입은 언제나 자신의 상위 타입으로 교체할 수 있어야 한다'는 원칙은?",
+    "answer": "리스코프 치환 원칙|리스코프 치환|LSP|Liskov Substitution Principle",
+    "explanation": "LSP(Liskov Substitution Principle)는 자식 클래스가 부모 클래스의 계약을 깨지 않아야 한다는 원칙입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 12,
+    "questionNo": 13,
+    "content": "다음 SQL의 실행 결과를 쓰시오. (부서, 합계 순)\n\n```sql\nSELECT 부서, SUM(급여)\nFROM 사원\nGROUP BY 부서\nHAVING SUM(급여) >= 700;\n```\n\n사원 테이블:\n| 이름 | 부서 | 급여 |\n|---|---|---|\n| 홍길동 | 영업 | 300 |\n| 김철수 | 개발 | 450 |\n| 이영희 | 개발 | 500 |\n| 박민수 | 영업 | 350 |\n| 최지원 | 인사 | 400 |",
+    "answer": "개발 950|개발, 950",
+    "explanation": "부서별 합계는 영업 650, 개발 950, 인사 400이며 HAVING 조건(700 이상)을 만족하는 것은 개발뿐입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 12,
+    "questionNo": 14,
+    "content": "다음 C 코드의 실행 결과를 쓰시오. (공백으로 구분)\n\n```c\n#include <stdio.h>\nint main() {\n    int arr[5] = {3, 7, 2, 9, 4};\n    int max = arr[0], idx = 0;\n    for (int i = 1; i < 5; i++) {\n        if (arr[i] > max) {\n            max = arr[i];\n            idx = i;\n        }\n    }\n    printf(\"%d %d\", max, idx);\n    return 0;\n}\n```",
+    "answer": "9 3|9, 3",
+    "explanation": "최댓값 9는 인덱스 3에 있습니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 12,
+    "questionNo": 15,
+    "content": "네트워크에 접속한 호스트에게 IP 주소, 서브넷 마스크, 기본 게이트웨이, DNS 서버 주소 등을 자동으로 할당하는 프로토콜은? (UDP 67/68 포트 사용)",
+    "answer": "DHCP|Dynamic Host Configuration Protocol",
+    "explanation": "DHCP는 Discover-Offer-Request-Ack 과정을 거쳐 IP 설정 정보를 자동으로 임대해 줍니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 12,
+    "questionNo": 16,
+    "content": "다음 자바 코드의 실행 결과를 쓰시오.\n\n```java\nclass A {\n    int v = 1;\n    int get() { return v; }\n}\nclass B extends A {\n    int v = 2;\n    int get() { return v * 10; }\n}\npublic class Main {\n    public static void main(String[] args) {\n        A obj = new B();\n        System.out.println(obj.v + obj.get());\n    }\n}\n```",
+    "answer": "21",
+    "explanation": "필드는 참조 변수의 타입(A)을 따라 obj.v=1이고, 메서드는 오버라이딩되어 실제 객체(B)의 get()이 호출되어 20입니다. 1+20=21입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 12,
+    "questionNo": 17,
+    "content": "소프트웨어 유지보수 유형 중, 운영체제나 하드웨어 등 운영 환경의 변화에 맞추어 소프트웨어를 수정하는 유지보수는?",
+    "answer": "적응 유지보수|적응적 유지보수|적응|Adaptive Maintenance",
+    "explanation": "유지보수는 수정(Corrective), 적응(Adaptive), 완전(Perfective), 예방(Preventive) 유지보수로 나뉩니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 12,
+    "questionNo": 18,
+    "content": "다음 SQL을 완성하시오. 학과가 '컴퓨터' 또는 '전자'인 학생의 이름을 조회한다.\n\n```sql\nSELECT 이름\nFROM 학생\nWHERE 학과 ( ? ) ('컴퓨터', '전자');\n```\n\n( ? )에 들어갈 키워드를 쓰시오.",
+    "answer": "IN",
+    "explanation": "IN은 괄호 안 값 목록 중 하나와 일치하는지 검사하며, OR 조건을 간결하게 표현합니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 12,
+    "questionNo": 19,
+    "content": "다음 파이썬 코드의 실행 결과를 쓰시오.\n\n```python\ns = \"information\"\nprint(s.count(\"i\"), s.find(\"o\"), s.upper()[2:5])\n```",
+    "answer": "2 3 FOR|2, 3, FOR",
+    "explanation": "'i'는 2번 등장하고, 'o'의 첫 위치는 인덱스 3이며, 대문자 문자열의 [2:5]는 'FOR'입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 12,
+    "questionNo": 20,
+    "content": "OLAP 연산 중, 요약된 데이터에서 더 상세한 수준의 데이터로 내려가며 분석하는 연산은?",
+    "answer": "드릴다운|드릴 다운|Drill-down|Drill down",
+    "explanation": "드릴다운은 요약 → 상세 방향, 롤업(Roll-up)은 상세 → 요약 방향의 분석입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 13,
+    "questionNo": 1,
+    "content": "복잡한 서브시스템에 대해 단순화된 하나의 통합 인터페이스를 제공하여 사용을 쉽게 하는 구조 패턴은?",
+    "answer": "퍼사드 패턴|퍼사드|파사드 패턴|파사드|Facade|Facade Pattern",
+    "explanation": "Facade 패턴은 여러 클래스를 감싸는 창구 역할의 객체를 두어 클라이언트와 서브시스템의 결합도를 낮춥니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 13,
+    "questionNo": 2,
+    "content": "다음 C 코드의 실행 결과를 쓰시오.\n\n```c\n#include <stdio.h>\nint main() {\n    int n = 12345, rev = 0;\n    while (n > 0) {\n        rev = rev * 10 + n % 10;\n        n /= 10;\n    }\n    printf(\"%d\", rev);\n    return 0;\n}\n```",
+    "answer": "54321",
+    "explanation": "일의 자리부터 하나씩 떼어 rev에 이어 붙이므로 숫자가 뒤집힙니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 13,
+    "questionNo": 3,
+    "content": "페이지 프레임이 3개인 시스템에서 다음 참조 문자열에 OPT(최적) 페이지 교체 알고리즘을 적용할 때 발생하는 페이지 부재 횟수는? (프레임은 처음에 비어 있음)\n\n1, 2, 3, 4, 2, 1, 5, 6, 2, 1, 2, 3",
+    "answer": "7|7회",
+    "explanation": "1,2,3(부재 3) → 4(가장 늦게 쓰일 3 교체) → 2,1 적중 → 5(이후 안 쓰이는 4 교체) → 6(5 교체) → 2,1,2 적중 → 3(부재)로 총 7회입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 13,
+    "questionNo": 4,
+    "content": "소프트웨어의 보안 취약점이 알려진 뒤 이를 막는 보안 패치가 배포되기 전에 그 취약점을 악용하는 공격은?",
+    "answer": "제로데이 공격|제로데이|Zero-day|Zero-day Attack|Zero Day Attack",
+    "explanation": "패치가 나오기 전(0일)에 이루어지는 공격이라 방어가 어렵습니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 13,
+    "questionNo": 5,
+    "content": "다음 자바 코드의 실행 결과를 쓰시오. (공백으로 구분)\n\n```java\npublic class Main {\n    public static void main(String[] args) {\n        String a = \"Java\";\n        String b = \"Java\";\n        String c = new String(\"Java\");\n        System.out.println((a == b) + \" \" + (a == c) + \" \" + a.equals(c));\n    }\n}\n```",
+    "answer": "true false true|true, false, true",
+    "explanation": "리터럴 a, b는 문자열 상수 풀의 같은 객체를 가리키지만, new로 만든 c는 다른 객체입니다. ==는 주소를, equals는 내용을 비교합니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 13,
+    "questionNo": 6,
+    "content": "다음 SQL을 완성하시오. 두 조회 결과에 공통으로 존재하는 학번만 조회한다.\n\n```sql\nSELECT 학번 FROM 수강A\n( ? )\nSELECT 학번 FROM 수강B;\n```\n\n( ? )에 들어갈 집합 연산자를 쓰시오.",
+    "answer": "INTERSECT",
+    "explanation": "INTERSECT는 교집합, UNION은 합집합, EXCEPT(MINUS)는 차집합을 구합니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 13,
+    "questionNo": 7,
+    "content": "정규화 과정에서 다치 종속(Multi-Valued Dependency)을 제거하여 만족시키는 정규형은?",
+    "answer": "제4정규형|4NF|제4정규형(4NF)|제4 정규형",
+    "explanation": "BCNF 이후 다치 종속을 제거하면 4NF, 조인 종속을 제거하면 5NF가 됩니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 13,
+    "questionNo": 8,
+    "content": "다음 파이썬 코드의 실행 결과를 쓰시오.\n\n```python\na = {1, 2, 3, 4}\nb = {3, 4, 5}\nprint(len(a | b), sorted(a - b), a & b == {3, 4})\n```",
+    "answer": "5 [1, 2] True",
+    "explanation": "합집합은 {1,2,3,4,5}로 5개, 차집합 정렬 결과는 [1, 2], 교집합은 {3, 4}이므로 True입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 13,
+    "questionNo": 9,
+    "content": "IP 주소 172.16.45.130/23이 속한 네트워크의 네트워크 주소는?",
+    "answer": "172.16.44.0",
+    "explanation": "/23의 서브넷 마스크는 255.255.254.0이므로 세 번째 옥텟이 2 단위로 나뉩니다. 45는 44~45 블록에 속하므로 172.16.44.0입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 13,
+    "questionNo": 10,
+    "content": "CMMI의 5단계 성숙도(초기 → 관리 → 정의 → ? → 최적화) 중 프로세스가 정량적으로 측정·통제되는 4단계의 이름은?",
+    "answer": "정량적 관리|정량적 관리 단계|Quantitatively Managed",
+    "explanation": "CMMI 성숙도는 초기(Initial), 관리(Managed), 정의(Defined), 정량적 관리(Quantitatively Managed), 최적화(Optimizing)입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 13,
+    "questionNo": 11,
+    "content": "다음 C 코드의 실행 결과를 쓰시오. (공백으로 구분)\n\n```c\n#include <stdio.h>\nint main() {\n    char s[] = \"KOREA\";\n    char *p = s;\n    int i;\n    for (i = 0; *(p + i) != '\\0'; i++);\n    printf(\"%d %c\", i, *(p + 2));\n    return 0;\n}\n```",
+    "answer": "5 R|5, R",
+    "explanation": "for문은 널 문자를 만날 때까지 i만 증가시키므로 i=5(문자열 길이)이고, *(p+2)는 세 번째 문자 'R'입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 13,
+    "questionNo": 12,
+    "content": "TCP에서 연결을 수립할 때 SYN → SYN+ACK → ACK 세 단계의 패킷 교환을 거치는 절차를 무엇이라 하는가?",
+    "answer": "3-way handshake|3 way handshake|3-way 핸드셰이크|3방향 핸드셰이크|쓰리웨이 핸드셰이크|Three-way handshake",
+    "explanation": "3-way handshake로 양측의 송수신 준비와 초기 순서 번호를 확인합니다. 연결 종료는 4-way handshake입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 13,
+    "questionNo": 13,
+    "content": "다음 SQL의 실행 결과를 쓰시오.\n\n```sql\nSELECT AVG(점수)\nFROM 성적\nWHERE 점수 >= 80;\n```\n\n성적 테이블:\n| 이름 | 점수 |\n|---|---|\n| 가 | 90 |\n| 나 | 70 |\n| 다 | 85 |\n| 라 | 60 |\n| 마 | 95 |",
+    "answer": "90",
+    "explanation": "80점 이상은 90, 85, 95이며 평균은 270/3=90입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 13,
+    "questionNo": 14,
+    "content": "다음 자바 코드의 실행 결과를 쓰시오. (공백으로 구분)\n\n```java\nclass Counter {\n    static int total = 0;\n    int count = 0;\n    Counter() { total++; count++; }\n}\npublic class Main {\n    public static void main(String[] args) {\n        Counter a = new Counter();\n        Counter b = new Counter();\n        Counter c = new Counter();\n        System.out.println(Counter.total + \" \" + c.count);\n    }\n}\n```",
+    "answer": "3 1|3, 1",
+    "explanation": "static 필드 total은 모든 객체가 공유하므로 3이 되고, 인스턴스 필드 count는 객체마다 따로 있으므로 1입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 13,
+    "questionNo": 15,
+    "content": "다른 사이트에서 유출된 계정 정보(ID/비밀번호) 목록을 이용해 여러 사이트에 자동으로 로그인을 시도하는 공격은?",
+    "answer": "크리덴셜 스터핑|크레덴셜 스터핑|Credential Stuffing",
+    "explanation": "같은 비밀번호를 여러 사이트에 재사용하는 습관을 노리는 공격입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 13,
+    "questionNo": 16,
+    "content": "메모리의 빈 영역이 다음과 같을 때 17KB 프로그램을 최적 적합(Best Fit) 방식으로 배치하면 어느 영역에 배치되는가?\n\n| 영역 | 크기 |\n|---|---|\n| 영역1 | 10KB |\n| 영역2 | 25KB |\n| 영역3 | 18KB |\n| 영역4 | 30KB |",
+    "answer": "영역3|3|3번",
+    "explanation": "최적 적합은 들어갈 수 있는 영역 중 단편화가 가장 작게 남는 영역을 고릅니다. 18KB인 영역3에 배치되어 1KB가 남습니다. (최초 적합이면 영역2, 최악 적합이면 영역4)"
+  },
+  {
+    "examYear": 9999,
+    "examRound": 13,
+    "questionNo": 17,
+    "content": "다음 파이썬 코드의 실행 결과를 쓰시오.\n\n```python\nclass Node:\n    def __init__(self, v):\n        self.v = v\n        self.next = None\n\na = Node(1); b = Node(2); c = Node(3)\na.next = b; b.next = c\ncur, total = a, 0\nwhile cur:\n    total += cur.v * 10\n    cur = cur.next\nprint(total)\n```",
+    "answer": "60",
+    "explanation": "연결 리스트 1→2→3을 순회하며 각 값의 10배를 더합니다. 10+20+30=60입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 13,
+    "questionNo": 18,
+    "content": "UML에서 인터페이스와 그 인터페이스를 구현한 클래스 사이의 관계로, 점선과 속이 빈 삼각형 화살표로 표현하는 관계는?",
+    "answer": "실체화|실체화 관계|Realization|구현|구현 관계",
+    "explanation": "실체화(Realization)는 인터페이스의 기능을 클래스가 실제로 구현하는 관계입니다. 실선+빈 삼각형은 일반화입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 13,
+    "questionNo": 19,
+    "content": "다음 C 코드의 실행 결과를 쓰시오.\n\n```c\n#include <stdio.h>\nint main() {\n    int n = 2, sum = 0;\n    switch (n) {\n        case 1: sum += 1;\n        case 2: sum += 2;\n        case 3: sum += 3;\n            break;\n        case 4: sum += 4;\n    }\n    printf(\"%d\", sum);\n    return 0;\n}\n```",
+    "answer": "5",
+    "explanation": "case 2부터 실행되며 break가 없어 case 3까지 이어서 실행(fall-through)됩니다. 2+3=5입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 13,
+    "questionNo": 20,
+    "content": "현실 세계의 물리적 사물이나 시스템을 가상 공간에 똑같이 구현하여 시뮬레이션·예측에 활용하는 기술은?",
+    "answer": "디지털 트윈|Digital Twin",
+    "explanation": "디지털 트윈은 실제 설비의 데이터를 가상 모델에 반영해 고장 예측, 운영 최적화 등에 활용합니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 14,
+    "questionNo": 1,
+    "content": "요청을 객체로 캡슐화하여 요청의 대기열 저장, 로깅, 실행 취소(Undo) 등을 지원하는 행위 패턴은?",
+    "answer": "커맨드 패턴|커맨드|Command|Command Pattern|명령 패턴",
+    "explanation": "Command 패턴은 실행할 작업을 객체로 만들어 호출자와 수행자를 분리합니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 14,
+    "questionNo": 2,
+    "content": "다음 파이썬 코드의 실행 결과를 쓰시오.\n\n```python\nx = [i ** 2 for i in range(1, 6)]\nprint(x[-2], x[::2])\n```",
+    "answer": "16 [1, 9, 25]",
+    "explanation": "x=[1, 4, 9, 16, 25]입니다. x[-2]는 뒤에서 두 번째인 16, x[::2]는 한 칸씩 건너뛴 [1, 9, 25]입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 14,
+    "questionNo": 3,
+    "content": "다음 SQL을 완성하시오. 주문이 없는 고객까지 포함하여 모든 고객과 주문 정보를 조회한다.\n\n```sql\nSELECT c.이름, o.주문번호\nFROM 고객 c ( ? ) JOIN 주문 o\n  ON c.고객번호 = o.고객번호;\n```\n\n( ? )에 들어갈 키워드를 쓰시오.",
+    "answer": "LEFT|LEFT OUTER",
+    "explanation": "LEFT (OUTER) JOIN은 왼쪽 테이블의 모든 행을 유지하고, 매칭되지 않는 오른쪽 값은 NULL로 채웁니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 14,
+    "questionNo": 4,
+    "content": "프로세스가 일정 시간 동안 자주 참조하는 페이지들의 집합으로, 이를 메모리에 유지하여 스래싱을 방지하는 개념은?",
+    "answer": "워킹 셋|워킹셋|Working Set",
+    "explanation": "워킹 셋(Working Set)은 지역성에 근거해 최근 집중 참조된 페이지 집합을 주기억장치에 상주시키는 방법입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 14,
+    "questionNo": 5,
+    "content": "다음 C 코드의 실행 결과를 쓰시오.\n\n```c\n#include <stdio.h>\nint main() {\n    int a[3][3] = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};\n    int sum = 0;\n    for (int i = 0; i < 3; i++) {\n        sum += a[i][i] + a[i][2 - i];\n    }\n    printf(\"%d\", sum);\n    return 0;\n}\n```",
+    "answer": "30",
+    "explanation": "주대각선(1+5+9=15)과 부대각선(3+5+7=15)을 더하므로 30입니다. 가운데 5는 두 번 더해집니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 14,
+    "questionNo": 6,
+    "content": "리눅스에서 umask 값이 027일 때, 새로 생성되는 일반 파일의 기본 권한을 8진수 3자리로 쓰시오. (일반 파일의 최대 권한은 666)",
+    "answer": "640|0640|rw-r-----",
+    "explanation": "666에서 umask 027에 해당하는 비트를 제거하면 640(rw-r-----)이 됩니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 14,
+    "questionNo": 7,
+    "content": "비밀번호를 해시로 저장할 때, 레인보우 테이블 공격을 어렵게 하기 위해 비밀번호에 덧붙이는 임의의 문자열은?",
+    "answer": "솔트|Salt|솔팅|Salting",
+    "explanation": "솔트를 붙이면 같은 비밀번호라도 해시 값이 달라져 미리 계산한 해시표로 역추적하기 어렵습니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 14,
+    "questionNo": 8,
+    "content": "다음 자바 코드의 실행 결과를 쓰시오.\n\n```java\npublic class Main {\n    static int f(int[] a, int n) {\n        if (n == 0) return a[0];\n        return Math.max(a[n], f(a, n - 1));\n    }\n    public static void main(String[] args) {\n        int[] a = {4, 9, 2, 7, 5};\n        System.out.println(f(a, a.length - 1));\n    }\n}\n```",
+    "answer": "9",
+    "explanation": "재귀적으로 배열의 최댓값을 구합니다. 최댓값은 9입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 14,
+    "questionNo": 9,
+    "content": "하나 이상의 기본 테이블로부터 유도된 가상 테이블로, 물리적으로 저장되지 않으며 보안·편의를 위해 사용하는 데이터베이스 객체는?",
+    "answer": "뷰|VIEW",
+    "explanation": "뷰는 CREATE VIEW로 정의하며, 원하는 열·행만 보여 주어 데이터 보안과 논리적 독립성을 제공합니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 14,
+    "questionNo": 10,
+    "content": "서브넷 마스크 255.255.252.0을 CIDR 표기(/n)로 쓰시오.",
+    "answer": "/22|22",
+    "explanation": "252=11111100이므로 1의 개수는 8+8+6=22개입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 14,
+    "questionNo": 11,
+    "content": "다음 파이썬 코드의 실행 결과를 쓰시오.\n\n```python\ndef div(a, b):\n    try:\n        return a // b\n    except ZeroDivisionError:\n        return -1\n    finally:\n        print(\"F\", end=\" \")\n\nprint(div(7, 2), div(1, 0))\n```",
+    "answer": "F F 3 -1|F, F, 3, -1",
+    "explanation": "print의 인자가 먼저 평가되면서 div가 두 번 호출되고, 각각 finally에서 'F '를 출력합니다. 그 다음 반환값 3과 -1이 출력됩니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 14,
+    "questionNo": 12,
+    "content": "XP(eXtreme Programming)의 실천 방법 중, 두 명의 개발자가 하나의 컴퓨터에서 함께 코드를 작성하고 검토하는 기법은?",
+    "answer": "짝 프로그래밍|페어 프로그래밍|Pair Programming",
+    "explanation": "한 명은 코드를 작성(드라이버)하고 다른 한 명은 검토(네비게이터)하며 역할을 교대합니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 14,
+    "questionNo": 13,
+    "content": "다음 SQL의 실행 결과를 쓰시오.\n\n```sql\nSELECT COUNT(*)\nFROM 학생 s JOIN 수강 r\n  ON s.학번 = r.학번\nWHERE s.학과 = '컴공';\n```\n\n학생 테이블:\n| 학번 | 이름 | 학과 |\n|---|---|---|\n| 1 | 김 | 컴공 |\n| 2 | 이 | 전자 |\n| 3 | 박 | 컴공 |\n| 4 | 최 | 기계 |\n\n수강 테이블:\n| 학번 | 과목 |\n|---|---|\n| 1 | DB |\n| 1 | OS |\n| 2 | DB |\n| 3 | NW |",
+    "answer": "3",
+    "explanation": "컴공 학생은 1, 3번이고, 조인 결과는 1번 2행(DB, OS) + 3번 1행(NW)으로 3행입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 14,
+    "questionNo": 14,
+    "content": "다음 C 코드의 실행 결과를 쓰시오.\n\n```c\n#include <stdio.h>\nstruct Item {\n    char name[10];\n    int price;\n    int qty;\n};\nint main() {\n    struct Item list[3] = {{\"pen\", 500, 4}, {\"note\", 1200, 2}, {\"bag\", 15000, 1}};\n    int total = 0;\n    for (int i = 0; i < 3; i++) {\n        total += list[i].price * list[i].qty;\n    }\n    printf(\"%d\", total);\n    return 0;\n}\n```",
+    "answer": "19400",
+    "explanation": "500*4 + 1200*2 + 15000*1 = 2000 + 2400 + 15000 = 19400입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 14,
+    "questionNo": 15,
+    "content": "하나의 물리적 스위치를 논리적으로 분할하여 여러 개의 독립된 브로드캐스트 도메인을 구성하는 기술은?",
+    "answer": "VLAN|가상 LAN|Virtual LAN",
+    "explanation": "VLAN은 물리적 위치와 관계없이 논리적으로 네트워크를 나누어 브로드캐스트 범위를 줄이고 보안을 높입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 14,
+    "questionNo": 16,
+    "content": "다음 자바 코드의 실행 결과를 쓰시오.\n\n```java\npublic class Main {\n    public static void main(String[] args) {\n        String s = \"PROGRAM\";\n        StringBuilder sb = new StringBuilder();\n        for (int i = s.length() - 1; i >= 0; i -= 2) {\n            sb.append(s.charAt(i));\n        }\n        System.out.println(sb);\n    }\n}\n```",
+    "answer": "MROP",
+    "explanation": "인덱스 6, 4, 2, 0의 문자 M, R, O, P를 차례로 붙입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 14,
+    "questionNo": 17,
+    "content": "IoT 환경에서 발행/구독(Publish/Subscribe) 방식으로 브로커를 통해 경량 메시지를 주고받는 프로토콜은?",
+    "answer": "MQTT|Message Queuing Telemetry Transport",
+    "explanation": "MQTT는 TCP 기반의 가벼운 메시징 프로토콜로, 저전력·저대역폭 IoT 기기에 적합합니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 14,
+    "questionNo": 18,
+    "content": "디스크 헤드가 현재 50번 실린더에 있고, 요청 큐가 82, 170, 43, 140, 24 순서일 때 FCFS 스케줄링을 적용하면 헤드의 총 이동 거리는?",
+    "answer": "460",
+    "explanation": "50→82(32) → 170(88) → 43(127) → 140(97) → 24(116)로 합계 460입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 14,
+    "questionNo": 19,
+    "content": "다음 파이썬 코드의 실행 결과를 쓰시오.\n\n```python\na = \"2024\"\nb = 2024\nprint(a * 2, b * 2, int(a) + b)\n```",
+    "answer": "20242024 4048 4048|20242024, 4048, 4048",
+    "explanation": "문자열 * 2는 문자열 반복, 정수 * 2는 곱셈입니다. int(a)+b=4048입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 14,
+    "questionNo": 20,
+    "content": "모든 입력 조합을 테스트하는 대신, 입력 변수의 값 쌍(pair)이 최소 한 번씩은 조합되도록 테스트 케이스를 구성하는 블랙박스 테스트 기법은?",
+    "answer": "페어와이즈 테스트|페어와이즈|페어와이즈 테스팅|Pairwise|Pairwise Testing",
+    "explanation": "페어와이즈는 적은 테스트 케이스로 두 요소 간 상호작용 결함을 효과적으로 찾는 조합 테스트 기법입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 15,
+    "questionNo": 1,
+    "content": "객체의 내부 상태에 따라 행위가 달라지도록, 각 상태를 별도의 클래스로 캡슐화하는 행위 패턴은?",
+    "answer": "상태 패턴|상태|스테이트 패턴|State|State Pattern",
+    "explanation": "State 패턴은 조건문 대신 상태 객체를 교체하는 방식으로 상태별 동작을 분리합니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 15,
+    "questionNo": 2,
+    "content": "다음 자바 코드의 실행 결과를 쓰시오.\n\n```java\npublic class Main {\n    public static void main(String[] args) {\n        int[] a = {1, 2, 3};\n        int r = 0;\n        try {\n            r = a[1] * 10;\n            r += a[3];\n        } catch (ArrayIndexOutOfBoundsException e) {\n            r += 100;\n        } finally {\n            r += 1;\n        }\n        System.out.println(r);\n    }\n}\n```",
+    "answer": "121",
+    "explanation": "r=20이 된 뒤 a[3]에서 예외가 발생해 catch에서 100을 더하고(120), finally에서 1을 더해 121입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 15,
+    "questionNo": 3,
+    "content": "다음 SQL을 완성하시오. 개발 부서 사원의 급여를 10% 인상한다.\n\n```sql\nUPDATE 사원\n( ? ) 급여 = 급여 * 1.1\nWHERE 부서 = '개발';\n```\n\n( ? )에 들어갈 키워드를 쓰시오.",
+    "answer": "SET",
+    "explanation": "UPDATE 테이블 SET 열=값 WHERE 조건; 형식으로 데이터를 수정합니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 15,
+    "questionNo": 4,
+    "content": "이미지·오디오 등 평범한 데이터 안에 비밀 메시지를 숨겨, 메시지의 존재 자체를 감추는 기술은?",
+    "answer": "스테가노그래피|Steganography",
+    "explanation": "암호화가 내용을 알아볼 수 없게 하는 것이라면, 스테가노그래피는 메시지가 있다는 사실 자체를 숨깁니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 15,
+    "questionNo": 5,
+    "content": "다음 C 코드의 실행 결과를 쓰시오.\n\n```c\n#include <stdio.h>\nint fib(int n) {\n    if (n <= 1) return n;\n    return fib(n - 1) + fib(n - 2);\n}\nint main() {\n    printf(\"%d\", fib(8));\n    return 0;\n}\n```",
+    "answer": "21",
+    "explanation": "피보나치 수열 0, 1, 1, 2, 3, 5, 8, 13, 21에서 fib(8)=21입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 15,
+    "questionNo": 6,
+    "content": "IPv4 주소의 첫 번째 옥텟이 191일 때, 이 주소는 어느 클래스에 속하는가?",
+    "answer": "B|B클래스|B 클래스|Class B",
+    "explanation": "A: 0~127, B: 128~191, C: 192~223, D: 224~239, E: 240~255이므로 191은 B 클래스입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 15,
+    "questionNo": 7,
+    "content": "병행 제어를 하지 않아 두 트랜잭션이 같은 데이터를 갱신할 때, 한 트랜잭션의 갱신 결과가 다른 트랜잭션에 의해 덮어써져 사라지는 문제는?",
+    "answer": "갱신 분실|갱신 손실|분실된 갱신|Lost Update",
+    "explanation": "병행 제어 미흡 시 문제로 갱신 분실, 모순성, 연쇄 복귀, 비완료 의존성 등이 있습니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 15,
+    "questionNo": 8,
+    "content": "다음 파이썬 코드의 실행 결과를 쓰시오.\n\n```python\ndef gen(n):\n    for i in range(n):\n        if i % 3 == 0:\n            yield i\n\nprint(list(gen(10)), sum(gen(7)))\n```",
+    "answer": "[0, 3, 6, 9] 9",
+    "explanation": "제너레이터는 3의 배수만 내보냅니다. gen(10)은 [0, 3, 6, 9], gen(7)의 합은 0+3+6=9입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 15,
+    "questionNo": 9,
+    "content": "COCOMO 모델의 개발 유형 중, 5만 라인(50KDSI) 이하의 중·소규모 사무 처리용 소프트웨어에 적용하는 유형은?",
+    "answer": "조직형|Organic|조직형(Organic)",
+    "explanation": "COCOMO 유형은 조직형(Organic), 반분리형(Semi-detached), 내장형(Embedded)입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 15,
+    "questionNo": 10,
+    "content": "LOC 기법으로 산정한 총 라인 수가 36,000이고, 개발자 6명, 개발자 1인당 월평균 생산성이 300라인일 때 개발 기간(개월)은?",
+    "answer": "20|20개월",
+    "explanation": "개발 기간 = 총 LOC / (개발자 수 × 1인당 월 생산성) = 36000 / (6 × 300) = 20개월입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 15,
+    "questionNo": 11,
+    "content": "다음 자바 코드의 실행 결과를 쓰시오.\n\n```java\ninterface Shape { double area(); }\nclass Rect implements Shape {\n    int w, h;\n    Rect(int w, int h) { this.w = w; this.h = h; }\n    public double area() { return w * h; }\n}\nclass Tri implements Shape {\n    int b, h;\n    Tri(int b, int h) { this.b = b; this.h = h; }\n    public double area() { return b * h / 2; }\n}\npublic class Main {\n    public static void main(String[] args) {\n        Shape[] s = {new Rect(3, 4), new Tri(5, 3)};\n        double sum = 0;\n        for (Shape x : s) sum += x.area();\n        System.out.println(sum);\n    }\n}\n```",
+    "answer": "19.0",
+    "explanation": "Rect는 12.0입니다. Tri는 정수끼리 계산(15/2)되어 7이 된 뒤 double로 바뀌므로 7.0입니다. 합계 19.0이 출력됩니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 15,
+    "questionNo": 12,
+    "content": "IPv4에서 IPv6로 전환하는 기술 중, IPv6 패킷을 IPv4 패킷 안에 캡슐화하여 IPv4 네트워크를 통과시키는 기법은?",
+    "answer": "터널링|Tunneling",
+    "explanation": "IPv4/IPv6 전환 기술에는 듀얼 스택, 터널링, 헤더 변환(주소 변환)이 있습니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 15,
+    "questionNo": 13,
+    "content": "다음 SQL의 실행 결과를 쓰시오. (분류, 개수 순)\n\n```sql\nSELECT 분류, COUNT(*)\nFROM 도서\nWHERE 가격 >= 10000\nGROUP BY 분류\nHAVING COUNT(*) >= 2;\n```\n\n도서 테이블:\n| 제목 | 분류 | 가격 |\n|---|---|---|\n| A | 소설 | 12000 |\n| B | IT | 25000 |\n| C | 소설 | 9000 |\n| D | IT | 30000 |\n| E | IT | 18000 |\n| F | 역사 | 15000 |",
+    "answer": "IT 3|IT, 3",
+    "explanation": "WHERE로 9000원 도서(C)를 제외하면 소설 1권, IT 3권, 역사 1권이 남고, 2권 이상인 분류는 IT뿐입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 15,
+    "questionNo": 14,
+    "content": "다음 C 코드의 실행 결과를 쓰시오. (공백으로 구분)\n\n```c\n#include <stdio.h>\nvoid func(int *p, int n) {\n    for (int i = 0; i < n; i++) {\n        *(p + i) += i;\n    }\n}\nint main() {\n    int a[4] = {10, 20, 30, 40};\n    func(a, 4);\n    printf(\"%d %d\", a[1], a[3]);\n    return 0;\n}\n```",
+    "answer": "21 43|21, 43",
+    "explanation": "배열 주소가 전달되어 원본이 바뀝니다. 각 원소에 인덱스를 더해 {10, 21, 32, 43}이 됩니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 15,
+    "questionNo": 15,
+    "content": "블록체인 상에서 사전에 정의된 조건이 충족되면 계약 내용이 자동으로 실행되도록 작성된 프로그램은?",
+    "answer": "스마트 컨트랙트|스마트 계약|Smart Contract",
+    "explanation": "스마트 컨트랙트는 중개자 없이 코드로 계약 조건을 집행하며, 이더리움에서 널리 사용됩니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 15,
+    "questionNo": 16,
+    "content": "교착상태 해결 방법(예방, 회피, 발견, 회복) 중 은행원 알고리즘(Banker's Algorithm)이 속하는 방법은?",
+    "answer": "회피|교착상태 회피|회피 기법|Avoidance",
+    "explanation": "은행원 알고리즘은 자원 할당 후에도 안전 상태가 유지되는지 검사하여 교착상태를 회피합니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 15,
+    "questionNo": 17,
+    "content": "다음 파이썬 코드의 실행 결과를 쓰시오.\n\n```python\nwords = [\"apple\", \"banana\", \"cherry\"]\nr = \"\"\nfor w in words:\n    r += w[0].upper() + str(len(w))\nprint(r)\n```",
+    "answer": "A5B6C6",
+    "explanation": "각 단어의 첫 글자를 대문자로 바꾸고 길이를 붙입니다. apple→A5, banana→B6, cherry→C6입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 15,
+    "questionNo": 18,
+    "content": "작성자가 아닌 숙련된 검토자들이 사전에 정의된 절차와 체크리스트에 따라 산출물의 결함을 찾아내는 가장 공식적인 검토 기법은?",
+    "answer": "인스펙션|Inspection|소프트웨어 인스펙션",
+    "explanation": "인스펙션은 계획-사전 교육-준비-인스펙션 회의-수정-후속 조치 단계로 진행되는 정형적 검토입니다. 비공식 검토로는 워크스루가 있습니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 15,
+    "questionNo": 19,
+    "content": "다음 자바 코드의 실행 결과를 쓰시오.\n\n```java\npublic class Main {\n    public static void main(String[] args) {\n        int[][] m = new int[3][3];\n        int n = 1;\n        for (int i = 0; i < 3; i++)\n            for (int j = 0; j < 3; j++)\n                m[j][i] = n++;\n        System.out.println(m[0][2] + m[2][0] + m[1][1]);\n    }\n}\n```",
+    "answer": "15",
+    "explanation": "m[j][i]에 값을 넣으므로 열 방향으로 채워집니다. m[0][2]=7, m[2][0]=3, m[1][1]=5로 합은 15입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 15,
+    "questionNo": 20,
+    "content": "여러 원천 시스템의 데이터를 추출·변환·적재하여 데이터 웨어하우스에 저장하는 과정을 무엇이라 하는가? (영문 약어)",
+    "answer": "ETL|Extract Transform Load|추출 변환 적재",
+    "explanation": "ETL은 Extract(추출), Transform(변환), Load(적재)의 약자입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 16,
+    "questionNo": 1,
+    "content": "상위 클래스에서 알고리즘의 전체 골격을 정의하고, 일부 단계의 구체적인 처리는 하위 클래스에서 재정의하도록 하는 행위 패턴은?",
+    "answer": "템플릿 메서드 패턴|템플릿 메서드|템플릿 메소드 패턴|템플릿 메소드|Template Method|Template Method Pattern",
+    "explanation": "Template Method 패턴은 처리 흐름은 고정하고 세부 단계만 하위 클래스가 바꾸도록 합니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 16,
+    "questionNo": 2,
+    "content": "다음 C 코드의 실행 결과를 쓰시오.\n\n```c\n#include <stdio.h>\nint main() {\n    char s[] = \"abcde\";\n    for (int i = 0; s[i]; i++) {\n        s[i] = s[i] - 32 + i;\n    }\n    printf(\"%s\", s);\n    return 0;\n}\n```",
+    "answer": "ACEGI",
+    "explanation": "소문자에서 32를 빼면 대문자가 되고, 여기에 인덱스 i를 더합니다. A+0, B+1, C+2, D+3, E+4 → A, C, E, G, I입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 16,
+    "questionNo": 3,
+    "content": "다음 SQL을 완성하시오. 트랜잭션 수행 중 일부만 취소할 수 있도록 중간 저장점을 설정한다.\n\n```sql\n( ? ) SP1;\n```\n\n( ? )에 들어갈 TCL 명령어를 쓰시오.",
+    "answer": "SAVEPOINT",
+    "explanation": "SAVEPOINT로 저장점을 만든 뒤 ROLLBACK TO SP1;으로 해당 지점까지만 되돌릴 수 있습니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 16,
+    "questionNo": 4,
+    "content": "악성코드에 감염되어 공격자의 명령·제어(C&C) 서버로부터 원격 조종되는 다수의 좀비 PC로 구성된 네트워크는?",
+    "answer": "봇넷|Botnet",
+    "explanation": "봇넷은 DDoS 공격, 스팸 발송 등에 동원됩니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 16,
+    "questionNo": 5,
+    "content": "다음 파이썬 코드의 실행 결과를 쓰시오.\n\n```python\nx = 10\ndef outer():\n    x = 20\n    def inner():\n        nonlocal x\n        x += 5\n        return x\n    inner()\n    return x\nprint(outer(), x)\n```",
+    "answer": "25 10|25, 10",
+    "explanation": "nonlocal은 바깥 함수(outer)의 x를 가리키므로 outer의 x가 25가 됩니다. 전역 x는 그대로 10입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 16,
+    "questionNo": 6,
+    "content": "192.168.1.0/24 네트워크에서 호스트 50대가 필요한 서브넷을 만들려고 한다. 낭비를 최소화하는 서브넷의 프리픽스 길이(/n)는? (네트워크·브로드캐스트 주소 제외)",
+    "answer": "/26|26",
+    "explanation": "필요 주소 수 50+2=52 이상인 2의 거듭제곱은 64(호스트 비트 6개)이므로 32-6=26, 즉 /26입니다. (사용 가능 호스트 62개)"
+  },
+  {
+    "examYear": 9999,
+    "examRound": 16,
+    "questionNo": 7,
+    "content": "병행 제어 기법 중, 트랜잭션이 시작될 때 시간 표시를 부여하고 그 순서에 따라 연산을 처리하여 교착상태가 발생하지 않는 기법은?",
+    "answer": "타임스탬프 순서|타임스탬프 순서 기법|타임스탬프|타임스탬프 기법|Timestamp Ordering",
+    "explanation": "타임스탬프 순서 기법은 로킹을 사용하지 않아 교착상태가 발생하지 않습니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 16,
+    "questionNo": 8,
+    "content": "다음 자바 코드의 실행 결과를 쓰시오.\n\n```java\npublic class Main {\n    public static void main(String[] args) {\n        int n = 6, count = 0;\n        while (n != 1) {\n            n = (n % 2 == 0) ? n / 2 : 3 * n + 1;\n            count++;\n        }\n        System.out.println(count);\n    }\n}\n```",
+    "answer": "8",
+    "explanation": "6→3→10→5→16→8→4→2→1로 8번 반복합니다. (콜라츠 추측)"
+  },
+  {
+    "examYear": 9999,
+    "examRound": 16,
+    "questionNo": 9,
+    "content": "스크럼(Scrum)에서 보통 1~4주 단위로 정해진 기간 동안 동작하는 결과물을 만들어 내는 반복 개발 주기는?",
+    "answer": "스프린트|Sprint",
+    "explanation": "스프린트마다 계획 회의, 일일 스크럼, 스프린트 리뷰, 회고를 진행합니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 16,
+    "questionNo": 10,
+    "content": "다음 프로세스가 모두 0초에 도착했을 때 비선점 우선순위 스케줄링의 평균 대기 시간은? (우선순위 숫자가 작을수록 높음)\n\n| 프로세스 | 실행 시간 | 우선순위 |\n|---|---|---|\n| P1 | 5 | 2 |\n| P2 | 3 | 4 |\n| P3 | 8 | 1 |\n| P4 | 2 | 3 |",
+    "answer": "9",
+    "explanation": "실행 순서는 P3(0~8) → P1(8~13) → P4(13~15) → P2(15~18)입니다. 대기 시간은 0+8+13+15=36이므로 평균 36/4=9입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 16,
+    "questionNo": 11,
+    "content": "다음 C 코드의 실행 결과를 쓰시오.\n\n```c\n#include <stdio.h>\nint main() {\n    int i = 0, s = 0;\n    do {\n        i++;\n        if (i % 3 == 0) continue;\n        s += i;\n    } while (i < 10);\n    printf(\"%d\", s);\n    return 0;\n}\n```",
+    "answer": "37",
+    "explanation": "1~10 중 3의 배수(3, 6, 9)를 제외하고 더합니다. 55-18=37입니다. do-while의 continue는 조건 검사로 이동합니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 16,
+    "questionNo": 12,
+    "content": "네트워크 장비의 제어 기능(Control Plane)과 데이터 전달 기능(Data Plane)을 분리하여, 소프트웨어로 네트워크를 중앙에서 제어·관리하는 기술은?",
+    "answer": "SDN|소프트웨어 정의 네트워크|소프트웨어 정의 네트워킹|Software Defined Network|Software Defined Networking",
+    "explanation": "SDN은 컨트롤러가 OpenFlow 등의 프로토콜로 장비를 프로그래밍 방식으로 제어합니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 16,
+    "questionNo": 13,
+    "content": "다음 SQL의 실행 결과를 쓰시오.\n\n```sql\nSELECT COUNT(*)\nFROM 사원\nWHERE 급여 > (SELECT AVG(급여) FROM 사원);\n```\n\n사원 테이블:\n| 이름 | 급여 |\n|---|---|\n| 김 | 300 |\n| 이 | 450 |\n| 박 | 500 |\n| 최 | 350 |\n| 정 | 400 |",
+    "answer": "2",
+    "explanation": "평균 급여는 2000/5=400이며, 400을 초과하는 사원은 450, 500으로 2명입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 16,
+    "questionNo": 14,
+    "content": "다음 자바 코드의 실행 결과를 쓰시오. (공백으로 구분)\n\n```java\npublic class Main {\n    static int calc(int a, int b) { return a + b; }\n    static double calc(double a, double b) { return a * b; }\n    static String calc(String a, int b) { return a + b; }\n    public static void main(String[] args) {\n        System.out.println(calc(3, 4) + \" \" + calc(2.0, 3) + \" \" + calc(\"A\", 5));\n    }\n}\n```",
+    "answer": "7 6.0 A5|7, 6.0, A5",
+    "explanation": "오버로딩된 메서드가 인자 타입에 맞게 호출됩니다. calc(2.0, 3)은 double 버전이 호출되어 6.0입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 16,
+    "questionNo": 15,
+    "content": "'아무것도 신뢰하지 않고 항상 검증한다(Never Trust, Always Verify)'는 원칙으로, 내부 네트워크 접근도 지속적으로 인증·검증하는 보안 모델은?",
+    "answer": "제로 트러스트|제로트러스트|Zero Trust",
+    "explanation": "제로 트러스트는 경계 기반 보안의 한계를 보완해 사용자·기기·접근마다 최소 권한과 지속적 검증을 적용합니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 16,
+    "questionNo": 16,
+    "content": "UML 구조 다이어그램 중, 시스템을 구성하는 물리적 하드웨어 노드와 그 위에 배치되는 소프트웨어 컴포넌트의 구성을 표현하는 다이어그램은?",
+    "answer": "배치 다이어그램|배치|Deployment Diagram|디플로이먼트 다이어그램",
+    "explanation": "배치(Deployment) 다이어그램은 노드와 통신 경로로 실행 환경의 물리적 구성을 보여 줍니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 16,
+    "questionNo": 17,
+    "content": "다음 파이썬 코드의 실행 결과를 쓰시오.\n\n```python\na = [1, 2, 3]\nb = a\nc = a[:]\nb.append(4)\nc.append(5)\nprint(len(a), len(c), a[-1] + c[-1])\n```",
+    "answer": "4 4 9|4, 4, 9",
+    "explanation": "b는 a와 같은 리스트를 가리키므로 a에 4가 추가되고, c는 복사본이라 따로 5가 추가됩니다. a[-1]+c[-1]=4+5=9입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 16,
+    "questionNo": 18,
+    "content": "빅데이터의 3V(Volume, Variety, Velocity) 중 데이터가 생성·유통·처리되는 빠르기를 의미하는 요소는?",
+    "answer": "속도|Velocity",
+    "explanation": "3V는 크기(Volume), 다양성(Variety), 속도(Velocity)이며, 여기에 정확성(Veracity), 가치(Value)를 더해 5V라고도 합니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 16,
+    "questionNo": 19,
+    "content": "다음 C 코드의 실행 결과를 쓰시오. (공백으로 구분)\n\n```c\n#include <stdio.h>\nint main() {\n    int a = 13;\n    printf(\"%d %d %d\", a << 2, a >> 1, ~a);\n    return 0;\n}\n```",
+    "answer": "52 6 -14|52, 6, -14",
+    "explanation": "13<<2=13*4=52, 13>>1=6, ~13은 2의 보수 체계에서 -(13+1)=-14입니다."
+  },
+  {
+    "examYear": 9999,
+    "examRound": 16,
+    "questionNo": 20,
+    "content": "대량의 온라인 트랜잭션을 처리·감시·제어하는 미들웨어로, 은행 업무나 항공 예약 시스템 등에 사용되는 것은?",
+    "answer": "TP-Monitor|TP Monitor|TP 모니터|TP-모니터|트랜잭션 처리 모니터",
+    "explanation": "미들웨어 종류에는 DB, RPC, MOM, TP-Monitor, ORB, WAS 등이 있습니다."
   }
 ]
