@@ -1,6 +1,7 @@
 package com.example.studynote.web;
 
 import com.example.studynote.service.PracticalSolveRecordService;
+import com.example.studynote.service.PracticalWrongPrintSession;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
@@ -44,8 +45,15 @@ public class PracticalWrongNoteController {
     }
 
     @GetMapping("/print")
-    public String print(Model model) {
-        model.addAttribute("items", solveRecordService.findWrongItemsForPrint());
+    public String print(@RequestParam(name = "session", required = false) List<String> sessionKeys, Model model) {
+        List<PracticalWrongPrintSession> allSessions = solveRecordService.findWrongSessionsForPrint();
+        List<PracticalWrongPrintSession> sessions = sessionKeys == null || sessionKeys.isEmpty()
+                ? allSessions
+                : allSessions.stream().filter(s -> sessionKeys.contains(s.sessionKey())).toList();
+        model.addAttribute("allSessions", allSessions);
+        model.addAttribute("sessions", sessions);
+        model.addAttribute("selectedKeys", sessionKeys == null ? List.of() : sessionKeys);
+        model.addAttribute("itemCount", sessions.stream().mapToInt(s -> s.items().size()).sum());
         model.addAttribute("printedAt", LocalDateTime.now());
         return "practical-wrong-notes-print";
     }

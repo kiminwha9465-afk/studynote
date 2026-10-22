@@ -3,16 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title th:text="'실기 오답 모음 ' + ${#temporals.format(printedAt, 'yyyyMMdd')}">실기 오답 모음</title>
+    <title th:text="${sessions.size() == 1}
+                    ? ('실기 오답 ' + ${sessions[0].title()} + ' ' + ${#temporals.format(sessions[0].solvedAt(), 'yyyyMMdd_HHmm')})
+                    : ('실기 오답 모음 ' + ${#temporals.format(printedAt, 'yyyyMMdd')})">실기 오답 모음</title>
     <style>
         * { box-sizing: border-box; }
         body { margin: 0; background: #f1f5f9; color: #1e293b; font: 14px/1.6 "Malgun Gothic", "Apple SD Gothic Neo", sans-serif; }
         .page { max-width: 800px; margin: 0 auto; padding: 24px 16px 48px; }
-        .toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .toolbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 16px; }
+        .toolbar .actions { display: flex; align-items: center; gap: 12px; }
+        .toolbar label { font-size: 13px; color: #475569; cursor: pointer; }
         .toolbar button { padding: 8px 16px; border: 0; border-radius: 6px; background: #4f46e5; color: #fff; font-weight: 600; cursor: pointer; }
         .toolbar a { color: #64748b; font-size: 13px; text-decoration: none; }
+        .picker { background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; margin-bottom: 20px; }
+        .picker summary { cursor: pointer; font-weight: 600; font-size: 13px; color: #334155; }
+        .picker ul { list-style: none; margin: 10px 0; padding: 0; max-height: 280px; overflow-y: auto; }
+        .picker li label { display: flex; gap: 8px; align-items: baseline; padding: 4px 0; font-size: 13px; cursor: pointer; }
+        .picker li .sub { color: #94a3b8; font-size: 12px; }
+        .picker .btns { display: flex; gap: 8px; align-items: center; }
+        .picker .btns button { padding: 6px 12px; border: 0; border-radius: 6px; background: #4f46e5; color: #fff; font-size: 12px; font-weight: 600; cursor: pointer; }
+        .picker .btns a { font-size: 12px; color: #64748b; }
         h1 { margin: 0 0 4px; font-size: 22px; }
         .meta { margin: 0 0 20px; color: #64748b; font-size: 12px; }
+        .session + .session { margin-top: 28px; }
+        .session-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; padding: 8px 12px; margin-bottom: 12px; border-left: 4px solid #4f46e5; background: #eef2ff; border-radius: 0 6px 6px 0; break-after: avoid; page-break-after: avoid; }
+        .session-head h2 { margin: 0; font-size: 16px; }
+        .session-head .when { font-size: 12px; color: #475569; margin-left: 6px; font-weight: 400; }
+        .session-head .score { font-size: 12px; color: #475569; white-space: nowrap; }
+        body.page-per-session .session + .session { break-before: page; page-break-before: always; margin-top: 0; }
         .item { background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px 18px; margin-bottom: 12px; break-inside: avoid; page-break-inside: avoid; }
         .head { display: flex; justify-content: space-between; gap: 8px; margin-bottom: 8px; font-size: 12px; color: #64748b; }
         .head b { color: #4f46e5; }
@@ -28,11 +46,14 @@
         .note { padding: 6px 10px; border-radius: 6px; background: #eef2ff; font-size: 12px; white-space: pre-wrap; margin-top: 6px; }
         .note.memo { background: #fefce8; }
         .empty { padding: 40px; text-align: center; color: #94a3b8; border: 1px dashed #cbd5e1; border-radius: 8px; }
-        @media (max-width: 480px) { .row { grid-template-columns: 1fr; } }
+        @media (max-width: 480px) {
+            .row { grid-template-columns: 1fr; }
+            .toolbar, .session-head { flex-wrap: wrap; }
+        }
         @media print {
             body { background: #fff; }
             .page { padding: 0; max-width: none; }
-            .toolbar { display: none; }
+            .toolbar, .picker { display: none; }
             .item { border-color: #cbd5e1; }
             * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         }
@@ -42,40 +63,76 @@
 <div class="page">
     <div class="toolbar">
         <a th:href="@{/practical/wrong-notes}">← 실기 오답노트</a>
-        <button type="button" onclick="window.print()">인쇄 / PDF로 저장</button>
+        <div class="actions">
+            <label th:if="${sessions.size() > 1}">
+                <input type="checkbox" onchange="document.body.classList.toggle('page-per-session', this.checked)">
+                회차마다 새 페이지
+            </label>
+            <button type="button" onclick="window.print()">인쇄 / PDF로 저장</button>
+        </div>
     </div>
+
+    <details th:if="${allSessions.size() > 1}" class="picker" th:open="${selectedKeys.empty}">
+        <summary th:text="${selectedKeys.empty} ? '회차 선택 (현재: 전체)' : ('회차 선택 (현재: ' + ${sessions.size()} + '개 회차)')">회차 선택</summary>
+        <form method="get" th:action="@{/practical/wrong-notes/print}">
+            <ul>
+                <li th:each="s : ${allSessions}">
+                    <label>
+                        <input type="checkbox" name="session" th:value="${s.sessionKey()}"
+                               th:checked="${selectedKeys.contains(s.sessionKey())}">
+                        <span th:text="${s.title()}"></span>
+                        <span class="sub" th:text="${#temporals.format(s.solvedAt(), 'yyyy.MM.dd HH:mm')} + ' · 오답 ' + ${s.items().size()} + '문항'"></span>
+                    </label>
+                </li>
+            </ul>
+            <div class="btns">
+                <button type="submit">선택한 회차만 보기</button>
+                <a th:href="@{/practical/wrong-notes/print}">전체 보기</a>
+            </div>
+        </form>
+    </details>
 
     <h1>실기 오답 모음</h1>
-    <p class="meta" th:text="${#temporals.format(printedAt, 'yyyy년 MM월 dd일 HH:mm')} + ' 기준 · 총 ' + ${items.size()} + '문항'"></p>
+    <p class="meta" th:text="${#temporals.format(printedAt, 'yyyy년 MM월 dd일 HH:mm')} + ' 기준 · ' + ${sessions.size()} + '개 회차 · 총 ' + ${itemCount} + '문항'"></p>
 
-    <div th:if="${items.empty}" class="empty">현재 오답으로 남은 문제가 없습니다.</div>
+    <div th:if="${sessions.empty}" class="empty">현재 오답으로 남은 문제가 없습니다.</div>
 
-    <div th:each="item, st : ${items}" class="item">
-        <div class="head">
-            <span>
-                <b th:text="${st.count} + '.'"></b>
-                <span th:text="${item.question().examYear == 9999} ? ('예상문제 ' + ${item.question().examRound} + '회 ' + ${item.question().questionNo} + '번')
-                                                                  : (${item.question().examYear} + '년 ' + ${item.question().examRound} + '회 ' + ${item.question().questionNo} + '번')"></span>
-            </span>
-            <span th:if="${item.wrongCount() > 1}" class="count" th:text="${item.wrongCount()} + '회 틀림'"></span>
+    <section th:each="s : ${sessions}" class="session">
+        <div class="session-head">
+            <h2>
+                <span th:text="${s.title()}"></span>
+                <span class="when" th:text="${#temporals.format(s.solvedAt(), 'yyyy.MM.dd HH:mm')} + ' 풀이'"></span>
+            </h2>
+            <span class="score" th:text="${s.correctCount()} + '/' + ${s.totalCount()} + ' 정답 · 오답 ' + ${s.items().size()} + '문항'"></span>
         </div>
 
-        <div class="content" th:utext="${item.question().contentHtml}"></div>
+        <div th:each="item, st : ${s.items()}" class="item">
+            <div class="head">
+                <span>
+                    <b th:text="${st.count} + '.'"></b>
+                    <span th:text="${item.question().examYear == 9999} ? ('예상문제 ' + ${item.question().examRound} + '회 ' + ${item.question().questionNo} + '번')
+                                                                      : (${item.question().examYear} + '년 ' + ${item.question().examRound} + '회 ' + ${item.question().questionNo} + '번')"></span>
+                </span>
+                <span th:if="${item.wrongCount() > 1}" class="count" th:text="'누적 ' + ${item.wrongCount()} + '회 틀림'"></span>
+            </div>
 
-        <div class="row">
-            <div class="box mine">
-                <div class="label">내 답안</div>
-                <div class="value" th:text="${#strings.listJoin(item.submittedAnswers(), ' / ')}"></div>
+            <div class="content" th:utext="${item.question().contentHtml}"></div>
+
+            <div class="row">
+                <div class="box mine">
+                    <div class="label">내 답안</div>
+                    <div class="value" th:text="${item.submitted()}"></div>
+                </div>
+                <div class="box answer">
+                    <div class="label">정답</div>
+                    <div class="value" th:text="${#strings.replace(item.question().answer, '|', ' / ')}"></div>
+                </div>
             </div>
-            <div class="box answer">
-                <div class="label">정답</div>
-                <div class="value" th:text="${#strings.replace(item.question().answer, '|', ' / ')}"></div>
-            </div>
+
+            <div th:if="${item.question().explanation != null}" class="note" th:text="${item.question().explanation}"></div>
+            <div th:if="${item.memo() != null}" class="note memo" th:text="'메모: ' + ${item.memo()}"></div>
         </div>
-
-        <div th:if="${item.question().explanation != null}" class="note" th:text="${item.question().explanation}"></div>
-        <div th:if="${item.memo() != null}" class="note memo" th:text="'메모: ' + ${item.memo()}"></div>
-    </div>
+    </section>
 </div>
 </body>
 </html>

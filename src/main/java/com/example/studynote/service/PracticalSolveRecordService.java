@@ -5,6 +5,7 @@ import com.example.studynote.repository.PracticalSolveRecordRepository;
 import com.example.studynote.web.PracticalResultView;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,29 +70,37 @@ public class PracticalSolveRecordService {
                 correctRecords, totalCount, correctCount));
     }
 
-    /** 현재 오답인 기록을 문제별로 묶어 연도·회차·번호 순으로 반환한다. */
+    /** 오답이 남아 있는 회차(풀이 기록)별로 오답 문항을 묶어 최신 회차 순으로 반환한다. */
     @Transactional(readOnly = true)
-    public List<PracticalWrongItem> findWrongItemsForPrint() {
-        Map<Long, List<PracticalSolveRecord>> byQuestion = new LinkedHashMap<>();
-        for (PracticalSolveRecord r : repo.findByCorrectFalseOrderBySolvedAtDesc()) {
-            byQuestion.computeIfAbsent(r.getQuestion().getId(), k -> new ArrayList<>()).add(r);
+    public List<PracticalWrongPrintSession> findWrongSessionsForPrint() {
+        List<PracticalWrongSession> sessions = findWrongSessions();
+
+        Map<Long, Integer> wrongCountByQuestion = new HashMap<>();
+        for (PracticalWrongSession s : sessions) {
+            for (PracticalSolveRecord r : s.wrongRecords()) {
+                wrongCountByQuestion.merge(r.getQuestion().getId(), 1, Integer::sum);
+            }
         }
 
-        List<PracticalWrongItem> items = new ArrayList<>();
-        for (List<PracticalSolveRecord> records : byQuestion.values()) {
-            List<String> submitted = records.stream()
-                    .map(r -> r.getSubmitted() == null || r.getSubmitted().isBlank() ? "(미응답)" : r.getSubmitted())
-                    .distinct().toList();
-            String memo = records.stream()
-                    .map(PracticalSolveRecord::getMemo)
-                    .filter(m -> m != null && !m.isBlank())
-                    .findFirst().orElse(null);
-            items.add(new PracticalWrongItem(records.get(0).getQuestion(), records.size(), submitted, memo));
+        List<PracticalWrongPrintSession> result = new ArrayList<>();
+        for (PracticalWrongSession s : sessions) {
+            if (s.wrongRecords().isEmpty()) {
+                continue;
+            }
+            List<PracticalWrongItem> items = s.wrongRecords().stream()
+                    .map(r -> new PracticalWrongItem(
+                            r.getQuestion(),
+                            r.getSubmitted() == null || r.getSubmitted().isBlank() ? "(미응답)" : r.getSubmitted(),
+                            r.getMemo() == null || r.getMemo().isBlank() ? null : r.getMemo(),
+                            wrongCountByQuestion.get(r.getQuestion().getId())))
+                    .sorted(Comparator.comparing((PracticalWrongItem i) -> i.question().getExamYear())
+                            .thenComparing(i -> i.question().getExamRound())
+                            .thenComparing(i -> i.question().getQuestionNo()))
+                    .toList();
+            result.add(new PracticalWrongPrintSession(
+                    s.sessionKey(), s.title(), s.solvedAt(), s.totalCount(), s.correctCount(), items));
         }
-        items.sort(Comparator.comparing((PracticalWrongItem i) -> i.question().getExamYear())
-                .thenComparing(i -> i.question().getExamRound())
-                .thenComparing(i -> i.question().getQuestionNo()));
-        return items;
+        return result;
     }
 
     @Transactional
