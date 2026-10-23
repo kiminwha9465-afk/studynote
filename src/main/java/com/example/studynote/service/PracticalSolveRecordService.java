@@ -120,6 +120,11 @@ public class PracticalSolveRecordService {
     }
 
     @Transactional
+    public void markCorrect(Long id) {
+        repo.findById(id).ifPresent(r -> r.setCorrect(true));
+    }
+
+    @Transactional
     public void saveMemo(Long id, String memo) {
         repo.findById(id).ifPresent(r -> r.setMemo(memo));
     }

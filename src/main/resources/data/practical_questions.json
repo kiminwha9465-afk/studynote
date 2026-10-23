@@ -20,7 +20,7 @@
     "examRound": 1,
     "questionNo": 3,
     "content": "프로토콜의 기본 3요소는?",
-    "answer": "구문·의미·타이밍|구문 의미 순서|구문 의미 시간|syntax semantics timing",
+    "answer": "구문·의미·타이밍|구문 의미 타이밍|구문 의미 순서|구문 의미 시간|syntax semantics timing",
     "explanation": "형식, 뜻, 주고받는 시점을 약속합니다."
   },
   {
@@ -68,7 +68,7 @@
     "examRound": 1,
     "questionNo": 9,
     "content": "동시 트랜잭션이 서로의 중간 처리에 간섭하지 않아야 하는 성질은?",
-    "answer": "격리성·독립성 (Isolation)|격리성·독립성|Isolation|격리성|독립성",
+    "answer": "격리성·독립성 (Isolation)|격리성·독립성|격리성 독립성|Isolation|격리성|독립성",
     "explanation": "혼자 실행한 것처럼 동작하도록 보장합니다."
   },
   {
@@ -76,7 +76,7 @@
     "examRound": 1,
     "questionNo": 10,
     "content": "성공한 트랜잭션 결과가 장애 후에도 유지되는 성질은?",
-    "answer": "지속성·영속성 (Durability)|지속성·영속성|Durability|지속성|영속성",
+    "answer": "지속성·영속성 (Durability)|지속성·영속성|지속성 영속성|Durability|지속성|영속성",
     "explanation": "완료를 확정한 결과는 사라지지 않아야 해요."
   },
   {
@@ -564,7 +564,7 @@
     "examRound": 4,
     "questionNo": 2,
     "content": "GoF 디자인 패턴의 세 분류는?",
-    "answer": "생성·구조·행위",
+    "answer": "생성·구조·행위|생성 구조 행위|생성, 구조, 행위",
     "explanation": "객체를 만들기, 조합하기, 협력하기로 나눠요."
   },
   {
@@ -604,7 +604,7 @@
     "examRound": 4,
     "questionNo": 7,
     "content": "DB 이상 현상의 세 종류는?",
-    "answer": "삽입·삭제·갱신 이상",
+    "answer": "삽입·삭제·갱신 이상|삽입 삭제 갱신 이상|삽입, 삭제, 갱신 이상",
     "explanation": "중복된 정보 때문에 넣기·지우기·고치기에서 문제가 생겨요."
   },
   {
@@ -876,7 +876,7 @@
     "examRound": 1,
     "questionNo": 15,
     "content": "데이터 모델의 세 구성 요소를 쓰세요. 순서는 상관없어요.",
-    "answer": "구조, 연산, 제약조건",
+    "answer": "구조, 연산, 제약조건|구조 연산 제약조건",
     "explanation": "기출에서 구성 요소를 함께 물을 때를 위한 묶음 문제예요."
   },
   {
@@ -884,7 +884,7 @@
     "examRound": 1,
     "questionNo": 16,
     "content": "결합도를 강한 순으로: 자료·내용·스탬프·공통·제어·외부.",
-    "answer": "내용 > 공통 > 외부 > 제어 > 스탬프 > 자료",
+    "answer": "내용 > 공통 > 외부 > 제어 > 스탬프 > 자료|내용 공통 외부 제어 스탬프 자료",
     "explanation": "강할수록 모듈 간 의존이 커요. 응집도 순서와 혼동하지 마세요."
   },
   {
@@ -1092,7 +1092,7 @@
     "examRound": 2,
     "questionNo": 21,
     "content": "고정된 중앙 장치 없이 노드끼리 구성하는 임시 무선망은?",
-    "answer": "애드혹 네트워크",
+    "answer": "애드혹 네트워크|에드혹 네트워크|ad-hoc 네트워크|Ad-hoc Network",
     "explanation": "기기들이 직접 연결되는 네트워크예요."
   },
   {
@@ -1515,7 +1515,7 @@
     "examYear": 2022,
     "examRound": 1,
     "questionNo": 20,
-    "content": "다음에서 설명하는 소프트웨어 개발 방법론은 무엇인가?\n\n- 나선형 모델이라고도 불림\n- 위험 분석을 반복적으로 수행하며 개발\n- 계획 → 위험 분석 → 개발 → 평가를 반복",
+    "content": "다음에서 설명하는 소프트웨어 개발 방법론은 무엇인가?\n\n- 위험 분석을 반복적으로 수행하며 개발\n- 계획 → 위험 분석 → 개발 → 평가를 반복\n- Boehm이 제안한 모델",
     "answer": "나선형 모델|Spiral Model|스파이럴 모델",
     "explanation": "나선형(Spiral) 모델은 Boehm이 제안한 모델로, 계획·위험분석·개발·평가의 4단계를 반복합니다. 위험 분석을 중심에 두어 대규모 고위험 프로젝트에 적합하지만 비용이 높습니다."
   },
@@ -1596,7 +1596,7 @@
     "examRound": 1,
     "questionNo": 30,
     "content": "후보키가 만족해야 하는 두 성질은?",
-    "answer": "유일성·최소성",
+    "answer": "유일성·최소성|유일성, 최소성|최소성, 유일성|유일성 최소성|최소성 유일성",
     "explanation": "행을 구분할 수 있고 불필요한 속성이 없어야 해요."
   },
   {
@@ -1676,7 +1676,7 @@
     "examRound": 1,
     "questionNo": 40,
     "content": "V모델의 테스트를 작은 단위부터 순서대로 쓰세요: 인수·통합·단위·시스템.",
-    "answer": "단위 > 통합 > 시스템 > 인수",
+    "answer": "단위 > 통합 > 시스템 > 인수|단위 통합 시스템 인수",
     "explanation": "기출 테스트 단계 빈칸을 위한 순서형 변형이에요."
   },
   {
@@ -2180,7 +2180,7 @@
     "examRound": 2,
     "questionNo": 1,
     "content": "객체 하나만 생성해 공유하도록 하는 패턴은?",
-    "answer": "싱글턴 (Singleton)|싱글턴|Singleton",
+    "answer": "싱글턴 (Singleton)|싱글턴|Singleton|싱글톤|싱글톤패턴|싱글톤 패턴",
     "explanation": "같은 인스턴스를 여러 곳에서 사용하도록 합니다."
   },
   {
@@ -2532,7 +2532,7 @@
     "examRound": 1,
     "questionNo": 20,
     "content": "응집도를 높은 순으로: 시간·순차·우연·논리·교환·절차·기능.",
-    "answer": "기능 > 순차 > 교환 > 절차 > 시간 > 논리 > 우연",
+    "answer": "기능 > 순차 > 교환 > 절차 > 시간 > 논리 > 우연|기능 순차 교환 절차 시간 논리 우연",
     "explanation": "기출 순서형 변형에 대비하는 전체 응집도 순서예요."
   },
   {
@@ -2660,7 +2660,7 @@
     "examRound": 3,
     "questionNo": 5,
     "content": "각 결정의 참·거짓 분기를 한 번 이상 수행하는 커버리지는?",
-    "answer": "분기·결정 커버리지|분기|결정 커버리지|분기 커버리지|branch coverage|decision coverage",
+    "answer": "분기·결정 커버리지|분기 결정 커버리지|분기|결정 커버리지|분기 커버리지|branch coverage|decision coverage",
     "explanation": "if의 양쪽 방향을 모두 확인합니다."
   },
   {
@@ -2980,7 +2980,7 @@
     "examRound": 2,
     "questionNo": 2,
     "content": "관계형 테이블에서 열 하나를 뜻하는 용어는?",
-    "answer": "속성 (Attribute)|속성|Attribute",
+    "answer": "속성 (Attribute)|속성|Attribute|애트리뷰트",
     "explanation": "학번·이름 같은 데이터 항목입니다."
   },
   {

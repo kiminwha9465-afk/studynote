@@ -88,6 +88,12 @@ public class PracticalWrongNoteController {
         return "redirect:/practical/wrong-notes";
     }
 
+    @PostMapping("/{id}/mark-correct")
+    public String markCorrect(@PathVariable Long id) {
+        solveRecordService.markCorrect(id);
+        return "redirect:/practical/wrong-notes";
+    }
+
     @PostMapping("/{id}/memo")
     public String saveMemo(@PathVariable Long id, @RequestParam String memo,
                             @RequestParam(required = false) String sessionKey) {
