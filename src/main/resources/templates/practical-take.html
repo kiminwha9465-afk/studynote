@@ -26,19 +26,19 @@
             <div class="mb-4 text-sm text-slate-800 dark:text-zinc-100 leading-relaxed"
                  th:utext="${q.contentHtml}"></div>
 
-            <div class="flex items-center gap-2">
-                <label class="text-sm text-slate-500 dark:text-zinc-400 shrink-0">답:</label>
-                <input type="text"
-                       th:name="${'answer_' + q.id}"
-                       placeholder="단답으로 입력하세요"
-                       class="flex-1 rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-800
-                              focus:border-indigo-400 focus:outline-none focus:ring-1 focus:ring-indigo-300
-                              dark:bg-zinc-700 dark:border-zinc-600 dark:text-zinc-200 dark:placeholder-zinc-500
-                              dark:focus:border-indigo-500">
+            <div class="flex items-start gap-2">
+                <label class="text-sm text-slate-500 dark:text-zinc-400 shrink-0 pt-2">답:</label>
+                <textarea th:name="${'answer_' + q.id}"
+                          placeholder="답을 입력하세요 (여러 줄은 Enter로 구분)"
+                          rows="2"
+                          class="flex-1 resize-none rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-800
+                                 focus:border-indigo-400 focus:outline-none focus:ring-1 focus:ring-indigo-300
+                                 dark:bg-zinc-700 dark:border-zinc-600 dark:text-zinc-200 dark:placeholder-zinc-500
+                                 dark:focus:border-indigo-500"></textarea>
             </div>
         </div>
 
-        <button type="submit"
+        <button type="button" id="submitBtn"
                 class="sticky bottom-4 self-center rounded-md bg-indigo-600 px-8 py-2.5 text-sm font-semibold text-white shadow-lg hover:bg-indigo-700">
             제출하기
         </button>
@@ -55,8 +55,9 @@
         timerEl.textContent = String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0');
     }, 1000);
 
-    document.querySelector('form').addEventListener('submit', function () {
+    document.getElementById('submitBtn').addEventListener('click', function () {
         elapsedEl.value = Math.floor((Date.now() - startTime) / 1000);
+        document.querySelector('form').submit();
     });
 
     window.addEventListener('pageshow', function (e) {
